@@ -79,3 +79,55 @@ body {
   width: 100%;
   background-color: #ffffff;
 }
+
+.imgContainer {
+  display: flex;
+  justify-content: center;
+}
+.img {
+  width: 350px;
+  height: 300px;
+  background-image: url(../assets/push-ape1.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.memberContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  margin: 10px 15px 20px 15px;
+}
+
+.profilePic {
+  width: 110px;
+  height: 110px;
+  margin-right: 20px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 25px;
+}
+
+.role,
+.name {
+  font-weight: 600; /* 역할과 이름 간 간격 조정 */
+}
+
+.role {
+  color: #6166f5;
+}
