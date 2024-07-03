@@ -12,40 +12,68 @@
       <p class="logo-title">사무직 직장인의 건강한 자세 파트너, 자세차렷</p>
     </div>
 
-    <div class="find-pw_form">
-      <p>비밀번호 찾기 - 본인 확인 이메일로 인증</p>
-      <p>
-        본인 확인 이메일 주소와 입력한 이메일 주소가 같아야 인증번호를 받을 수
-        있습니다.
-      </p>
-      <form action="" autocomplete="off">
-        <input
-          type="text"
-          id="sign-up_id"
-          placeholder="아이디 (4~12자의 영어나 숫자)"
-        />
-        <input type="text" id="sign-up_name" placeholder="이름 (실명)" />
-        <input
-          type="text"
-          id="sign-up_email"
-          placeholder="이메일 (ID@example.com)"
-        />
-        <input
-          type="submit"
-          value="인증번호 전송"
-          id="send_verification-number"
-        />
-        <input
-          type="text"
-          id="sign-up_verification-number"
-          placeholder="인증번호 입력"
-        />
-        <input type="submit" value="확인" id="check_verification-number" />
-        <input type="submit" value="재전송" id="resend_verification-number" />
-      </form>
+    <div class="find-pw_container">
+      <div class="find-pw_wrap">
+        <p>비밀번호 찾기 - 본인 확인 이메일로 인증</p>
+        <p>
+          본인 확인 이메일 주소와 입력한 이메일 주소가 같아야 인증번호를 받을 수
+          있습니다.
+        </p>
+        <div class="find-pw_form">
+          <form action="" autocomplete="off">
+            <div class="field">
+              <input
+                type="text"
+                id="sign-up_id"
+                placeholder="아이디 (4~12자의 영어나 숫자)"
+              />
+            </div>
+            <div class="field">
+              <input type="text" id="sign-up_name" placeholder="이름 (실명)" />
+            </div>
 
-      <div class="find-pw_finished">
-        <button onclick="location.href='get-pw.html'">확인</button>
+            <div class="field_email">
+              <input
+                type="text"
+                id="sign-up_email"
+                placeholder="이메일 (ID@example.com)"
+              />
+              <input
+                type="submit"
+                value="인증번호 전송"
+                id="send_verification-number"
+              />
+            </div>
+
+            <div class="field_verification-number">
+              <input
+                type="text"
+                id="sign-up_verification-number"
+                placeholder="인증번호 입력"
+              />
+              <input
+                type="submit"
+                value="확인"
+                id="check_verification-number"
+              />
+              <input
+                type="submit"
+                value="재전송"
+                id="resend_verification-number"
+              />
+            </div>
+
+            <div class="find-pw_finished">
+              <button
+                type="button"
+                class="find-pw_next"
+                onclick="location.href='get-pw.html'"
+              >
+                확인
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </body>
