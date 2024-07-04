@@ -4,9 +4,16 @@
 
 /*Components*/
 @import "components/logo-header.css";
+@import "components/container.css";
 
 /*Screens*/
 @import "screens/login.css";
+@import "screens/find-id.css";
+@import "screens/find-pw.css";
+@import "screens/get-id.css";
+@import "screens/get-pw.css";
+@import "screens/sign-up.css";
+@import "screens/choice-problem.css";
 
 body {
   font-family: "Ubuntu", sans-serif;

@@ -12,30 +12,38 @@
       <p class="logo-title">사무직 직장인의 건강한 자세 파트너, 자세차렷</p>
     </div>
 
-    <form action="" autocomplete="off">
-      <div class="reset-pw">
+    <div class="get-pw_container">
+      <div class="get-pw_wrap">
         <p>비밀번호 재설정</p>
         <p>
           비밀번호를 변경해주세요. (8~15자 이상의 영문, 숫자, 특수문자 2가지
           조합)
         </p>
-        <input type="password" id="new-pw" placeholder="새 비밀번호" />
-        <input
-          type="password"
-          id="check_new-pw"
-          placeholder="새 비밀번호 확인"
-        />
-      </div>
+        <div class="get-pw_form">
+          <form action="" autocomplete="off">
+            <div class="field">
+              <input type="password" id="new-pw" placeholder="새 비밀번호" />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                id="check_new-pw"
+                placeholder="새 비밀번호 확인"
+              />
+            </div>
 
-      <div class="get-pw_finished">
-        <button
-          type="button"
-          class="get-pw_login"
-          onclick="location.href='login.html'"
-        >
-          확인
-        </button>
+            <div class="get-pw_finished">
+              <button
+                type="button"
+                class="get-pw_login"
+                onclick="location.href='login.html'"
+              >
+                확인
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
+    </div>
   </body>
 </html>
