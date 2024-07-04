@@ -22,14 +22,27 @@
         <div class="get-pw_form">
           <form action="" autocomplete="off">
             <div class="field">
-              <input type="password" id="new-pw" placeholder="새 비밀번호" />
+              <input
+                type="password"
+                id="new-pw"
+                placeholder="새 비밀번호"
+                autocomplete="off"
+              />
+            </div>
+            <div class="failurePassword-message hide">
+              비밀번호는 8~15자의 영문, 숫자, 특수문자 2가지 조합 사용
+              가능합니다.
             </div>
             <div class="field">
               <input
                 type="password"
                 id="check_new-pw"
                 placeholder="새 비밀번호 확인"
+                autocomplete="off"
               />
+            </div>
+            <div class="mismatch-message hide">
+              비밀번호가 일치하지 않습니다.
             </div>
 
             <div class="get-pw_finished">
@@ -45,5 +58,6 @@
         </div>
       </div>
     </div>
+    <script src="js/get-pw.js"></script>
   </body>
 </html>

@@ -18,13 +18,19 @@
         <div class="find-id_form">
           <form action="" autocomplete="off">
             <div class="field">
-              <input type="text" id="sign-up_name" placeholder="이름 (실명)" />
+              <input
+                type="text"
+                id="sign-up_name"
+                placeholder="이름 (실명)"
+                autocomplete="off"
+              />
             </div>
             <div class="field_email">
               <input
                 type="text"
                 id="sign-up_email"
                 placeholder="이메일 (ID@example.com)"
+                autocomplete="off"
               />
 
               <input
@@ -33,12 +39,16 @@
                 id="send_verification-number"
               />
             </div>
+            <div class="failureEmail-message hide">
+              이메일은 ID@example.com 형식으로 입력해주세요.
+            </div>
 
             <div class="field_verification-number">
               <input
                 type="text"
                 id="sign-up_verification-number"
                 placeholder="인증번호 입력"
+                autocomplete="off"
               />
 
               <input
@@ -67,5 +77,6 @@
         </div>
       </div>
     </div>
+    <script src="js/find-id.js"></script>
   </body>
 </html>
