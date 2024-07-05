@@ -116,7 +116,8 @@ hr {
 }
 
 .login_social-login img {
-  width: 40px;
+  width: 45px;
+  margin: 0 8px 5px 10px;
 }
 
 /* 아이디 찾기, 비밀번호 찾기, 회원가입 */

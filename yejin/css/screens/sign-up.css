@@ -22,10 +22,15 @@
 .sign-up_social-login_icon {
   display: flex;
   flex-direction: row;
+  margin-right: 10px;
 }
 
 .sign-up_social-login_icon a {
-  padding: 0 8px;
+  padding: 0 15px;
+}
+
+.sign-up_social-login_icon img {
+  width: 45px;
 }
 
 .sign-up_social-login span {
