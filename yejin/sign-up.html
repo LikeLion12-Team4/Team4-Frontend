@@ -42,23 +42,53 @@
                 type="text"
                 id="sign-up_id"
                 placeholder="아이디 (4~12자의 영어나 숫자)"
+                autocomplete="off"
               />
+              <div class="success-message hide">
+                사용할 수 있는 아이디입니다.
+              </div>
+              <div class="failure-message hide">
+                아이디는 4~12자의 영어나 숫자만 사용 가능합니다.
+              </div>
             </div>
-            <div class="field">
+            <div class="field_password">
               <input
                 type="password"
                 id="sign-up_pw"
                 placeholder="비밀번호 (8~15자 이상의 영문, 숫자, 특수문자 2가지 조합)"
+                autocomplete="off"
               />
+              <div class="sign-up_hide-pw">
+                <img
+                  class="sign-up_hide-pw-img"
+                  src="./css/icon/비밀번호 가리기.svg"
+                />
+              </div>
+              <div class="sign-up_show-pw">
+                <img
+                  class="sign-up_show-pw-img"
+                  src="./css/icon/비밀번호 보이기.svg"
+                />
+              </div>
+              <div class="failurePassword-message hide">
+                비밀번호는 8~15자의 영문, 숫자, 특수문자 2가지 조합 사용
+                가능합니다.
+              </div>
             </div>
             <div class="field">
-              <input type="text" id="sign-up_name" placeholder="이름 (실명)" />
+              <input
+                type="text"
+                id="sign-up_name"
+                placeholder="이름 (실명)"
+                autocomplete="off"
+              />
             </div>
             <div class="field_email">
               <input
                 type="text"
                 id="sign-up_email"
                 placeholder="이메일 (ID@example.com)"
+                autocomplete="off"
               />
               <input
                 type="submit"
@@ -66,11 +96,15 @@
                 id="send_verification-number"
               />
             </div>
+            <div class="failureEmail-message hide">
+              이메일은 ID@example.com 형식으로 입력해주세요.
+            </div>
             <div class="field_verification-number">
               <input
                 type="text"
                 id="sign-up_verification-number"
                 placeholder="인증번호 입력"
+                autocomplete="off"
               />
               <input
                 type="submit"
@@ -83,6 +117,7 @@
                 id="resend_verification-number"
               />
             </div>
+            <div class="failure-message hide">인증번호가 올바르지 않습니다</div>
           </form>
 
           <div class="sign-up_finished">
@@ -97,5 +132,7 @@
         </div>
       </div>
     </div>
+    <script src="js/sign-up.js"></script>
+    <script src="js/sign-up_hide-pw.js"></script>
   </body>
 </html>

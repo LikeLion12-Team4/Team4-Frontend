@@ -15,11 +15,35 @@
       <div class="login-wrap">
         <div class="login-form">
           <form action="" autocomplete="off">
-            <div class="login-input_id">
-              <input type="text" id="login-id" placeholder="아이디" />
-            </div>
-            <div class="login-input_pw">
-              <input type="password" id="login-pw" placeholder="비밀번호" />
+            <div class="login-input">
+              <div class="login-input_id">
+                <input
+                  type="text"
+                  id="login-id"
+                  placeholder="아이디"
+                  autocomplete="off"
+                />
+              </div>
+              <div class="login-input_pw">
+                <input
+                  type="password"
+                  id="login-pw"
+                  placeholder="비밀번호"
+                  autocomplete="off"
+                />
+                <div class="hide-pw">
+                  <img
+                    class="hide-pw-img"
+                    src="./css/icon/비밀번호 가리기.svg"
+                  />
+                </div>
+                <div class="show-pw">
+                  <img
+                    class="show-pw-img"
+                    src="./css/icon/비밀번호 보이기.svg"
+                  />
+                </div>
+              </div>
             </div>
             <div>
               <input type="submit" value="로그인" id="login-btn" />
@@ -54,5 +78,6 @@
         </div>
       </div>
     </div>
+    <script src="js/login_hide-pw.js"></script>
   </body>
 </html>

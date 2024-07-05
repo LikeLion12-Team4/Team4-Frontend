@@ -25,16 +25,21 @@
   display: flex;
 }
 
-.field_email input {
-  flex: 1;
+#send_verification-number {
+  flex-basis: 130px;
 }
 
 .field_verification-number {
   display: flex;
 }
 
-.field_verification-number input {
-  flex: 1;
+#check_verification-number {
+  flex-basis: 164px;
+  margin-right: 10px;
+}
+
+#resend_verification-number {
+  flex-basis: 164px;
 }
 
 .find-id_form input {

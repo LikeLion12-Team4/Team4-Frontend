@@ -26,10 +26,22 @@
                 type="text"
                 id="sign-up_id"
                 placeholder="아이디 (4~12자의 영어나 숫자)"
+                autocomplete="off"
               />
+              <div class="success-message hide">
+                사용할 수 있는 아이디입니다.
+              </div>
+              <div class="failure-message hide">
+                아이디는 4~12자의 영어나 숫자만 사용 가능합니다.
+              </div>
             </div>
             <div class="field">
-              <input type="text" id="sign-up_name" placeholder="이름 (실명)" />
+              <input
+                type="text"
+                id="sign-up_name"
+                placeholder="이름 (실명)"
+                autocomplete="off"
+              />
             </div>
 
             <div class="field_email">
@@ -37,6 +49,7 @@
                 type="text"
                 id="sign-up_email"
                 placeholder="이메일 (ID@example.com)"
+                autocomplete="off"
               />
               <input
                 type="submit"
@@ -44,12 +57,15 @@
                 id="send_verification-number"
               />
             </div>
-
+            <div class="failureEmail-message hide">
+              이메일은 ID@example.com 형식으로 입력해주세요.
+            </div>
             <div class="field_verification-number">
               <input
                 type="text"
                 id="sign-up_verification-number"
                 placeholder="인증번호 입력"
+                autocomplete="off"
               />
               <input
                 type="submit"
@@ -76,5 +92,6 @@
         </div>
       </div>
     </div>
+    <script src="js/find-pw.js"></script>
   </body>
 </html>
