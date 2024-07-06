@@ -46,17 +46,17 @@
   padding: 15px;
   border: 1px solid #ccc;
   font-size: 15px;
-  width: 100%;
+  width: 640px;
   margin: 13px auto;
 }
 
-.find-id_form input[type="submit"] {
+.find-id_form input[type="button"] {
   background-color: #6166f5;
   color: white;
   border: none;
 }
 
-.find-id_form input[type="submit"]:hover {
+.find-id_form input[type="button"]:hover {
   background-color: #3838d4;
 }
 
@@ -79,3 +79,16 @@
 .find-id_next:hover {
   background-color: #3838d4;
 }
+
+/* 이메일 인증번호 유효시간
+.field_verification-number {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.remaining-time {
+  position: relative;
+  margin-left: 10px;
+  font-size: 16px;
+} */

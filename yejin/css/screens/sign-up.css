@@ -69,13 +69,13 @@
   margin: 13px auto;
 }
 
-.sign-up_form input[type="submit"] {
+.sign-up_form input[type="button"] {
   background-color: #6166f5;
   color: white;
   border: none;
 }
 
-.sign-up_form input[type="submit"]:hover {
+.sign-up_form input[type="button"]:hover {
   background-color: #3838d4;
 }
 
@@ -140,6 +140,7 @@
   display: none;
 }
 
+/*유효성 검증 메세지*/
 .failure-message,
 .failurePassword-message,
 .failureEmail-message {
@@ -154,5 +155,25 @@
 }
 
 .hide {
+  display: none;
+}
+
+/*이메일 인증번호 유효시간*/
+.field_verification-number {
+  position: relative;
+}
+
+.remaining-time {
+  position: absolute;
+  top: 23px;
+  left: 320px;
+  font-size: 16px;
+  margin-left: 20px;
+  color: rgb(245, 51, 51);
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.show {
   display: none;
 }

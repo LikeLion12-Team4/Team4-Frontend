@@ -32,11 +32,11 @@
                 placeholder="이메일 (ID@example.com)"
                 autocomplete="off"
               />
-
               <input
-                type="submit"
+                type="button"
                 value="인증번호 전송"
                 id="send_verification-number"
+                onclick="timeWrap()"
               />
             </div>
             <div class="failureEmail-message hide">
@@ -50,15 +50,17 @@
                 placeholder="인증번호 입력"
                 autocomplete="off"
               />
-
+              <div class="remaining-time show">
+                <span class="remaining-min">3</span> :
+                <span class="remaining-sec">00</span>
+              </div>
               <input
-                type="submit"
+                type="button"
                 value="확인"
                 id="check_verification-number"
               />
-
               <input
-                type="submit"
+                type="button"
                 value="재전송"
                 id="resend_verification-number"
               />
@@ -78,5 +80,6 @@
       </div>
     </div>
     <script src="js/find-id.js"></script>
+    <script src="js/remaining-time.js"></script>
   </body>
 </html>
