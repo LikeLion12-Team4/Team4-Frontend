@@ -25,14 +25,14 @@
               <input
                 type="text"
                 id="sign-up_id"
-                placeholder="아이디 (4~12자의 영어나 숫자)"
+                placeholder="아이디 (2~10자의 한글이나 영문)"
                 autocomplete="off"
               />
               <div class="success-message hide">
                 사용할 수 있는 아이디입니다.
               </div>
               <div class="failure-message hide">
-                아이디는 4~12자의 영어나 숫자만 사용 가능합니다.
+                아이디는 2~10자의 한글이나 영문만 사용 가능합니다.
               </div>
             </div>
             <div class="field">
@@ -55,7 +55,6 @@
                 type="button"
                 value="인증번호 전송"
                 id="send_verification-number"
-                onclick="timeWrap()"
               />
             </div>
             <div class="failureEmail-message hide">
@@ -68,7 +67,7 @@
                 placeholder="인증번호 입력"
                 autocomplete="off"
               />
-              <div class="remaining-time show">
+              <div class="remaining-time hide">
                 <span class="remaining-min">3</span> :
                 <span class="remaining-sec">00</span>
               </div>
@@ -97,7 +96,7 @@
         </div>
       </div>
     </div>
-    <script src="js/find-pw.js"></script>
     <script src="js/remaining-time.js"></script>
+    <script src="js/find-pw.js"></script>
   </body>
 </html>

@@ -24,12 +24,6 @@
           <div class="kakao-login">
             <a href="#"><img src="./icon/kakao.svg" alt="kakao-login" /></a>
           </div>
-          <!-- <div class="google-login">
-            <a href="#"><img src="./icon/google.svg" alt="google-login" /></a>
-          </div>
-          <div class="apple-login">
-            <a href="#"><img src="./icon/apple.svg" alt="apple-login" /></a>
-          </div> -->
         </div>
       </div>
 
@@ -41,14 +35,14 @@
               <input
                 type="text"
                 id="sign-up_id"
-                placeholder="아이디 (4~12자의 영어나 숫자)"
+                placeholder="아이디 (2~10자의 한글이나 영문)"
                 autocomplete="off"
               />
               <div class="success-message hide">
                 사용할 수 있는 아이디입니다.
               </div>
               <div class="failure-message hide">
-                아이디는 4~12자의 영어나 숫자만 사용 가능합니다.
+                아이디는 2~10자의 한글이나 영문만 사용 가능합니다.
               </div>
             </div>
             <div class="field_password">
@@ -61,13 +55,13 @@
               <div class="sign-up_hide-pw">
                 <img
                   class="sign-up_hide-pw-img"
-                  src="./css/icon/비밀번호 가리기.svg"
+                  src="./css/icon/비밀번호 가리기.svg"
                 />
               </div>
               <div class="sign-up_show-pw">
                 <img
                   class="sign-up_show-pw-img"
-                  src="./css/icon/비밀번호 보이기.svg"
+                  src="./css/icon/비밀번호 보이기.svg"
                 />
               </div>
               <div class="failurePassword-message hide">
@@ -94,7 +88,6 @@
                 type="button"
                 value="인증번호 전송"
                 id="send_verification-number"
-                onclick="timeWrap()"
               />
             </div>
             <div class="failureEmail-message hide">
@@ -107,7 +100,7 @@
                 placeholder="인증번호 입력"
                 autocomplete="off"
               />
-              <div class="remaining-time show">
+              <div class="remaining-time hide">
                 <span class="remaining-min">3</span> :
                 <span class="remaining-sec">00</span>
               </div>
@@ -138,7 +131,7 @@
       </div>
     </div>
     <script src="js/sign-up.js"></script>
-    <script src="js/sign-up_hide-pw.js"></script>
+    <script src="js/hide-pw.js"></script>
     <script src="js/remaining-time.js"></script>
   </body>
 </html>
