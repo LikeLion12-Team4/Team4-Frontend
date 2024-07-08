@@ -1,0 +1,319 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 110vh;
+  background: linear-gradient(180deg, #ffffff 55%, #6166f527);
+}
+
+/* 마이페이지 타이틀 부분 */
+
+.title {
+  margin: 45px 0 20px 0;
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.titleText {
+  justify-content: left;
+  color: #6166f5;
+  font-size: 50px;
+  font-weight: 600;
+  margin: 5px 7px 0 0;
+}
+
+.titleIcon {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+.titleIcon i {
+  color: #6166f5;
+  font-size: 45px;
+}
+
+/* 00님, 오늘도 좋은 하루 되세요! 부분 */
+
+.greetings {
+  font-size: 20px;
+  align-self: self-end;
+  font-weight: 400;
+}
+
+.nickname {
+  color: #6166f5;
+  font-weight: 700;
+}
+
+hr {
+  /* 구분선 스타일 */
+  border: none;
+  height: 1px;
+  background-color: #bebebe;
+  width: 910px; /* 구분선 너비 : 추후 조정 */
+  margin-bottom: 45px;
+}
+
+/* 마이페이지 메뉴 */
+
+.myPageMenu {
+  /* Block 4개(프로필, 최근시청영상..)를 wrapping하는 클래스!*/
+  width: 900px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.myPageContainer {
+  /* Block 2개씩(세로로)을 wrapping하는 클래스임 */
+  display: flex;
+  flex-direction: column;
+}
+
+.myPageBlock {
+  /* Block 각각을 나타내는 클래스임 (총 4개 존재) */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative; /* 내부 메뉴 위치 조절하려고 설정해둠 */
+
+  border-radius: 20px;
+  border-color: rgba(56, 56, 56, 0.433);
+  border-width: 1px;
+  border-style: solid;
+
+  margin: 15px 15px 15px 15px;
+  padding: 25px;
+
+  width: 450px;
+  min-height: 30vh; /* 의논해볼 부분 : 높이를 절대크기로 지정해둘지. */
+
+  box-shadow: inset -3px -3px 13px 1px rgba(36, 36, 36, 0.114); /* 그림자 반대 방향이 더 예뻐서 해둠.. */
+}
+
+#my_profile,
+#notification_settings {
+  /* block 1열 */
+  width: 500px;
+}
+
+#video_history,
+#body_parts {
+  /* block 2열 */
+  width: 350px;
+}
+
+/* block 각각 배경색 지정*/
+
+/* 내 프로필 */
+#my_profile {
+  background-color: #7f83fd17;
+}
+
+/* 푸시 알림 설정 */
+#notification_settings {
+  background-color: #ff92f617;
+}
+
+/* 최근 시청한 영상 */
+#video_history {
+  background-color: #ffffff;
+}
+
+/* 현재 고민 부위*/
+#body_parts {
+  background-color: #ffffff;
+}
+
+.blockTitle {
+  /* block 이름. myPageBlock을 상속 */
+  margin: 0 0 3px 0;
+  font-size: 22px;
+  color: #6166f5;
+  font-weight: 600;
+}
+
+.blockTitle i {
+  margin-right: -3px;
+}
+
+#profileNickname {
+  margin-top: 20px;
+  font-size: 35px;
+}
+
+.userEmail {
+  color: rgb(72, 72, 72);
+}
+
+#recent_video {
+  margin: 5px 0 30px 0;
+  color: rgb(255, 89, 139);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#liked_video {
+  margin: 5px 0 0px 0;
+  color: rgb(255, 89, 139);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+#bell_img_container {
+  display: flex;
+  justify-content: center;
+}
+
+#bell_img {
+  width: 90px;
+  height: 90px;
+  background-image: url(../assets/bell-icon.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.settingsToggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.menuTogglecontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 10px 20px 10px;
+}
+
+.settingsMenu {
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+/* 토글 스위치 스타일 */
+.toggleSwitch {
+  padding: 5px;
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 25px;
+}
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+input:checked + .slider {
+  background-color: #6166f5;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+/* 라운드 슬라이더 */
+.slider.round {
+  border-radius: 30px;
+}
+.slider.round:before {
+  border-radius: 30px;
+}
+
+/*현재 고민 부위*/
+
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+}
+
+.unfoldBlock {
+  /* 펼치기, 열기 버튼. myPageBlock을 상속 */
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  margin: 15px;
+
+  background: none; /* 버튼 기본 스타일 삭제 */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  outline: inherit;
+  color: #8e8e8e;
+  font: 13px;
+}
+
+.bodyPartContainer {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px;
+}
+
+.bodyPartBlock {
+  width: 40%; /* 슬라이드 너비 조정 */
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px 10px 0;
+  padding: 10px;
+
+  font-size: 20px;
+  font-weight: 500;
+
+  border: 1.5px solid #b7b7b7; /* 테두리 색상 설정 */
+  border-radius: 20px; /* 모서리 둥글기 설정 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.165); /* 그림자 효과 추가 */
+}
+
+.bodyPartBlock img {
+  max-height: 60px; /* 이미지 최대 높이 설정 */
+  width: 80px; /* 이미지 너비 자동 조정 */
+  object-fit: contain; /* 이미지 비율 유지하며 컨테이너에 맞춤 */
+}
