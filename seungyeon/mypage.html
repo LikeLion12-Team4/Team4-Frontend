@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>마이페이지</title>
+    <script
+      src="https://kit.fontawesome.com/9125fcc41c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="mypage.css" />
+    <link rel="stylesheet" href="../serin/css/style.css" />
+  </head>
+  <body>
+    <header style="width: 100%">
+      <!--세린 헤더파일, 임시로 width 지정해둠-->
+      <nav>
+        <ul>
+          <li>
+            <a href="#"
+              ><img
+                class="header_logo"
+                src="../serin/logo.png"
+                alt="logo_img"
+              />자세차렷</a
+            >
+          </li>
+          <li><a href="#">주변 병원/클래스 찾기</a></li>
+          <li><a href="#">현재 내 자세 보기</a></li>
+          <li><a href="#">서비스 소개</a></li>
+          <li><a href="#">마이페이지</a></li>
+        </ul>
+        <div class="user_button">
+          <button><a href="#">로그인</a></button>
+          <button><a href="#">회원가입</a></button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="title">
+      <div class="titleContainer">
+        <div class="titleText">마이페이지</div>
+        <div class="titleIcon">
+          <i class="fa-solid fa-user"></i>
+        </div>
+      </div>
+      <div class="greetings">
+        <span class="nickname">아기사자</span>님, 오늘도 좋은 하루 되세요!
+      </div>
+    </div>
+    <hr />
+    <!--구분선-->
+    <div class="myPageMenu">
+      <div class="myPageContainer">
+        <div class="myPageBlock" id="my_profile">
+          <div class="blockTitle">내 프로필</div>
+          <div id="profileNickname">
+            <span class="nickname" style="color: black">아기사자</span>님
+          </div>
+          <div class="userEmail">leemj@gmail.com</div>
+          <button class="unfoldBlock">
+            펼치기
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+        <div class="myPageBlock" id="notification_settings">
+          <div class="blockTitle">푸시 알림 설정</div>
+          <div id="bell_img_container">
+            <div id="bell_img"></div>
+          </div>
+          <div class="settingsToggle">
+            <div class="menuTogglecontainer">
+              <div class="settingsMenu">알림</div>
+              <label class="toggleSwitch">
+                <input type="checkbox" id="notification_toggle" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="menuTogglecontainer">
+              <div class="settingsMenu">소리</div>
+              <label class="toggleSwitch">
+                <input type="checkbox" id="sound_toggle" checked />
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="menuTogglecontainer">
+              <div class="settingsMenu">간격</div>
+              <select id="notification_interval">
+                <option value="10">10분</option>
+                <option value="20">20분</option>
+                <option value="30" selected>30분</option>
+                <option value="60">1시간</option>
+              </select>
+            </div>
+          </div>
+          <button class="unfoldBlock">
+            추가하기
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="myPageContainer">
+        <div class="myPageBlock" id="video_history">
+          <div class="blockTitle">최근 시청한 영상</div>
+          <div id="recent_video">거북목 예방을 위한 스트레칭</div>
+          <div class="blockTitle">
+            <span>
+              <i class="fa-solid fa-heart"></i>
+              좋아요
+            </span>
+            표시한 영상
+          </div>
+          <div id="liked_video"><i class="fa-solid fa-heart"></i> 13개</div>
+        </div>
+        <div class="myPageBlock" id="body_parts">
+          <div class="blockTitle">현재 고민 부위</div>
+          <div class="sliderContainer">
+            <div class="bodyPartContainer">
+              <div class="bodyPartBlock">
+                <div class="bodyPartName">목</div>
+                <img
+                  class="bodyPartImage"
+                  src="../assets/neck_img.png"
+                  alt="목"
+                />
+              </div>
+              <div class="bodyPartBlock">
+                <div class="bodyPartName">허리</div>
+                <img
+                  class="bodyPartImage"
+                  src="../assets/back_img.png"
+                  alt="허리"
+                />
+              </div>
+              <div class="bodyPartBlock">
+                <div class="bodyPartName">눈</div>
+                <img
+                  class="bodyPartImage"
+                  src="../assets/eyes_img.png"
+                  alt="눈"
+                />
+              </div>
+              <!-- 추가 bodyPartBlock -->
+            </div>
+          </div>
+          <button class="unfoldBlock">변경하기</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="mypage.js"></script>
+  </body>
+</html>
