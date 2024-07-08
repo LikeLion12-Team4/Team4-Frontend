@@ -5,6 +5,7 @@
 /*Components*/
 @import "components/logo-header.css";
 @import "components/container.css";
+@import "components/form-validation.css";
 
 /*Screens*/
 @import "screens/login.css";
@@ -13,7 +14,11 @@
 @import "screens/get-id.css";
 @import "screens/get-pw.css";
 @import "screens/sign-up.css";
-@import "screens/choice-problem.css";
+@import "screens/survey.css";
+@import "screens/survey-modal.css";
+@import "screens/change-id-modal.css";
+@import "screens/change-pw-modal.css";
+@import "screens/social-sign-up.css";
 
 body {
   font-family: "Ubuntu", sans-serif;
