@@ -32,17 +32,17 @@
   padding: 15px;
   border: 1px solid #ccc;
   font-size: 15px;
-  width: 100%;
+  width: 640px;
   margin: 13px auto;
 }
 
-.find-pw_form input[type="submit"] {
+.find-pw_form input[type="button"] {
   background-color: #6166f5;
   color: white;
   border: none;
 }
 
-.find-pw_form input[type="submit"]:hover {
+.find-pw_form input[type="button"]:hover {
   background-color: #3838d4;
 }
 
