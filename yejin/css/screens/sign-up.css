@@ -139,37 +139,3 @@
   width: 25px;
   display: none;
 }
-
-/*유효성 검증 메세지*/
-.failure-message,
-.failurePassword-message,
-.failureEmail-message {
-  font-size: 13px;
-  margin-left: 10px;
-  color: red;
-}
-
-.success-message {
-  font-size: 13px;
-  margin-left: 10px;
-}
-
-.hide {
-  display: none;
-}
-
-/*이메일 인증번호 유효시간*/
-.field_verification-number {
-  position: relative;
-}
-
-.remaining-time {
-  position: absolute;
-  top: 23px;
-  left: 320px;
-  font-size: 16px;
-  margin-left: 20px;
-  color: rgb(245, 51, 51);
-  border: 1px solid #ccc;
-  padding: 5px;
-}
