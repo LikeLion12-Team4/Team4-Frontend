@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내 프로필</title>
+    <script
+      src="https://kit.fontawesome.com/9125fcc41c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="profile.css" />
+    <link rel="stylesheet" href="../serin/header.css" />
+  </head>
+  <body>
+    <header data-include-path="../serin/header.html"></header>
+
+    <div class="title">
+      <div class="titleContainer">
+        <div class="titleText">내 프로필</div>
+      </div>
+      <div class="greetings">
+        <span class="nickname">아기사자</span>님, 오늘도 좋은 하루 되세요!
+      </div>
+    </div>
+    <hr />
+    <!--구분선-->
+
+    <div class="profileContainer">
+      <div class="profileMenuContainer">
+        <div class="profileMenuContainerTitle">개인정보</div>
+        <div class="profileMenu">
+          <div class="profileMenuTitle">아이디</div>
+          <div class="profileMenuValue">아기사자</div>
+          <button class="profileMenuEditButton">변경하기</button>
+        </div>
+        <div class="profileMenu">
+          <div class="profileMenuTitle">비밀번호</div>
+          <div class="profileMenuValue"></div>
+          <button class="profileMenuEditButton">변경하기</button>
+        </div>
+        <div class="profileMenu">
+          <div class="profileMenuTitle">이름</div>
+          <div class="profileMenuValue">최상명</div>
+        </div>
+        <div class="profileMenu">
+          <div class="profileMenuTitle">연결된 계정</div>
+          <div class="profileMenuValue">Choism@naver.com</div>
+        </div>
+      </div>
+      <div class="profileMenuContainer">
+        <div class="profileMenuContainerTitle">기타</div>
+        <button id="delete_account">회원 탈퇴</button>
+      </div>
+    </div>
+
+    <script src="profile.js"></script>
+  </body>
+</html>
