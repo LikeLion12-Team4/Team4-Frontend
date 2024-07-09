@@ -19,10 +19,15 @@ let failureEmailMessage = document.querySelector(".failureEmail-message");
 // 새 비밀번호 불일치 메시지 정보
 let mismatchMessage = document.querySelector(".mismatch-message");
 
-// 아이디 유효성 검증 (한글 또는 영문)
+// 아이디 유효성 검증(영문 또는 숫자)
 function idCheck(str) {
-  return /^[가-힣a-zA-Z]{2,10}$/.test(str);
+  return /^[A-Za-z0-9]{4,12}$/.test(str);
 }
+
+// // 아이디 유효성 검증 (한글 또는 영문)
+// function idCheck(str) {
+//   return /^[가-힣a-zA-Z]{2,10}$/.test(str);
+// }
 
 // 비밀번호 유효성 검증
 function passwordCheck(str) {

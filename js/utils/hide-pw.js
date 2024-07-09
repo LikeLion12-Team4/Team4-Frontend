@@ -7,10 +7,10 @@ function togglePasswordVisibility(inputSelector, imgSelector) {
     hidePassword.addEventListener("click", function () {
       if (inputPassword.type === "password") {
         inputPassword.type = "text";
-        hidePassword.src = "css/icon/비밀번호 보이기.svg";
+        hidePassword.src = "../../assets/icons/비밀번호 보이기.svg";
       } else {
         inputPassword.type = "password";
-        hidePassword.src = "css/icon/비밀번호 가리기.svg";
+        hidePassword.src = "../../assets/icons/비밀번호 가리기.svg";
       }
     });
   }
