@@ -1,0 +1,23 @@
+/*유효성 검증 메세지*/
+.failure-message,
+.failurePassword-message,
+.failureEmail-message {
+  font-size: 13px;
+  margin-left: 10px;
+  color: red;
+}
+
+.success-message {
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+.mismatch-message {
+  font-size: 13px;
+  margin-left: 10px;
+  color: red;
+}
+
+.hide {
+  display: none;
+}

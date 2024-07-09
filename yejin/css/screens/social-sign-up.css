@@ -1,4 +1,4 @@
-.get-pw_container {
+.social_sign-up_container {
   position: relative;
   top: 60px;
   display: flex;
@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-.get-pw_wrap {
+.social_sign-up_form_wrap {
   background-color: white;
   padding: 30px;
   border-radius: 10px;
@@ -15,28 +15,28 @@
   height: 500px;
 }
 
-.get-pw_wrap p:nth-child(1) {
+.social_sign-up_form_wrap p {
   font-size: 18px;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin-top: 40px;
+  margin-bottom: 50px;
 }
 
-.get-pw_wrap p:nth-child(2) {
-  font-size: 14px;
-  margin-bottom: 40px;
-  color: gray;
+.social_sign-up_form {
+  display: flex;
+  flex-direction: column;
+  width: 640px;
 }
 
-.get-pw_form input {
+.social_sign-up_form input {
   padding: 15px;
   border: 1px solid #ccc;
   font-size: 15px;
-  margin: 13px auto;
   width: 100%;
+  margin: 13px auto;
 }
 
-.get-pw_login {
-  width: 100%;
+.social_sign-up_next {
+  width: calc(100% - 50px);
   padding: 15px;
   margin-top: 30px;
   background-color: #6166f5;
@@ -46,12 +46,6 @@
   font-size: 15px;
 }
 
-.get-pw_login:hover {
+.social_sign-up_next:hover {
   background-color: #3838d4;
-}
-
-.get-pw_finished {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
 }
