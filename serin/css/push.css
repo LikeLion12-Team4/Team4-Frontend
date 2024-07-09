@@ -1,0 +1,30 @@
+ .push_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border: solid 1px #6266ED;
+    flex-direction: column;
+    width: 500px;
+    padding: 20px;
+    position: relative;
+ }
+.push_box h2 {
+    margin: 0;
+}
+ .push_box a {
+    color: #E35F79;
+    font-weight: bold;
+ }
+
+ .push_box p {
+    margin-bottom: 0;
+    font-weight: bold;
+ }
+.fa-x {
+    color:#6266ED;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 20px;
+ }
