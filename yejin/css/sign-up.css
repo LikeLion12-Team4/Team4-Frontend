@@ -80,12 +80,14 @@
 }
 
 .sign-up_finished {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
   margin-top: 20px;
 }
 
 .sign-up_next {
-  width: calc(100% - 50px);
+  width: 100%;
   padding: 15px;
   margin-top: 30px;
   background-color: #6166f5;

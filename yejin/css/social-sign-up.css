@@ -35,8 +35,15 @@
   margin: 13px auto;
 }
 
+.social_sign-up_finished {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
 .social_sign-up_next {
-  width: calc(100% - 50px);
+  width: 100%;
   padding: 15px;
   margin-top: 30px;
   background-color: #6166f5;
