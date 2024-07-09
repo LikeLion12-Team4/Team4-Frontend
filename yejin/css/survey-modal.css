@@ -22,10 +22,12 @@
   background: #ffffff;
   border-radius: 20px;
 }
-.survey-modal_wrap img {
+
+.survey-modal_close-btn {
   display: flex;
   margin-left: auto;
 }
+
 .survey-modal_title span {
   color: #6166f5;
   font-weight: bold;

@@ -30,7 +30,7 @@
 
 /* 아이디 입력란 아이콘 */
 #login-id {
-  background-image: url(../icon/아이디.svg);
+  background-image: url(../css/icon/아이디.svg);
   background-size: 20px;
   background-position: 10px center;
   background-repeat: no-repeat;
@@ -40,7 +40,7 @@
 
 /* 비밀번호 입력란 아이콘 */
 #login-pw {
-  background-image: url(../icon/비밀번호.svg);
+  background-image: url(../css/icon/비밀번호.svg);
   background-size: 20px;
   background-position: 10px center;
   background-repeat: no-repeat;
