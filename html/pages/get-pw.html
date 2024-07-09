@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자세차렷</title>
+    <link rel="stylesheet" href="css/get-pw.css" />
+    <link rel="stylesheet" href="css/sign-up.css" />
+    <link rel="stylesheet" href="css/logo-header.css" />
+    <link rel="stylesheet" href="css/find-id.css" />
+    <link rel="stylesheet" href="css/form-validation.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+  </head>
+  <body>
+    <div class="logo-header">
+      <img class="logo-img" src="./icon/logo.svg" alt="log so" />
+      <p class="logo-title">사무직 직장인의 건강한 자세 파트너, 자세차렷</p>
+    </div>
+
+    <div class="get-pw_container">
+      <div class="get-pw_wrap">
+        <p>비밀번호 재설정</p>
+        <p>
+          비밀번호를 변경해주세요. (8~15자 이상의 영문, 숫자, 특수문자 2가지
+          조합)
+        </p>
+        <div class="get-pw_form">
+          <form action="" autocomplete="off">
+            <div class="field">
+              <input
+                type="password"
+                id="new-pw"
+                placeholder="새 비밀번호"
+                autocomplete="off"
+              />
+            </div>
+            <div class="failurePassword-message hide">
+              비밀번호는 8~15자의 영문, 숫자, 특수문자 2가지 조합 사용
+              가능합니다.
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                id="check_new-pw"
+                placeholder="새 비밀번호 확인"
+                autocomplete="off"
+              />
+            </div>
+            <div class="mismatch-message hide">
+              비밀번호가 일치하지 않습니다.
+            </div>
+
+            <div class="get-pw_finished">
+              <button
+                type="button"
+                class="get-pw_login"
+                onclick="location.href='login.html'"
+              >
+                확인
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="js/form-validation.js"></script>
+  </body>
+</html>

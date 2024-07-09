@@ -1,0 +1,142 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+}
+
+#mainBanner {
+  width: 100%;
+  height: 250px;
+  background-color: #6166f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#mainBannerIcon {
+  width: 150px;
+  height: 150px;
+  background-image: url(../assets/pair-logo.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#mainBannerText {
+  font-size: 25px;
+  font-weight: 400;
+  color: #f5f6ff;
+  margin: 0 0 30px 0;
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(245 246 255);
+}
+
+.containerTitle {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  font-weight: 700;
+  color: #181818;
+  margin: 15px 0 15px 0;
+}
+
+.containerTitleIcon {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#introduction,
+#notification,
+#map,
+#video,
+#devTeam {
+  padding: 20px 0 20px 0;
+  margin: 10px 0 10px 0;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+#notification,
+#video {
+  width: 100%;
+  background-color: #ffffff;
+}
+
+.imgContainer {
+  display: flex;
+  justify-content: center;
+}
+.img {
+  width: 350px;
+  height: 300px;
+  background-image: url(../assets/push-ape1.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.memberContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  margin: 10px 15px 20px 15px;
+  justify-content: flex-start;
+}
+
+.profilePic {
+  width: 110px;
+  height: 110px;
+  margin-right: 20px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 25px;
+}
+
+.role,
+.name {
+  font-weight: 600; /* 역할과 이름 간 간격 조정 */
+}
+
+.role {
+  color: #6166f5;
+}
+
+#최정훈_profile .profilePic {
+  transform: scale(0.75);
+}
+
+#김예진_profile {
+  margin: 10px 8px 20px 22px;
+}

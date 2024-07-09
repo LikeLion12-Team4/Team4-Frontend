@@ -1,0 +1,71 @@
+.find-pw_container {
+  position: relative;
+  top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.find-pw_wrap {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #d3d3d3;
+  width: 700px;
+  height: 600px;
+  margin-bottom: 50px;
+}
+
+.find-pw_wrap p:nth-child(1) {
+  font-size: 18px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.find-pw_wrap p:nth-child(2) {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: gray;
+}
+
+.find-pw_form input {
+  padding: 15px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  width: 640px;
+  margin: 13px auto;
+}
+
+.find-pw_form input[type="button"] {
+  background-color: #6166f5;
+  color: white;
+  border: none;
+}
+
+.find-pw_form input[type="button"]:hover {
+  background-color: #3838d4;
+}
+
+.find-pw_next:hover {
+  background-color: #3838d4;
+}
+
+.find-pw_finished {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.find-pw_next {
+  width: calc(100% - 50px);
+  padding: 15px;
+  margin-top: 30px;
+  background-color: #6166f5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.find-id_next:hover {
+  background-color: #3838d4;
+}

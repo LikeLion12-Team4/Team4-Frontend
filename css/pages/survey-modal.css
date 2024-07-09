@@ -1,0 +1,101 @@
+.survey-modal_container {
+  /*팝업 배경*/
+  /* display: none; 평소에는 보이지 않도록 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.survey-modal_wrap {
+  /*팝업*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 400px;
+  transform: translate(-50%, -50%);
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+}
+
+.survey-modal_close-btn {
+  display: flex;
+  margin-left: auto;
+}
+
+.survey-modal_title span {
+  color: #6166f5;
+  font-weight: bold;
+  margin: 0 5px;
+}
+
+.survey-modal_wrap p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.survey-modal_wrap p:nth-child(1) {
+  font-size: 25px;
+
+  margin-bottom: 10px;
+}
+
+.survey-modal_wrap p:nth-child(2) {
+  font-size: 14px;
+  margin-bottom: 35px;
+  color: gray;
+}
+
+.survey-modal_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.survey-modal_icon {
+  display: flex;
+  flex-direction: row;
+}
+
+.survey-modal_icon div img {
+  display: flex;
+  flex-direction: row;
+  width: 100px;
+  height: auto;
+  border: 1px solid gray;
+  border-radius: 10px;
+  margin: 8px;
+}
+
+.survey-modal_icon div img:hover {
+  border: 4px solid #3838d4;
+}
+
+.survey-modal_finished {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.survey-modal_next {
+  width: 100%;
+  padding: 15px;
+  margin-top: 30px;
+  background-color: #6166f5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.survey-modal_next:hover {
+  background-color: #3838d4;
+}

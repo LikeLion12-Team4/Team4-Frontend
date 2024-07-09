@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자세차렷</title>
+    <link rel="stylesheet" href="css/sign-up.css" />
+    <link rel="stylesheet" href="css/logo-header.css" />
+    <link rel="stylesheet" href="css/find-id.css" />
+    <link rel="stylesheet" href="css/form-validation.css" />
+    <link rel="stylesheet" href="css/remaining-time.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+  </head>
+  <body>
+    <div class="logo-header">
+      <img class="logo-img" src="./icon/logo.svg" alt="logo" />
+      <p class="logo-title">사무직 직장인의 건강한 자세 파트너, 자세차렷</p>
+    </div>
+
+    <div class="sign-up_container">
+      <div class="sign-up_social-login">
+        <span class="sign-up_social-login_content"
+          >소셜 로그인으로 간편하게 이용해보세요!</span
+        >
+        <div class="sign-up_social-login_icon">
+          <div class="naver-login">
+            <a href="#"><img src="./icon/naver.svg" alt="naver-login" /></a>
+          </div>
+          <div class="kakao-login">
+            <a href="#"><img src="./icon/kakao.svg" alt="kakao-login" /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sign-up_form_wrap">
+        <p>회원가입하고 맞춤 서비스를 경험하세요!</p>
+        <div class="sign-up_form">
+          <form action="#">
+            <div class="field">
+              <input
+                type="text"
+                id="sign-up_id"
+                placeholder="아이디 (2~10자의 한글이나 영문)"
+                autocomplete="off"
+              />
+              <div class="success-message hide">
+                사용할 수 있는 아이디입니다.
+              </div>
+              <div class="failure-message hide">
+                아이디는 2~10자의 한글이나 영문만 사용 가능합니다.
+              </div>
+            </div>
+            <div class="field_password">
+              <input
+                type="password"
+                id="sign-up_pw"
+                placeholder="비밀번호 (8~15자 이상의 영문, 숫자, 특수문자 2가지 조합)"
+                autocomplete="off"
+              />
+              <div class="sign-up_hide-pw">
+                <img
+                  class="sign-up_hide-pw-img"
+                  src="./css/icon/비밀번호 가리기.svg"
+                />
+              </div>
+              <div class="sign-up_show-pw">
+                <img
+                  class="sign-up_show-pw-img"
+                  src="./css/icon/비밀번호 보이기.svg"
+                />
+              </div>
+              <div class="failurePassword-message hide">
+                비밀번호는 8~15자의 영문, 숫자, 특수문자 2가지 조합 사용
+                가능합니다.
+              </div>
+            </div>
+            <div class="field">
+              <input
+                type="text"
+                id="sign-up_name"
+                placeholder="이름 (실명)"
+                autocomplete="off"
+              />
+            </div>
+            <div class="field_email">
+              <input
+                type="text"
+                id="sign-up_email"
+                placeholder="이메일 (ID@example.com)"
+                autocomplete="off"
+              />
+              <input
+                type="button"
+                value="인증번호 전송"
+                id="send_verification-number"
+              />
+            </div>
+            <div class="failureEmail-message hide">
+              이메일은 ID@example.com 형식으로 입력해주세요.
+            </div>
+            <div class="field_verification-number">
+              <input
+                type="text"
+                id="sign-up_verification-number"
+                placeholder="인증번호 입력"
+                autocomplete="off"
+              />
+              <div class="remaining-time hide">
+                <span class="remaining-min">3</span> :
+                <span class="remaining-sec">00</span>
+              </div>
+              <input
+                type="button"
+                value="확인"
+                id="check_verification-number"
+              />
+              <input
+                type="button"
+                value="재전송"
+                id="resend_verification-number"
+              />
+            </div>
+            <div class="failure-message hide">인증번호가 올바르지 않습니다</div>
+          </form>
+
+          <div class="sign-up_finished">
+            <button
+              type="button"
+              class="sign-up_next"
+              onclick="location.href='survey.html'"
+            >
+              다음으로
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/form-validation.js"></script>
+    <script src="js/hide-pw.js"></script>
+    <script src="js/remaining-time.js"></script>
+  </body>
+</html>
