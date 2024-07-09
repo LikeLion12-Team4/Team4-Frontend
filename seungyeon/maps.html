@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내 프로필</title>
+    <script
+      src="https://kit.fontawesome.com/9125fcc41c.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="maps.css" />
+    <link rel="stylesheet" href="../serin/header.css" />
+  </head>
+  <body>
+    <header data-include-path="../serin/header.html"></header>
+    <div id="map_container"></div>
+    <!--appkey 삽입부분-->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79b84750b6a7d831b0a221614f5329ae"
+    ></script>
+    <!--지도 표시 부분-->
+
+    <!--라이브러리 불러오기 부분-->
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"
+    ></script>
+    <script>
+      var mapContainer = document.getElementById("map_container");
+      var mapOption = {
+        center: new kakao.maps.LatLng(37.603137093485785, 126.9563494979624),
+        level: 2,
+      };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
+
+      // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열
+      var positions = [
+        {
+          content: "<div>상명아트센터</div>",
+          latlng: new kakao.maps.LatLng(37.603137093485785, 126.9563494979624),
+        },
+        {
+          content: "<div>미래백년관</div>",
+          latlng: new kakao.maps.LatLng(37.602966, 126.954956),
+        },
+        {
+          content: "<div>상명대학교부속초등학교</div>",
+          latlng: new kakao.maps.LatLng(37.600827, 126.956377),
+        },
+        {
+          content: "<div>소림사</div>",
+          latlng: new kakao.maps.LatLng(37.6012, 126.958953),
+        },
+      ];
+
+      // 마커 이미지 URL, fitness 마커인데 임시로 호스팅함
+      var imageUrl = "https://ifh.cc/g/aZTysy.png";
+
+      // 마커 이미지 크기 지정
+      var imageSize = new kakao.maps.Size(69, 69);
+
+      // 마커 이미지 생성
+      var markerImage = new kakao.maps.MarkerImage(imageUrl, imageSize);
+
+      for (var i = 0; i < positions.length; i++) {
+        // 마커 생성
+        var marker = new kakao.maps.Marker({
+          map: map, // 마커를 표시할 지도
+          position: positions[i].latlng, // 마커의 위치
+          image: markerImage,
+        });
+
+        // 마커에 표시할 인포윈도우를 생성
+        var infowindow = new kakao.maps.InfoWindow({
+          content: positions[i].content, // 인포윈도우에 표시할 내용
+        });
+
+        // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록
+        // 이벤트 리스너로는 클로저를 만들어 등록
+        // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록
+        kakao.maps.event.addListener(
+          marker,
+          "mouseover",
+          makeOverListener(map, marker, infowindow)
+        );
+        kakao.maps.event.addListener(
+          marker,
+          "mouseout",
+          makeOutListener(infowindow)
+        );
+      }
+
+      // 인포윈도우를 표시하는 클로저를 만드는 함수
+      function makeOverListener(map, marker, infowindow) {
+        return function () {
+          infowindow.open(map, marker);
+        };
+      }
+
+      // 인포윈도우를 닫는 클로저를 만드는 함수
+      function makeOutListener(infowindow) {
+        return function () {
+          infowindow.close();
+        };
+      }
+    </script>
+
+    <script src="maps.js"></script>
+  </body>
+</html>
