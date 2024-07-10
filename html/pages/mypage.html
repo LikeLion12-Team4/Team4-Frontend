@@ -8,37 +8,13 @@
       src="https://kit.fontawesome.com/9125fcc41c.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="mypage.css" />
-    <link rel="stylesheet" href="../serin/css/style.css" />
+    <link rel="stylesheet" href="../../css/pages/mypage.css" />
+    <link rel="stylesheet" href="../../css/components/header.css" />
     <link rel="stylesheet" href="../../css/pages/survey-modal.css" />
     <link rel="stylesheet" href="../../css/pages/logo-header.css" />
   </head>
+  <header data-include-path="../../html/components/header.html"></header>
   <body>
-    <header style="width: 100%">
-      <!--세린 헤더파일, 임시로 width 지정해둠-->
-      <nav>
-        <ul>
-          <li>
-            <a href="#"
-              ><img
-                class="header_logo"
-                src="../serin/logo.png"
-                alt="logo_img"
-              />자세차렷</a
-            >
-          </li>
-          <li><a href="#">주변 병원/클래스 찾기</a></li>
-          <li><a href="#">현재 내 자세 보기</a></li>
-          <li><a href="#">서비스 소개</a></li>
-          <li><a href="#">마이페이지</a></li>
-        </ul>
-        <div class="user_button">
-          <button><a href="#">로그인</a></button>
-          <button><a href="#">회원가입</a></button>
-        </div>
-      </nav>
-    </header>
-
     <div class="title">
       <div class="titleContainer">
         <div class="titleText">마이페이지</div>
@@ -60,7 +36,7 @@
             <span class="nickname" style="color: black">아기사자</span>님
           </div>
           <div class="userEmail">leemj@gmail.com</div>
-          <button class="unfoldBlock">
+          <button class="unfoldBlock" id="profile-button">
             펼치기
             <i class="fa-solid fa-plus"></i>
           </button>
@@ -103,7 +79,9 @@
       </div>
       <div class="myPageContainer">
         <div class="myPageBlock" id="video_history">
-          <div class="blockTitle">최근 시청한 영상</div>
+          <div class="blockTitle" id="recent_video_button">
+            최근 시청한 영상
+          </div>
           <div id="recent_video">거북목 예방을 위한 스트레칭</div>
           <div class="blockTitle">
             <span>
@@ -122,7 +100,7 @@
                 <div class="bodyPartName">목</div>
                 <img
                   class="bodyPartImage"
-                  src="../assets/neck_img.png"
+                  src="../../assets/icons/neck_img.png"
                   alt="목"
                 />
               </div>
@@ -130,7 +108,7 @@
                 <div class="bodyPartName">허리</div>
                 <img
                   class="bodyPartImage"
-                  src="../assets/back_img.png"
+                  src="../../assets/images/back_img.png"
                   alt="허리"
                 />
               </div>
@@ -138,7 +116,7 @@
                 <div class="bodyPartName">눈</div>
                 <img
                   class="bodyPartImage"
-                  src="../assets/eyes_img.png"
+                  src="../../assets/images/eyes_img.png"
                   alt="눈"
                 />
               </div>
@@ -187,6 +165,6 @@
         </div>
       </div>
     </div>
-    <script src="mypage.js"></script>
+    <script src="../../js/pages/mypage.js"></script>
   </body>
 </html>

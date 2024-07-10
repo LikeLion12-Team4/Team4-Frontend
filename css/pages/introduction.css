@@ -6,6 +6,14 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
+  overflow-x: hidden; /* 이거 */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 이거 */
+}
+
+header {
+  width: 100vw; /* 이거 */
 }
 
 #mainBanner {
@@ -21,7 +29,7 @@ body {
 #mainBannerIcon {
   width: 150px;
   height: 150px;
-  background-image: url(../assets/pair-logo.svg);
+  background-image: url(../../assets/images/pair-logo.svg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

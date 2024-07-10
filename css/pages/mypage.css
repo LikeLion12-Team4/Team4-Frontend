@@ -14,6 +14,11 @@ body {
   background: linear-gradient(180deg, #ffffff 55%, #6166f527);
 }
 
+header {
+  /* 이거 넣어줬으면 하는거 */
+  width: 100vw;
+}
+
 /* 마이페이지 타이틀 부분 */
 
 .title {
@@ -185,7 +190,7 @@ hr {
 #bell_img {
   width: 90px;
   height: 90px;
-  background-image: url(../assets/bell-icon.png);
+  background-image: url(../../assets/icons/bell-icon.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
