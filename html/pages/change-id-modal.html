@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>자세차렷</title>
-    <link rel="stylesheet" href="css/change-id-modal.css" />
-    <link rel="stylesheet" href="css/form-validation.css" />
-    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="../../css/pages/change-id-modal.css" />
+    <link rel="stylesheet" href="../../css/pages/form-validation.css" />
+    <link rel="stylesheet" href="../../css/pages/reset.css" />
   </head>
   <body>
     <div class="change-id-modal_container">
       <div class="change-id-modal_wrap">
         <button type="button" class="change-id-modal_close-btn">
-          <img src="./icon/close.svg" />
+          <img src="../../assets/icons/close.svg" />
         </button>
         <div class="change-id-modal_title">
           <p><span>아이디</span>를 변경해주세요!</p>
@@ -24,29 +24,25 @@
               <input
                 type="text"
                 id="sign-up_id"
-                placeholder="아이디 (2~10자의 한글이나 영문)"
+                placeholder="아이디 (4~12자의 영문이나 숫자)"
                 autocomplete="off"
               />
               <div class="success-message hide">
                 사용할 수 있는 아이디입니다.
               </div>
               <div class="failure-message hide">
-                아이디는 2~10자의 한글이나 영문만 사용 가능합니다.
+                아이디는 4~12자의 영문이나 숫자만 사용 가능합니다.
               </div>
             </div>
           </div>
           <div class="change-id-modal_finished">
-            <button
-              type="button"
-              class="change-id-modal_next"
-              onclick="location.href='#'"
-            >
+            <button type="button" class="change-id-modal_next">
               변경 완료
             </button>
           </div>
         </div>
       </div>
     </div>
-    <script src="js/form-validation.js"></script>
+    <script src="../../js/utils/form-validation.js"></script>
   </body>
 </html>

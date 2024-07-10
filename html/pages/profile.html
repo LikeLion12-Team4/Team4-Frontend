@@ -10,6 +10,11 @@
     ></script>
     <link rel="stylesheet" href="profile.css" />
     <link rel="stylesheet" href="../serin/header.css" />
+    <link rel="stylesheet" href="../../css/pages/change-id-modal.css" />
+    <link rel="stylesheet" href="../../css/pages/form-validation.css" />
+    <link rel="stylesheet" href="../../css/pages/change-pw-modal.css" />
+    <link rel="stylesheet" href="../../css/pages/form-validation.css" />
+    <link rel="stylesheet" href="../../css/pages/reset.css" />
   </head>
   <body>
     <header data-include-path="../serin/header.html"></header>
@@ -53,6 +58,92 @@
       </div>
     </div>
 
+    <!--아이디 변경 모달-->
+    <div class="change-id-modal_container">
+      <div class="change-id-modal_wrap">
+        <button type="button" class="change-id-modal_close-btn">
+          <img src="../../assets/icons/close.svg" />
+        </button>
+        <div class="change-id-modal_title">
+          <p><span>아이디</span>를 변경해주세요!</p>
+        </div>
+
+        <div class="change-id-modal_content">
+          <div class="change-id-modal_form">
+            <div class="field">
+              <input
+                type="text"
+                id="sign-up_id"
+                placeholder="아이디 (4~12자의 영문이나 숫자)"
+                autocomplete="off"
+              />
+              <div class="success-message hide">
+                사용할 수 있는 아이디입니다.
+              </div>
+              <div class="failure-message hide">
+                아이디는 4~12자의 영문이나 숫자만 사용 가능합니다.
+              </div>
+            </div>
+          </div>
+          <div class="change-id-modal_finished">
+            <button
+              type="button"
+              class="change-id-modal_next"
+              onclick="location.href='#'"
+            >
+              변경 완료
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--비밀번호 변경 모달-->
+    <div class="change-pw-modal_container">
+      <div class="change-pw-modal_wrap">
+        <button type="button" class="change-pw-modal_close-btn">
+          <img src="../../assets/icons/close.svg" />
+        </button>
+        <div class="change-pw-modal_title">
+          <p><span>비밀번호</span>를 변경해주세요!</p>
+        </div>
+
+        <div class="change-pw-modal_content">
+          <div class="change-pw-modal_form">
+            <div class="field">
+              <input
+                type="password"
+                id="new-pw"
+                placeholder="새 비밀번호"
+                autocomplete="off"
+              />
+            </div>
+            <div class="failurePassword-message hide">
+              비밀번호는 8~15자의 영문, 숫자, 특수문자 2가지 조합 사용
+              가능합니다.
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                id="check_new-pw"
+                placeholder="새 비밀번호 확인"
+                autocomplete="off"
+              />
+            </div>
+            <div class="mismatch-message hide">
+              비밀번호가 일치하지 않습니다.
+            </div>
+          </div>
+          <div class="change-pw-modal_finished">
+            <button type="button" class="change-pw-modal_next">
+              변경 완료
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="profile.js"></script>
+    <script src="../../js/utils/form-validation.js"></script>
   </body>
 </html>

@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>자세차렷</title>
-    <link rel="stylesheet" href="css/find-pw.css" />
-    <link rel="stylesheet" href="css/sign-up.css" />
-    <link rel="stylesheet" href="css/logo-header.css" />
-    <link rel="stylesheet" href="css/find-id.css" />
-    <link rel="stylesheet" href="css/form-validation.css" />
-    <link rel="stylesheet" href="css/remaining-time.css" />
-    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="../../css/pages/find-pw.css" />
+    <link rel="stylesheet" href="../../css/pages/sign-up.css" />
+    <link rel="stylesheet" href="../../css/pages/logo-header.css" />
+    <link rel="stylesheet" href="../../css/pages/find-id.css" />
+    <link rel="stylesheet" href="../../css/pages/form-validation.css" />
+    <link rel="stylesheet" href="../../css/pages/remaining-time.css" />
+    <link rel="stylesheet" href="../../css/pages/reset.css" />
   </head>
   <body>
     <div class="logo-header">
-      <img class="logo-img" src="./icon/logo.svg" alt="logo" />
+      <a href="../pages/index.html">
+        <img class="logo-img" src="../../assets/icons/logo.svg" alt="logo" />
+      </a>
       <p class="logo-title">사무직 직장인의 건강한 자세 파트너, 자세차렷</p>
     </div>
 
@@ -31,14 +33,14 @@
               <input
                 type="text"
                 id="sign-up_id"
-                placeholder="아이디 (2~10자의 한글이나 영문)"
+                placeholder="아이디 (4~12자의 영문이나 숫자)"
                 autocomplete="off"
               />
               <div class="success-message hide">
                 사용할 수 있는 아이디입니다.
               </div>
               <div class="failure-message hide">
-                아이디는 2~10자의 한글이나 영문만 사용 가능합니다.
+                아이디는 4~12자의 영문이나 숫자만 사용 가능합니다.
               </div>
             </div>
             <div class="field">
@@ -100,7 +102,7 @@
         </div>
       </div>
     </div>
-    <script src="js/remaining-time.js"></script>
-    <script src="js/form-validation.js"></script>
+    <script src="../../js/utils/remaining-time.js"></script>
+    <script src="../../js/utils/form-validation.js"></script>
   </body>
 </html>
