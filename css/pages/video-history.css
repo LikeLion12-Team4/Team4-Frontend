@@ -14,10 +14,6 @@ body {
   background: linear-gradient(180deg, #ffffff 55%, #6166f527);
 }
 
-header {
-  width: 100vw; /* 이거 */
-}
-
 /* 마이페이지 타이틀 부분 */
 
 .title {
