@@ -185,7 +185,7 @@ hr {
 #bell_img {
   width: 90px;
   height: 90px;
-  background-image: url(../assets/bell-icon.png);
+  background-image: url(../../assets/icons/bell-icon.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

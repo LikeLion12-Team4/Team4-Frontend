@@ -21,7 +21,7 @@ body {
 #mainBannerIcon {
   width: 150px;
   height: 150px;
-  background-image: url(../assets/pair-logo.svg);
+  background-image: url(../../assets/images/pair-logo.svg);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -35,6 +35,7 @@ body {
 }
 
 .container {
+  padding: 15px;
   text-align: center;
   width: 100%;
   display: flex;
