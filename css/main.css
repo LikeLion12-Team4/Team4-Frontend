@@ -1,0 +1,164 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+
+
+
+
+
+
+/* main css */
+
+
+
+.videos {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FAFAFA;
+    
+}
+
+.category p {
+    padding: 20px;
+    margin-bottom: 0;
+    color: #6266ED;
+    font-weight: bold;
+}
+.video_silder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+
+.left_btn,
+.right_btn{
+    background-color: #7D7D7D;
+    color : white;
+    border-radius: 8px;
+    padding: 5px 8px;
+    border: none;
+}
+
+.video_container {
+    display: flex;
+    overflow: hidden;
+    width: 950px;
+    margin: 0 20px;
+}
+.video_card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    overflow: hidden;
+    flex: 0 0 230px;
+    height: 250px;
+    margin-right: 10px;
+    position: relative;
+}
+
+.video_card img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    height: 50%;
+}
+
+.video_min {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #E35F79;
+    color: white;
+    padding: 3px 13px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.bodypart {
+    display: flex;
+    width: 45px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 5px 0px;
+    margin: 15px 20px;
+    font-weight: bold;
+}
+
+.video_comment {
+    display: flex;
+    justify-content: center;
+    margin: 0px 10px;
+    font-size: 15px;
+}
+
+.fa-heart {
+    position: absolute;
+    bottom : 15px;
+    right: 20px;
+    color: #999999;
+    font-size: 20px;
+}
+
+.video_card .fa-heart:active{
+    color: #6266ED;
+}
+
+.silde {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dot {
+    height: 8px;
+    width: 8px;
+    margin: 0 5px;
+    background-color: #E5E7EB;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dot:active {
+    background-color: #121826;
+}
+
+.dot:nth-child(1){
+    background-color: #121826;
+}
+
+
+.bodypart_choice {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.bodypart_choice span {
+    color: black;
+    border-radius: 5px;
+    background-color: #EAEAEA;
+    padding: 3px 8px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+

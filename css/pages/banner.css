@@ -1,0 +1,13 @@
+.banner {
+    background-color: #6266ED;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    flex-direction: column;
+    font-weight: bold;
+    padding-bottom: 60px;
+}
+.banner h3 {
+    margin-top: 15px;
+}
