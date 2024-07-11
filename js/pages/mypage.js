@@ -1,4 +1,4 @@
-// 토큰 하드코딩
+// 토큰 하드코딩.. 로그인 완성되면 변경하자..
 const hardcodedToken = window.APP_CONFIG.hardcodedToken;
 
 // include.js
@@ -186,11 +186,178 @@ function fetchUserInfo() {
     })
     .catch((error) => console.log("error", error));
 }
+
+// 고민 부위 변경 로직 (^^ ㅠ..)
+
+// bodypart 정보를 매핑하는 객체
+const bodyPartMap = {
+  1: { name: "목", engName: "neck" },
+  2: { name: "손목", engName: "wrist" },
+  3: { name: "눈", engName: "eyes" },
+  4: { name: "허리", engName: "back" },
+  5: { name: "어깨", engName: "shoulders" },
+};
+
+// 모달 관련 변수
+const modal = document.querySelector(".survey-modal_container");
+const modalCloseBtn = document.querySelector(".survey-modal_close-btn");
+const saveBtn = document.querySelector(".survey-modal_next");
+const bodyPartIcons = document.querySelectorAll(".survey-modal_icon > div");
+
+// 선택된 bodypart를 저장할 배열
+let selectedBodyParts = [];
+
+// 모달 열기
+document
+  .getElementById("body_part_change_btn")
+  .addEventListener("click", () => {
+    modal.style.display = "flex";
+    initializeSelectedBodyParts();
+  });
+
+// 모달 닫기
+modalCloseBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// bodypart 아이콘 클릭 이벤트
+bodyPartIcons.forEach((icon, index) => {
+  icon.addEventListener("click", () => {
+    icon.classList.toggle("selected");
+    updateSelectedBodyParts(index + 1);
+  });
+});
+
+// 저장 버튼 클릭 이벤트
+saveBtn.addEventListener("click", () => {
+  if (selectedBodyParts.length > 0) {
+    updateUserBodyParts();
+    modal.style.display = "none";
+  } else {
+    alert("최소 1개 이상의 고민 부위를 선택해주세요.");
+  }
+});
+
+// 선택된 bodypart 초기화 및 표시
+function initializeSelectedBodyParts() {
+  selectedBodyParts = [];
+  bodyPartIcons.forEach((icon, index) => {
+    if (userBodyParts.includes(index + 1)) {
+      icon.classList.add("selected");
+      selectedBodyParts.push(index + 1);
+    } else {
+      icon.classList.remove("selected");
+    }
+  });
+}
+
+// 선택된 bodypart 업데이트
+function updateSelectedBodyParts(partId) {
+  const index = selectedBodyParts.indexOf(partId);
+  if (index > -1) {
+    selectedBodyParts.splice(index, 1);
+  } else {
+    selectedBodyParts.push(partId);
+  }
+
+  // UI 업데이트
+  bodyPartIcons.forEach((icon, index) => {
+    if (selectedBodyParts.includes(index + 1)) {
+      icon.classList.add("selected");
+    } else {
+      icon.classList.remove("selected");
+    }
+  });
+}
+
+// 사용자의 bodypart 업데이트
+function updateUserBodyParts() {
+  var requestOptions = {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${hardcodedToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ bodypart: selectedBodyParts }),
+    redirect: "follow",
+  };
+
+  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("Body parts updated successfully:", result);
+      userBodyParts = selectedBodyParts;
+      displayBodyParts(); // UI 즉시 업데이트
+    })
+    .catch((error) => console.log("error", error));
+}
+
+// 사용자의 현재 bodypart를 저장할 변수
+let userBodyParts = [];
+
+// 사용자의 bodypart 정보를 가져와서 표시하는 함수
+function fetchAndDisplayBodyParts() {
+  var requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${hardcodedToken}`,
+    },
+    redirect: "follow",
+  };
+
+  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      userBodyParts = result.bodypart.map((part) => part.id);
+      displayBodyParts();
+      initializeSelectedBodyParts(); // 모달 내 선택 상태 초기화
+    })
+    .catch((error) => console.log("error", error));
+}
+
+// bodypart를 화면에 표시하는 함수
+function displayBodyParts() {
+  const bodyPartContainer = document.querySelector(".bodyPartContainer");
+  bodyPartContainer.innerHTML = "";
+
+  userBodyParts.forEach((partId) => {
+    const bodyPartInfo = bodyPartMap[partId];
+    if (bodyPartInfo) {
+      const bodyPartBlock = createBodyPartBlock(
+        bodyPartInfo.name,
+        bodyPartInfo.engName
+      );
+      bodyPartContainer.appendChild(bodyPartBlock);
+    }
+  });
+}
+
+// bodyPartBlock을 생성하는 함수
+function createBodyPartBlock(partName, engName) {
+  const bodyPartBlock = document.createElement("div");
+  bodyPartBlock.className = "bodyPartBlock";
+
+  const bodyPartName = document.createElement("div");
+  bodyPartName.className = "bodyPartName";
+  bodyPartName.textContent = partName;
+
+  const bodyPartImage = document.createElement("img");
+  bodyPartImage.className = "bodyPartImage";
+  bodyPartImage.src = `../../assets/images/${engName}_img.png`;
+  bodyPartImage.alt = partName;
+
+  bodyPartBlock.appendChild(bodyPartName);
+  bodyPartBlock.appendChild(bodyPartImage);
+
+  return bodyPartBlock;
+}
+
 // 이벤트 리스너 추가
 document.addEventListener("DOMContentLoaded", function () {
   fetchAlarmSettings();
   fetchAndDisplayRecentVideo();
   fetchUserInfo();
+  fetchAndDisplayBodyParts();
 
   document
     .getElementById("notification_toggle")
