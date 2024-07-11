@@ -4,6 +4,7 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     width: 100%;
+    margin-top: 60px;
 }
 
 a {
@@ -13,6 +14,13 @@ a {
     display: flex;
 }
 
+header {
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    width: 100%;
+
+}
 .navbar {
     display: flex;
     justify-content: space-around;
@@ -55,7 +63,8 @@ a {
     justify-content: space-around;
 }
 
-.user_button a {
+.login_btn,
+.join_btn {
     margin-right: 20px;
     padding: 5px 10px;
     display: flex;
@@ -65,7 +74,7 @@ a {
     font-size: 13px;
 }
 
-.user_button a:first-child {
+.login_btn {
     color: #6266ED;
 }
 
@@ -100,4 +109,12 @@ a {
 
 .navbar_menu li:hover::after {
     width: 100%;
+}
+
+.logout_btn {
+    display: none;
+}
+
+.welcome_msg {
+    display: none;
 }
