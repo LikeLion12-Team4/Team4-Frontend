@@ -36,7 +36,7 @@
         <div class="profileMenuContainerTitle">개인정보</div>
         <div class="profileMenu">
           <div class="profileMenuTitle">아이디</div>
-          <div class="profileMenuValue">아기사자</div>
+          <div class="profileMenuValue" id="nickname">아기사자</div>
           <button class="profileMenuEditButton">변경하기</button>
         </div>
         <div class="profileMenu">
@@ -46,11 +46,11 @@
         </div>
         <div class="profileMenu">
           <div class="profileMenuTitle">이름</div>
-          <div class="profileMenuValue">최상명</div>
+          <div class="profileMenuValue" id="name">최상명</div>
         </div>
         <div class="profileMenu">
           <div class="profileMenuTitle">연결된 계정</div>
-          <div class="profileMenuValue">Choism@naver.com</div>
+          <div class="profileMenuValue" id="email">Choism@naver.com</div>
         </div>
       </div>
       <div class="profileMenuContainer">
@@ -120,8 +120,8 @@
               />
             </div>
             <div class="failurePassword-message hide">
-              비밀번호는 8~15자의 영문, 숫자, 특수문자 2가지 조합 사용
-              가능합니다.
+              비밀번호는 8~15자의 영문, 숫자 조합 사용 가능합니다. (특수문자는
+              선택)
             </div>
             <div class="field">
               <input
