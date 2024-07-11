@@ -169,16 +169,25 @@ hr {
 }
 
 #recent_video {
+  width: fit-content;
   margin: 5px 0 30px 0;
   color: rgb(255, 89, 139);
   font-weight: 600;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 #liked_video {
+  width: 60px;
+  cursor: pointer;
   margin: 5px 0 0px 0;
   color: rgb(255, 89, 139);
   font-weight: 600;
+  /*font-size: 18px;*/
+  text-decoration: underline;
+}
+
+#liked_video i {
   text-decoration: underline;
 }
 
