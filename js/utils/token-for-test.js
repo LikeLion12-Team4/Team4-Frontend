@@ -1,0 +1,4 @@
+window.APP_CONFIG = {
+  hardcodedToken:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwNzA4ODgwLCJpYXQiOjE3MjA3MDUyODAsImp0aSI6IjNiZjY0NTdhNDA0MzRlZjNiZTYzMDg3ODg5ZTgxZjdlIiwidXNlcl9pZCI6M30.Xi9nxPs-TZcqv24I7dmMOATB3ocM8Fh7V1cnKXmJR4k",
+};

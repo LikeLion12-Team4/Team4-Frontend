@@ -1,3 +1,6 @@
+//
+const hardcodedToken = window.APP_CONFIG.hardcodedToken;
+
 // include.js
 window.addEventListener("load", function () {
   var allElements = document.getElementsByTagName("*");
@@ -21,7 +24,7 @@ async function fetchAndCreateVideoCards() {
   try {
     const response = await fetch("http://3.37.18.8:8000/videolike/", {
       headers: {
-        Authorization: "Bearer (토큰 여기다 하드코딩 나중에 꼭 지우기)",
+        Authorization: `Bearer ${hardcodedToken}`,
       },
     });
     const data = await response.json();
@@ -71,8 +74,7 @@ async function handleHeartClick(event) {
       response = await fetch(`http://3.37.18.8:8000/video_id/${videoId}/`, {
         method: "DELETE",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwNzAwNzcyLCJpYXQiOjE3MjA2OTcxNzIsImp0aSI6IjEyMGU5YThhZDg0OTRiMGU4MmY4ZmNlMDM0NGE2ZGQ3IiwidXNlcl9pZCI6M30.D7yxSCovDJNQWDWG-EEgXX4aIhgpQo6sKDtn_F2_UyI",
+          Authorization: `Bearer ${hardcodedToken}`,
         },
         redirect: "follow",
       });
@@ -81,8 +83,7 @@ async function handleHeartClick(event) {
       response = await fetch(`http://3.37.18.8:8000/video_id/${videoId}/`, {
         method: "POST",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwNzAwNzcyLCJpYXQiOjE3MjA2OTcxNzIsImp0aSI6IjEyMGU5YThhZDg0OTRiMGU4MmY4ZmNlMDM0NGE2ZGQ3IiwidXNlcl9pZCI6M30.D7yxSCovDJNQWDWG-EEgXX4aIhgpQo6sKDtn_F2_UyI",
+          Authorization: `Bearer ${hardcodedToken}`,
         },
         redirect: "follow",
       });
