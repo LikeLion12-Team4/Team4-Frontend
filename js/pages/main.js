@@ -107,9 +107,62 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    
-});
+    const searchForm = document.querySelector('.search_bar');
+    const searchInput = document.querySelector('.search_txt');
 
+    searchForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const searchText = searchInput.value.toLowerCase();
+
+        // 기존 메인 컨텐츠 숨기기
+        document.querySelector('main').style.display = 'none';
+
+        // 검색 결과 섹션 가져오기 또는 생성
+        let searchResults = document.querySelector('.search_results');
+        if (!searchResults) {
+            searchResults = document.createElement('section');
+            searchResults.classList.add('search_results');
+            document.body.appendChild(searchResults);
+        }
+        searchResults.innerHTML = ''; // 기존 검색 결과 초기화
+
+        // AJAX 요청을 사용하여 동영상 목록 가져오기
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://3.37.18.8:8000/videos/', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var videos = JSON.parse(xhr.responseText);
+
+                Object.keys(videos).forEach(key => {
+                    videos[key].forEach(video => {
+                        const videoTitle = video.title.toLowerCase();
+                        const bodypart = video.bodypart.bodyname.toLowerCase();
+
+                        if (videoTitle.includes(searchText) || bodypart.includes(searchText)) {
+                            const videoCard = document.createElement('div');
+                            videoCard.classList.add('video_card');
+
+                            videoCard.innerHTML = `
+                                <img src="${video.thumbnail}" alt="${video.title}">
+                                <a href="${video.youtubelink}" target="_blank">
+                                    <div class="video_comment">${video.title}</div>
+                                </a>
+                                <div class="bodypart">${video.bodypart.bodyname}</div>
+                            `;
+
+                            searchResults.appendChild(videoCard);
+                        }
+                    });
+                });
+
+                if (searchResults.children.length === 0) {
+                    searchResults.innerHTML = '<p>No results found</p>';
+                }
+            }
+        };
+        xhr.send();
+    });
+});
 
 
 
