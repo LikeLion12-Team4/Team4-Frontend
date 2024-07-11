@@ -9,8 +9,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="../../css/pages/liked-videos.css" />
-    <link rel="stylesheet" href="../serin/header.css" />
-    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/components/header.css" />
   </head>
   <body>
     <header data-include-path="../../html/components/header.html"></header>
@@ -22,42 +21,10 @@
     </div>
     <hr />
     <!--구분선-->
-
-    <div class="profileContainer">
-      <div class="profileMenuContainer">
-        <div class="profileMenuContainerTitle">개인정보</div>
-        <div class="profileMenu">
-          <div class="profileMenuTitle">아이디</div>
-          <div class="profileMenuValue">아기사자</div>
-          <button class="profileMenuEditButton">변경하기</button>
-        </div>
-        <div class="profileMenu">
-          <div class="profileMenuTitle">비밀번호</div>
-          <div class="profileMenuValue"></div>
-          <button class="profileMenuEditButton">변경하기</button>
-        </div>
-        <div class="profileMenu">
-          <div class="profileMenuTitle">이름</div>
-          <div class="profileMenuValue">최상명</div>
-        </div>
-        <div class="profileMenu">
-          <div class="profileMenuTitle">연결된 계정</div>
-          <div class="profileMenuValue">Choism@naver.com</div>
-        </div>
-      </div>
-      <div class="profileMenuContainer">
-        <div class="profileMenuContainerTitle">기타</div>
-        <button id="delete_account">회원 탈퇴</button>
-      </div>
-    </div>
-
+    <!--
     <section class="videos">
       <div class="category">
-        <p>아기사자 님의 꼿꼿한 목을 위해! 목에 좋은 스트레칭</p>
         <div class="video_silder">
-          <button class="left_btn">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
           <div class="video_container">
             <div class="video_card">
               <img src="./sky.jpg" alt="" />
@@ -102,27 +69,17 @@
               <i class="fa-regular fa-heart"></i>
             </div>
           </div>
-          <button class="right_btn">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-        <div class="silde">
-          <span class="dot" onclick="currentSlide(1)"></span>
-          <span class="dot" onclick="currentSlide(2)"></span>
-          <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
-      </div>
-
-      <div class="category">
-        <p>아기사자 님의 꼿꼿한 목을 위해! 목에 좋은 스트레칭</p>
-        <div class="video_silder">
-          <button class="left_btn">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
           <div class="video_container">
             <div class="video_card">
               <img src="./sky.jpg" alt="" />
-              <span class="video_min">3분</span>
+              <span class="video_min">1분</span>
+              <span class="bodypart">목</span>
+              <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
+              <i class="fa-regular fa-heart"></i>
+            </div>
+            <div class="video_card">
+              <img src="./sky.jpg" alt="" />
+              <span class="video_min">2분</span>
               <span class="bodypart">목</span>
               <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
               <i class="fa-regular fa-heart"></i>
@@ -136,83 +93,34 @@
             </div>
             <div class="video_card">
               <img src="./sky.jpg" alt="" />
-              <span class="video_min">3분</span>
+              <span class="video_min">4분</span>
               <span class="bodypart">목</span>
               <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
               <i class="fa-regular fa-heart"></i>
             </div>
             <div class="video_card">
               <img src="./sky.jpg" alt="" />
-              <span class="video_min">3분</span>
+              <span class="video_min">5분</span>
+              <span class="bodypart">목</span>
+              <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
+              <i class="fa-regular fa-heart"></i>
+            </div>
+            <div class="video_card">
+              <img src="./sky.jpg" alt="" />
+              <span class="video_min">6분</span>
               <span class="bodypart">목</span>
               <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
               <i class="fa-regular fa-heart"></i>
             </div>
           </div>
-          <button class="right_btn">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-        <div class="silde">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
         </div>
       </div>
+    </section>
+  -->
 
-      <div class="category">
-        <p>아기사자 님의 꼿꼿한 목을 위해! 목에 좋은 스트레칭</p>
-        <div class="bodypart_choice">
-          <span>목</span>
-          <span>손목</span>
-          <span>눈</span>
-          <span>허리</span>
-          <span>어깨</span>
-        </div>
-        <div class="video_silder">
-          <button class="left_btn">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <div class="video_container">
-            <div class="video_card">
-              <a href="https://youtu.be/DiHUEWBRQEI?si=uf1Snq2W1hxZ9ZqF"></a>
-              <img src="./sky.jpg" alt="" />
-              <span class="video_min">3분</span>
-              <span class="bodypart">목</span>
-              <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-              <i class="fa-regular fa-heart"></i>
-            </div>
-            <div class="video_card">
-              <img src="./sky.jpg" alt="" />
-              <span class="video_min">3분</span>
-              <span class="bodypart">목</span>
-              <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-              <i class="fa-regular fa-heart"></i>
-            </div>
-            <div class="video_card">
-              <img src="./sky.jpg" alt="" />
-              <span class="video_min">3분</span>
-              <span class="bodypart">목</span>
-              <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-              <i class="fa-regular fa-heart"></i>
-            </div>
-            <div class="video_card">
-              <img src="./sky.jpg" alt="" />
-              <span class="video_min">3분</span>
-              <span class="bodypart">목</span>
-              <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-              <i class="fa-regular fa-heart"></i>
-            </div>
-          </div>
-          <button class="right_btn">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
-        </div>
-        <div class="silde">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
+    <section class="videos">
+      <div class="video_grid" id="videoContainer">
+        <!-- 비디오 카드 추가(동적생성 ) -->
       </div>
     </section>
 

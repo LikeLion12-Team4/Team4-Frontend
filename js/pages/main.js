@@ -77,5 +77,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    
+    const lastCategory = document.querySelector('.last_category');
+    const bodypartChoices = lastCategory.querySelectorAll('.bodypart_choice span');
+    const videoCards = lastCategory.querySelectorAll('.video_card');
+
+    bodypartChoices.forEach(choice => {
+        choice.addEventListener('click', function() {
+            const selectedPart = this.getAttribute('data-bodypart');
+            // 선택된 파트의 배경색 변경
+            bodypartChoices.forEach(part => {
+                if (part.getAttribute('data-bodypart') === selectedPart) {
+                    part.style.backgroundColor = '#6266ED';
+                    part.style.color = 'white';
+                } else {
+                    part.style.backgroundColor = '#EAEAEA';
+                    part.style.color = 'black';
+                }
+            });
+
+            videoCards.forEach(card => {
+                const bodypart = card.querySelector('.bodypart').textContent;
+                if (bodypart === selectedPart) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    
 });
+
+
+
+
+
+
+
 

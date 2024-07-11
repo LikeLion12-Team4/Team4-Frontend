@@ -14,6 +14,13 @@ a {
   padding-bottom: 1px;
 }
 
+header {
+    position: fixed;
+    top: 0px;
+    z-index: 100;
+    width: 100%;
+
+}
 .navbar {
   display: flex;
   justify-content: space-around;
@@ -62,6 +69,7 @@ a {
   justify-content: space-around;
 }
 
+
 .user_button a {
   margin-right: 20px;
   padding: 5px 10px;
@@ -108,3 +116,12 @@ a {
 .navbar_menu li:hover::after {
   width: 100%;
 }
+
+.logout_btn {
+    display: none;
+}
+
+.welcome_msg {
+    display: none;
+}
+
