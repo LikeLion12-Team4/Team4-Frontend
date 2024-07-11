@@ -1,17 +1,17 @@
 /* header css */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    width: 100%;
-    margin-top: 60px;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  width: 100%;
 }
 
 a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    display: flex;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  padding-bottom: 1px;
 }
 
 header {
@@ -22,93 +22,99 @@ header {
 
 }
 .navbar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #6266ED;
-    padding: 10px 20px;
-    
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #6266ed;
+  height: 50px;
+  /* padding: 5px 20px; */
+}
+
+.site_name {
+  color: white;
+  font-weight: bold;
+  display: flex;
 }
 
 .header_logo {
-    width: 40px;
-    height: 40px;
-    margin-right: 5px;
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
 }
 
 .navbar_menu {
-    display: flex;
-    list-style: none;
-    padding-left: 0;
-    align-items: center;
-    flex-grow: 1;
-    margin-top: 5px;
-    margin-bottom: 0;
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  align-items: center;
+  flex-grow: 1;
+  /* margin-top: 5px; */
+  /* margin-bottom: 0; */
 }
 
 .navbar_menu li {
-    margin: 0px 20px;
-    font-size: 14px;
-    position: relative;
+  margin: 0px 20px;
+  font-size: 14px;
+  position: relative;
 }
 
 .navbar_menu li:first-child {
-    /* margin: 5px 20px; */
-    font-size: 20px;
-    display: flex;
-    align-items: center;
+  /* margin: 5px 20px; */
+  font-size: 20px;
+  display: flex;
+  align-items: center;
 }
 .user_button {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
-.login_btn,
-.join_btn {
-    margin-right: 20px;
-    padding: 5px 10px;
-    display: flex;
-    background-color: white;
-    color: black;
-    border-radius: 5px;
-    font-size: 13px;
+
+.user_button a {
+  margin-right: 20px;
+  padding: 5px 10px;
+  display: flex;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  font-size: 13px;
 }
 
-.login_btn {
-    color: #6266ED;
+.user_button a:first-child {
+  color: #6266ed;
 }
 
 @media screen and (max-width: 960px) {
-    .navbar_menu li:not(:first-child) {
-        display: none;
-    }
-    .user_button a {
-        display: block;
-    }
-    .navbar {
-        display: flex;
-        padding: 10px 20px;
-    }
-    .navbar_menu {
-        flex-grow: 0;
-    }
+  .navbar_menu li:not(:first-child) {
+    display: none;
+  }
+  .user_button a {
+    display: block;
+  }
+  .navbar {
+    display: flex;
+    padding: 10px 20px;
+  }
+  .navbar_menu {
+    flex-grow: 0;
+  }
 }
 
 .navbar_menu li:not(:first-child)::after {
-    content: '';
-    position: absolute;
-    display: block;
-    width: 0;
-    height: 2px;
-    background-color: white;
-    transition: 0.3s ease;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
+  content: "";
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: 0.3s ease;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .navbar_menu li:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
 .logout_btn {
@@ -118,3 +124,4 @@ header {
 .welcome_msg {
     display: none;
 }
+
