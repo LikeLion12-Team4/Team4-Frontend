@@ -29,32 +29,85 @@
         <div class="survey_content">
           <div class="survey_icon">
             <div>
-              <img src="../../assets/icons/목.svg" alt="목" />
+              <button
+                id="목"
+                class="body-part-btn"
+                onclick="selectBodyPart('목')"
+              >
+                <img src="../../assets/icons/목.svg" alt="목" />
+              </button>
             </div>
             <div>
-              <img src="../../assets/icons/손목.svg" alt="손목" />
+              <button
+                id="손목"
+                class="body-part-btn"
+                onclick="selectBodyPart('손목')"
+              >
+                <img src="../../assets/icons/손목.svg" alt="손목" />
+              </button>
             </div>
             <div>
-              <img src="../../assets/icons/눈.svg" alt="눈" />
+              <button
+                id="눈"
+                class="body-part-btn"
+                onclick="selectBodyPart('눈')"
+              >
+                <img src="../../assets/icons/눈.svg" alt="눈" />
+              </button>
             </div>
             <div>
-              <img src="../../assets/icons/허리.svg" alt="허리" />
+              <button
+                id="허리"
+                class="body-part-btn"
+                onclick="selectBodyPart('허리')"
+              >
+                <img src="../../assets/icons/허리.svg" alt="허리" />
+              </button>
             </div>
             <div>
-              <img src="../../assets/icons/어깨.svg" alt="어깨" />
+              <button
+                id="어깨"
+                class="body-part-btn"
+                onclick="selectBodyPart('어깨')"
+              >
+                <img src="../../assets/icons/어깨.svg" alt="어깨" />
+              </button>
             </div>
           </div>
+          <p id="selectedParts"></p>
+
           <div class="survey_finished">
-            <button
-              type="button"
-              class="survey_next"
-              onclick="location.href='index.html'"
-            >
+            <button type="button" id="survey_submit" class="survey_next">
               가입 완료
             </button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- <script>
+      let selectedBody = "";
+
+      function selectBodyPart(part) {
+        const button = document.getElementById(part);
+
+        if (!selectedBody.includes(part)) {
+          if (selectedBody.length > 0) {
+            selectedBody += "," + part;
+          } else {
+            selectedBody = part;
+          }
+          button.querySelector("img").classList.add("selected");
+        } else {
+          let partsArray = selectedBody.split(",");
+          partsArray = partsArray.filter((p) => p !== part);
+          selectedBody = partsArray.join(",");
+          button.querySelector("img").classList.remove("selected");
+        }
+
+        console.log(selectedBody);
+      }
+    </script> -->
+    <script src="../../js/pages/survey.js"></script>
   </body>
 </html>

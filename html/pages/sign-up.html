@@ -49,9 +49,6 @@
                 placeholder="아이디 (4~12자의 영문이나 숫자)"
                 autocomplete="off"
               />
-              <div class="success-message hide">
-                사용할 수 있는 아이디입니다.
-              </div>
               <div class="failure-message hide">
                 아이디는 4~12자의 영문이나 숫자만 사용 가능합니다.
               </div>
@@ -130,16 +127,16 @@
           </form>
 
           <div class="sign-up_finished">
-            <button type="button" class="sign-up_next">다음으로</button>
+            <button type="button" id="sign-up_next" class="sign-up_next">
+              다음으로
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <script src="../../js/pages/sign-up.js"></script>
-    <script src="../../js/pages/send-email.js"></script>
     <script src="../../js/utils/form-validation.js"></script>
     <script src="../../js/utils/hide-pw.js"></script>
-    <script src="../../js/utils/remaining-time.js"></script>
   </body>
 </html>

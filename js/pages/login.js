@@ -67,5 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 로그인 폼에 이벤트 리스너를 추가합니다.
-  document.querySelector("form").addEventListener("submit", submitLoginForm);
+  document
+    .getElementById("login-btn")
+    .addEventListener("click", submitLoginForm);
 });
