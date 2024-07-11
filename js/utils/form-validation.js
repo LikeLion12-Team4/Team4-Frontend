@@ -51,14 +51,11 @@ if (inputId) {
   inputId.onkeyup = function () {
     if (inputId.value.length !== 0) {
       if (idCheck(inputId.value)) {
-        successMessage.classList.remove("hide"); // 사용할 수 있는 아이디입니다.
         failureMessage.classList.add("hide"); // 실패 메시지가 가려져야 함
       } else {
-        successMessage.classList.add("hide");
         failureMessage.classList.remove("hide");
       }
     } else {
-      successMessage.classList.add("hide");
       failureMessage.classList.add("hide");
     }
   };
