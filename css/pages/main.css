@@ -26,12 +26,15 @@ body {
     
 }
 
-.category p {
+.category p,
+.last_category p {
     padding: 20px;
     margin-bottom: 0;
     color: #6266ED;
     font-weight: bold;
 }
+
+
 .video_silder {
     display: flex;
     align-items: center;
