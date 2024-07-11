@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var API_SERVER_DOMAIN = "http://3.37.18.8:8000/users/find_id/";
+  var API_SERVER_DOMAIN = "http://3.37.18.8:8000/users/find_pwd/";
   var API_SERVER_DOMAIN_EMAIL_SEND = "http://3.37.18.8:8000/email/send/";
   var API_SERVER_DOMAIN_EMAIL_VERIFY = "http://3.37.18.8:8000/email/verify/";
 
@@ -18,15 +18,17 @@ document.addEventListener("DOMContentLoaded", function () {
     return null;
   }
 
-  function findIdForm(event) {
+  function findPwForm(event) {
     event.preventDefault(); // 기본 제출 동작을 막습니다.
 
     var email = document.getElementById("sign-up_email").value;
+    var username = document.getElementById("sign-up_id").value;
     var fullname = document.getElementById("sign-up_name").value;
 
     // FormData 객체를 생성하고 사용자 입력을 추가합니다.
     var formdata = new FormData();
     formdata.append("email", email);
+    formdata.append("username", username);
     formdata.append("fullname", fullname);
 
     // 쿠키에서 인증 토큰을 가져옵니다.
@@ -46,20 +48,17 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch(API_SERVER_DOMAIN, requestOptions)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Find ID failed");
+          throw new Error("Find PW failed");
         }
         return response.json();
       })
       .then((data) => {
         console.log(data);
-        // alert("아이디 찾기 성공!");
-        alert(data.email);
-        // window.findEmail = data.email;
-        sessionStorage.setItem("username", data.username);
-        window.location.replace("get-id.html");
+        sessionStorage.setItem("password", data.password);
+        window.location.replace("get-pw.html");
       })
       .catch((error) => {
-        alert("아이디 찾기 중 오류가 발생했습니다. 다시 시도해주세요.");
+        alert("비밀번호 찾기 중 오류가 발생했습니다. 다시 시도해주세요.");
         console.error("Error:", error);
       });
   }
@@ -138,6 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!response.ok) {
           throw new Error("Verification failed");
         }
+        console.log(response);
         return response.json();
       })
       .then((result) => {
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // 회원가입 폼에 이벤트 리스너를 추가합니다.
-  document.getElementById("find-id_next").addEventListener("click", findIdForm);
+  document.getElementById("find-pw_next").addEventListener("click", findPwForm);
 
   // 인증번호 전송 버튼에 이벤트 리스너를 추가합니다.
   document
