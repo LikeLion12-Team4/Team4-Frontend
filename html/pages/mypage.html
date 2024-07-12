@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>마이페이지</title>
+    <script src="../../js/utils/token-for-test.js"></script>
+    <!--하드코드된 토큰, 나중에 지우기-->
     <script
       src="https://kit.fontawesome.com/9125fcc41c.js"
       crossorigin="anonymous"
@@ -71,10 +73,6 @@
               </select>
             </div>
           </div>
-          <button class="unfoldBlock">
-            추가하기
-            <i class="fa-solid fa-plus"></i>
-          </button>
         </div>
       </div>
       <div class="myPageContainer">
@@ -96,34 +94,12 @@
           <div class="blockTitle">현재 고민 부위</div>
           <div class="sliderContainer">
             <div class="bodyPartContainer">
-              <div class="bodyPartBlock">
-                <div class="bodyPartName">목</div>
-                <img
-                  class="bodyPartImage"
-                  src="../../assets/icons/neck_img.png"
-                  alt="목"
-                />
-              </div>
-              <div class="bodyPartBlock">
-                <div class="bodyPartName">허리</div>
-                <img
-                  class="bodyPartImage"
-                  src="../../assets/images/back_img.png"
-                  alt="허리"
-                />
-              </div>
-              <div class="bodyPartBlock">
-                <div class="bodyPartName">눈</div>
-                <img
-                  class="bodyPartImage"
-                  src="../../assets/images/eyes_img.png"
-                  alt="눈"
-                />
-              </div>
               <!-- 추가 bodyPartBlock -->
             </div>
           </div>
-          <button class="unfoldBlock">변경하기</button>
+          <button class="unfoldBlock" id="body_part_change_btn">
+            변경하기
+          </button>
         </div>
       </div>
     </div>
@@ -143,24 +119,24 @@
         <!--고민 부위 변경 모달-->
         <div class="survey-modal_content">
           <div class="survey-modal_icon">
-            <div>
-              <img src="../../assets/icons/목.svg" alt="목" />
+            <div id="bodypart-1">
+              <img src="../../assets/icons/목.svg" alt="목" />
             </div>
-            <div>
-              <img src="../../assets/icons/손목.svg" alt="손목" />
+            <div id="bodypart-2">
+              <img src="../../assets/icons/손목.svg" alt="손목" />
             </div>
-            <div>
-              <img src="../../assets/icons/눈.svg" alt="눈" />
+            <div id="bodypart-3">
+              <img src="../../assets/icons/눈.svg" alt="눈" />
             </div>
-            <div>
-              <img src="../../assets/icons/허리.svg" alt="허리" />
+            <div id="bodypart-4">
+              <img src="../../assets/icons/허리.svg" alt="허리" />
             </div>
-            <div>
-              <img src="../../assets/icons/어깨.svg" alt="어깨" />
+            <div id="bodypart-5">
+              <img src="../../assets/icons/어깨.svg" alt="어깨" />
             </div>
           </div>
           <div class="survey-modal_finished">
-            <button type="button" class="survey-modal_next">가입 완료</button>
+            <button type="button" class="survey-modal_next">저장</button>
           </div>
         </div>
       </div>
