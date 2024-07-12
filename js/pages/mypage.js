@@ -369,3 +369,118 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("notification_interval")
     .addEventListener("change", updateAlarmSettings);
 });
+
+//
+//
+//
+document.addEventListener("DOMContentLoaded", function () {
+  // 모달 관련 변수
+  const modal = document.querySelector(".survey-modal_container");
+  const modalCloseBtn = document.querySelector(".survey-modal_close-btn");
+  const saveBtn = document.querySelector(".survey-modal_next");
+  const bodyPartIcons = document.querySelectorAll(".survey-modal_icon > div");
+
+  // 모달 열기
+  const bodyPartChangeBtn = document.getElementById("body_part_change_btn");
+  if (bodyPartChangeBtn) {
+    bodyPartChangeBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+      initializeSelectedBodyParts();
+    });
+  }
+
+  // 모달 닫기
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  // bodypart 아이콘 클릭 이벤트
+  bodyPartIcons.forEach((icon, index) => {
+    icon.addEventListener("click", () => {
+      icon.classList.toggle("selected");
+      updateSelectedBodyParts(index + 1);
+    });
+  });
+
+  // 저장 버튼 클릭 이벤트
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      if (selectedBodyParts.length > 0) {
+        updateUserBodyParts();
+        modal.style.display = "none";
+      } else {
+        alert("최소 1개 이상의 고민 부위를 선택해주세요.");
+      }
+    });
+  }
+
+  fetchAlarmSettings();
+  fetchAndDisplayRecentVideo();
+  fetchUserInfo();
+  fetchAndDisplayBodyParts();
+
+  const notificationToggle = document.getElementById("notification_toggle");
+  const soundToggle = document.getElementById("sound_toggle");
+  const notificationInterval = document.getElementById("notification_interval");
+
+  if (notificationToggle) {
+    notificationToggle.addEventListener("change", updateAlarmSettings);
+  }
+  if (soundToggle) {
+    soundToggle.addEventListener("change", updateAlarmSettings);
+  }
+  if (notificationInterval) {
+    notificationInterval.addEventListener("change", updateAlarmSettings);
+  }
+});
+
+// updateUserBodyParts 함수 수정
+function updateUserBodyParts() {
+  const selectedBodyPartNames = selectedBodyParts
+    .filter((id) => bodyPartMap[id])
+    .map((id) => bodyPartMap[id].name);
+
+  const bodypartString = selectedBodyPartNames.join(",");
+
+  var formdata = new FormData();
+  formdata.append("bodypart", bodypartString);
+
+  var requestOptions = {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${hardcodedToken}`,
+    },
+    body: formdata,
+    redirect: "follow",
+  };
+
+  fetch("http://3.37.18.8:8000/users/survey/", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("Body parts updated successfully:", result);
+      fetchAndDisplayBodyParts(); // 업데이트 후 다시 불러오기
+    })
+    .catch((error) => console.log("error", error));
+}
+
+// fetchAndDisplayBodyParts 함수 수정
+function fetchAndDisplayBodyParts() {
+  var requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${hardcodedToken}`,
+    },
+    redirect: "follow",
+  };
+
+  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      userBodyParts = result.bodypart.map((part) => part.id);
+      displayBodyParts();
+      initializeSelectedBodyParts();
+    })
+    .catch((error) => console.log("error", error));
+}
