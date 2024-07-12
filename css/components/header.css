@@ -15,11 +15,10 @@ a {
 }
 
 header {
-    position: fixed;
-    top: 0px;
-    z-index: 100;
-    width: 100%;
-
+  position: fixed;
+  top: 0px;
+  z-index: 100;
+  width: 100%;
 }
 .navbar {
   display: flex;
@@ -33,6 +32,7 @@ header {
 .site_name {
   color: white;
   font-weight: bold;
+  margin-top: 7px;
   display: flex;
 }
 
@@ -68,7 +68,6 @@ header {
   display: flex;
   justify-content: space-around;
 }
-
 
 .user_button a {
   margin-right: 20px;
@@ -124,4 +123,3 @@ header {
 .welcome_msg {
   display: none;
 }
-
