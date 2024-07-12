@@ -153,7 +153,7 @@ savePwBtn.addEventListener("click", () => {
 
 // 비밀번호 유효성 검사
 function validatePassword(password, confirmPassword) {
-  // 8자 이상, 영문과 숫자 조합 (특수문자는 선택적)
+  // 8자 이상, 영문과 숫자, 특수문자 중 2가지 이상 조합
   const pwRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
   return pwRegex.test(password) && password === confirmPassword;
 }
