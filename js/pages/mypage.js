@@ -1,5 +1,42 @@
 // 토큰 하드코딩.. 로그인 완성되면 변경하자..
-const hardcodedToken = window.APP_CONFIG.hardcodedToken;
+//const getToken() = window.APP_CONFIG.getToken();
+
+// 로그인 정보 가져오기
+
+let API_SERVER_DOMAIN = "http://3.37.18.8:8000";
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var cookies = document.cookie.split(";");
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    while (cookie.charAt(0) === " ") {
+      cookie = cookie.substring(1, cookie.length);
+    }
+    if (cookie.indexOf(nameEQ) === 0) {
+      return cookie.substring(nameEQ.length, cookie.length);
+    }
+  }
+  return null;
+}
+
+function getToken() {
+  return getCookie("accessToken") || null;
+}
+
+function checkAndFetch(url, options) {
+  // 토큰 존재하는지 확인 후 fetch하는 로직
+  const token = getToken();
+  if (!token) {
+    window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 변경하세요
+    return Promise.reject("No token found");
+  }
+  options.headers = {
+    ...options.headers,
+    Authorization: `Bearer ${token}`,
+  };
+  return fetch(url, options);
+}
 
 // include.js
 window.addEventListener("load", function () {
@@ -38,12 +75,12 @@ function fetchAlarmSettings() {
   var requestOptions = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       if (result.is_option) {
@@ -77,7 +114,7 @@ function updateAlarmSettings() {
   var requestOptions = {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -91,13 +128,13 @@ function updateAlarmSettings() {
   var requestOptions = {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     body: formdata,
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("알림 설정이 업데이트되었습니다:", result);
@@ -107,7 +144,7 @@ function updateAlarmSettings() {
 
 // 최근 시청한 영상 정보 가져오기 및 표시
 function fetchAndDisplayRecentVideo() {
-  const token = hardcodedToken;
+  const token = getToken();
 
   var requestOptions = {
     method: "GET",
@@ -117,7 +154,7 @@ function fetchAndDisplayRecentVideo() {
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -145,12 +182,12 @@ function fetchUserInfo() {
   var requestOptions = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       // 닉네임 업데이트
@@ -189,80 +226,90 @@ function fetchUserInfo() {
 
 // 고민 부위 변경 로직 (^^ ㅠ..)
 
-// bodypart 정보를 매핑하는 객체
+// 고민 부위 변경 로직
+
 const bodyPartMap = {
-  1: { name: "목", engName: "neck" },
-  2: { name: "손목", engName: "wrist" },
-  3: { name: "눈", engName: "eyes" },
-  4: { name: "허리", engName: "back" },
-  5: { name: "어깨", engName: "shoulders" },
+  목: { id: 1, engName: "neck" },
+  손목: { id: 2, engName: "wrist" },
+  눈: { id: 3, engName: "eyes" },
+  허리: { id: 4, engName: "back" },
+  어깨: { id: 5, engName: "shoulders" },
 };
 
 // 모달 관련 변수
 const modal = document.querySelector(".survey-modal_container");
 const modalCloseBtn = document.querySelector(".survey-modal_close-btn");
-const saveBtn = document.querySelector(".survey-modal_next");
+const saveBtn = document.querySelector(".survey-modal_finished");
 const bodyPartIcons = document.querySelectorAll(".survey-modal_icon > div");
 
 // 선택된 bodypart를 저장할 배열
 let selectedBodyParts = [];
 
-// 모달 열기
-document
-  .getElementById("body_part_change_btn")
-  .addEventListener("click", () => {
-    modal.style.display = "flex";
-    initializeSelectedBodyParts();
-  });
-
-// 모달 닫기
-modalCloseBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-// bodypart 아이콘 클릭 이벤트
-bodyPartIcons.forEach((icon, index) => {
-  icon.addEventListener("click", () => {
-    icon.classList.toggle("selected");
-    updateSelectedBodyParts(index + 1);
-  });
-});
-
-// 저장 버튼 클릭 이벤트
-saveBtn.addEventListener("click", () => {
-  if (selectedBodyParts.length > 0) {
-    updateUserBodyParts();
-    modal.style.display = "none";
-  } else {
-    alert("최소 1개 이상의 고민 부위를 선택해주세요.");
+document.addEventListener("DOMContentLoaded", function () {
+  // 모달 열기
+  const bodyPartChangeBtn = document.getElementById("body_part_change_btn");
+  if (bodyPartChangeBtn) {
+    bodyPartChangeBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+      initializeSelectedBodyParts();
+    });
   }
+
+  // 모달 닫기
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  // bodypart 아이콘 클릭 이벤트
+  bodyPartIcons.forEach((icon) => {
+    icon.addEventListener("click", () => {
+      const part = icon.id.replace("bodypart-", "");
+      selectBodyPart(part);
+    });
+  });
+
+  // 저장 버튼 클릭 이벤트
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      if (selectedBodyParts.length > 0) {
+        updateUserBodyParts();
+        modal.style.display = "none";
+      } else {
+        alert("최소 1개 이상의 고민 부위를 선택해주세요.");
+      }
+    });
+  }
+
+  fetchAndDisplayBodyParts();
 });
 
 // 선택된 bodypart 초기화 및 표시
 function initializeSelectedBodyParts() {
-  selectedBodyParts = [];
-  bodyPartIcons.forEach((icon, index) => {
-    if (userBodyParts.includes(index + 1)) {
-      icon.classList.add("selected");
-      selectedBodyParts.push(index + 1);
-    } else {
-      icon.classList.remove("selected");
-    }
-  });
+  selectedBodyParts = userBodyParts
+    .map((id) =>
+      Object.keys(bodyPartMap).find((key) => bodyPartMap[key].id === id)
+    )
+    .filter((part) => part !== undefined);
+  updateBodyPartUI();
 }
 
-// 선택된 bodypart 업데이트
-function updateSelectedBodyParts(partId) {
-  const index = selectedBodyParts.indexOf(partId);
-  if (index > -1) {
-    selectedBodyParts.splice(index, 1);
+function selectBodyPart(part) {
+  const index = selectedBodyParts.indexOf(part);
+  if (index === -1) {
+    selectedBodyParts.push(part);
   } else {
-    selectedBodyParts.push(partId);
+    selectedBodyParts.splice(index, 1);
   }
+  updateBodyPartUI();
+}
 
-  // UI 업데이트
-  bodyPartIcons.forEach((icon, index) => {
-    if (selectedBodyParts.includes(index + 1)) {
+// UI 업데이트 함수
+function updateBodyPartUI() {
+  bodyPartIcons.forEach((icon) => {
+    const part = icon.id.replace("bodypart-", "");
+    if (selectedBodyParts.includes(part)) {
       icon.classList.add("selected");
     } else {
       icon.classList.remove("selected");
@@ -272,22 +319,25 @@ function updateSelectedBodyParts(partId) {
 
 // 사용자의 bodypart 업데이트
 function updateUserBodyParts() {
+  const bodypartString = selectedBodyParts.join(",");
+
+  var formdata = new FormData();
+  formdata.append("bodypart", bodypartString);
+
   var requestOptions = {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
     },
-    body: JSON.stringify({ bodypart: selectedBodyParts }),
+    body: formdata,
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/users/survey/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("Body parts updated successfully:", result);
-      userBodyParts = selectedBodyParts;
-      displayBodyParts(); // UI 즉시 업데이트
+      fetchAndDisplayBodyParts(); // 업데이트 후 다시 불러오기
     })
     .catch((error) => console.log("error", error));
 }
@@ -300,17 +350,17 @@ function fetchAndDisplayBodyParts() {
   var requestOptions = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       userBodyParts = result.bodypart.map((part) => part.id);
       displayBodyParts();
-      initializeSelectedBodyParts(); // 모달 내 선택 상태 초기화
+      initializeSelectedBodyParts();
     })
     .catch((error) => console.log("error", error));
 }
@@ -321,11 +371,13 @@ function displayBodyParts() {
   bodyPartContainer.innerHTML = "";
 
   userBodyParts.forEach((partId) => {
-    const bodyPartInfo = bodyPartMap[partId];
-    if (bodyPartInfo) {
+    const part = Object.keys(bodyPartMap).find(
+      (key) => bodyPartMap[key].id === partId
+    );
+    if (part) {
       const bodyPartBlock = createBodyPartBlock(
-        bodyPartInfo.name,
-        bodyPartInfo.engName
+        part,
+        bodyPartMap[part].engName
       );
       bodyPartContainer.appendChild(bodyPartBlock);
     }
@@ -353,7 +405,15 @@ function createBodyPartBlock(partName, engName) {
 }
 
 // 이벤트 리스너 추가
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function (event) {
+  event.preventDefault(); // 기본 제출 동작 막기
+
+  const token = getToken();
+  if (!token) {
+    window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 리다이렉트시캄ㅇ
+    return;
+  }
+
   fetchAlarmSettings();
   fetchAndDisplayRecentVideo();
   fetchUserInfo();

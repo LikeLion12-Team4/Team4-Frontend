@@ -1,9 +1,10 @@
 /* header css */
 body {
   margin: 0;
-  padding: 0;
+  padding: 30px 0 0 0;
   font-family: Arial, sans-serif;
   width: 100%;
+
 }
 
 a {
@@ -15,11 +16,10 @@ a {
 }
 
 header {
-    position: fixed;
-    top: 0px;
-    z-index: 100;
-    width: 100%;
-
+  position: fixed;
+  top: 0px;
+  z-index: 100;
+  width: 100%;
 }
 .navbar {
   display: flex;
@@ -33,6 +33,7 @@ header {
 .site_name {
   color: white;
   font-weight: bold;
+  margin-top: 7px;
   display: flex;
 }
 
@@ -80,7 +81,7 @@ header {
   font-size: 13px;
 }
 
-.user_button a:first-child {
+.login_btn {
   color: #6266ed;
 }
 
@@ -118,10 +119,9 @@ header {
 }
 
 .logout_btn {
-    display: none;
+  display: none;
 }
 
 .welcome_msg {
-    display: none;
+  display: none;
 }
-
