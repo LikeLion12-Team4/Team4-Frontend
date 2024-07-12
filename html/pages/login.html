@@ -59,12 +59,14 @@
         <hr />
         <div class="login_social-login">
           <div class="naver-login">
-            <a href="#"
+            <a
+              href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=11aaVPdZhiD9nRNF_CS8&state=STATE_STRING&redirect_uri=http://3.37.18.8:8000/naver/login/finish/"
+              id="naver-login-btn"
               ><img src="../../assets/icons/naver.svg" alt="naver-login"
             /></a>
           </div>
           <div class="kakao-login">
-            <a href="#"
+            <a href="#" id="kakao-login-btn"
               ><img src="../../assets/icons/kakao.svg" alt="kakao-login"
             /></a>
           </div>
@@ -90,5 +92,10 @@
     </div>
     <script src="../../js/pages/login.js"></script>
     <script src="../../js/utils/hide-pw.js"></script>
+    <script src="../../js/pages/naver-login.js"></script>
+    <script
+      src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
+      charset="utf-8"
+    ></script>
   </body>
 </html>
