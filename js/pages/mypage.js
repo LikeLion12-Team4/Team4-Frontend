@@ -189,80 +189,90 @@ function fetchUserInfo() {
 
 // 고민 부위 변경 로직 (^^ ㅠ..)
 
-// bodypart 정보를 매핑하는 객체
+// 고민 부위 변경 로직
+
 const bodyPartMap = {
-  1: { name: "목", engName: "neck" },
-  2: { name: "손목", engName: "wrist" },
-  3: { name: "눈", engName: "eyes" },
-  4: { name: "허리", engName: "back" },
-  5: { name: "어깨", engName: "shoulders" },
+  목: { id: 1, engName: "neck" },
+  손목: { id: 2, engName: "wrist" },
+  눈: { id: 3, engName: "eyes" },
+  허리: { id: 4, engName: "back" },
+  어깨: { id: 5, engName: "shoulders" },
 };
 
 // 모달 관련 변수
 const modal = document.querySelector(".survey-modal_container");
 const modalCloseBtn = document.querySelector(".survey-modal_close-btn");
-const saveBtn = document.querySelector(".survey-modal_next");
+const saveBtn = document.querySelector(".survey-modal_finished");
 const bodyPartIcons = document.querySelectorAll(".survey-modal_icon > div");
 
 // 선택된 bodypart를 저장할 배열
 let selectedBodyParts = [];
 
-// 모달 열기
-document
-  .getElementById("body_part_change_btn")
-  .addEventListener("click", () => {
-    modal.style.display = "flex";
-    initializeSelectedBodyParts();
-  });
-
-// 모달 닫기
-modalCloseBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
-
-// bodypart 아이콘 클릭 이벤트
-bodyPartIcons.forEach((icon, index) => {
-  icon.addEventListener("click", () => {
-    icon.classList.toggle("selected");
-    updateSelectedBodyParts(index + 1);
-  });
-});
-
-// 저장 버튼 클릭 이벤트
-saveBtn.addEventListener("click", () => {
-  if (selectedBodyParts.length > 0) {
-    updateUserBodyParts();
-    modal.style.display = "none";
-  } else {
-    alert("최소 1개 이상의 고민 부위를 선택해주세요.");
+document.addEventListener("DOMContentLoaded", function () {
+  // 모달 열기
+  const bodyPartChangeBtn = document.getElementById("body_part_change_btn");
+  if (bodyPartChangeBtn) {
+    bodyPartChangeBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+      initializeSelectedBodyParts();
+    });
   }
+
+  // 모달 닫기
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  // bodypart 아이콘 클릭 이벤트
+  bodyPartIcons.forEach((icon) => {
+    icon.addEventListener("click", () => {
+      const part = icon.id.replace("bodypart-", "");
+      selectBodyPart(part);
+    });
+  });
+
+  // 저장 버튼 클릭 이벤트
+  if (saveBtn) {
+    saveBtn.addEventListener("click", () => {
+      if (selectedBodyParts.length > 0) {
+        updateUserBodyParts();
+        modal.style.display = "none";
+      } else {
+        alert("최소 1개 이상의 고민 부위를 선택해주세요.");
+      }
+    });
+  }
+
+  fetchAndDisplayBodyParts();
 });
 
 // 선택된 bodypart 초기화 및 표시
 function initializeSelectedBodyParts() {
-  selectedBodyParts = [];
-  bodyPartIcons.forEach((icon, index) => {
-    if (userBodyParts.includes(index + 1)) {
-      icon.classList.add("selected");
-      selectedBodyParts.push(index + 1);
-    } else {
-      icon.classList.remove("selected");
-    }
-  });
+  selectedBodyParts = userBodyParts
+    .map((id) =>
+      Object.keys(bodyPartMap).find((key) => bodyPartMap[key].id === id)
+    )
+    .filter((part) => part !== undefined);
+  updateBodyPartUI();
 }
 
-// 선택된 bodypart 업데이트
-function updateSelectedBodyParts(partId) {
-  const index = selectedBodyParts.indexOf(partId);
-  if (index > -1) {
-    selectedBodyParts.splice(index, 1);
+function selectBodyPart(part) {
+  const index = selectedBodyParts.indexOf(part);
+  if (index === -1) {
+    selectedBodyParts.push(part);
   } else {
-    selectedBodyParts.push(partId);
+    selectedBodyParts.splice(index, 1);
   }
+  updateBodyPartUI();
+}
 
-  // UI 업데이트
-  bodyPartIcons.forEach((icon, index) => {
-    if (selectedBodyParts.includes(index + 1)) {
+// UI 업데이트 함수
+function updateBodyPartUI() {
+  bodyPartIcons.forEach((icon) => {
+    const part = icon.id.replace("bodypart-", "");
+    if (selectedBodyParts.includes(part)) {
       icon.classList.add("selected");
     } else {
       icon.classList.remove("selected");
@@ -272,22 +282,25 @@ function updateSelectedBodyParts(partId) {
 
 // 사용자의 bodypart 업데이트
 function updateUserBodyParts() {
+  const bodypartString = selectedBodyParts.join(",");
+
+  var formdata = new FormData();
+  formdata.append("bodypart", bodypartString);
+
   var requestOptions = {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${hardcodedToken}`,
-      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ bodypart: selectedBodyParts }),
+    body: formdata,
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  fetch("http://3.37.18.8:8000/users/survey/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("Body parts updated successfully:", result);
-      userBodyParts = selectedBodyParts;
-      displayBodyParts(); // UI 즉시 업데이트
+      fetchAndDisplayBodyParts(); // 업데이트 후 다시 불러오기
     })
     .catch((error) => console.log("error", error));
 }
@@ -310,7 +323,7 @@ function fetchAndDisplayBodyParts() {
     .then((result) => {
       userBodyParts = result.bodypart.map((part) => part.id);
       displayBodyParts();
-      initializeSelectedBodyParts(); // 모달 내 선택 상태 초기화
+      initializeSelectedBodyParts();
     })
     .catch((error) => console.log("error", error));
 }
@@ -321,11 +334,13 @@ function displayBodyParts() {
   bodyPartContainer.innerHTML = "";
 
   userBodyParts.forEach((partId) => {
-    const bodyPartInfo = bodyPartMap[partId];
-    if (bodyPartInfo) {
+    const part = Object.keys(bodyPartMap).find(
+      (key) => bodyPartMap[key].id === partId
+    );
+    if (part) {
       const bodyPartBlock = createBodyPartBlock(
-        bodyPartInfo.name,
-        bodyPartInfo.engName
+        part,
+        bodyPartMap[part].engName
       );
       bodyPartContainer.appendChild(bodyPartBlock);
     }
@@ -369,118 +384,3 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("notification_interval")
     .addEventListener("change", updateAlarmSettings);
 });
-
-//
-//
-//
-document.addEventListener("DOMContentLoaded", function () {
-  // 모달 관련 변수
-  const modal = document.querySelector(".survey-modal_container");
-  const modalCloseBtn = document.querySelector(".survey-modal_close-btn");
-  const saveBtn = document.querySelector(".survey-modal_next");
-  const bodyPartIcons = document.querySelectorAll(".survey-modal_icon > div");
-
-  // 모달 열기
-  const bodyPartChangeBtn = document.getElementById("body_part_change_btn");
-  if (bodyPartChangeBtn) {
-    bodyPartChangeBtn.addEventListener("click", () => {
-      modal.style.display = "flex";
-      initializeSelectedBodyParts();
-    });
-  }
-
-  // 모달 닫기
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-  }
-
-  // bodypart 아이콘 클릭 이벤트
-  bodyPartIcons.forEach((icon, index) => {
-    icon.addEventListener("click", () => {
-      icon.classList.toggle("selected");
-      updateSelectedBodyParts(index + 1);
-    });
-  });
-
-  // 저장 버튼 클릭 이벤트
-  if (saveBtn) {
-    saveBtn.addEventListener("click", () => {
-      if (selectedBodyParts.length > 0) {
-        updateUserBodyParts();
-        modal.style.display = "none";
-      } else {
-        alert("최소 1개 이상의 고민 부위를 선택해주세요.");
-      }
-    });
-  }
-
-  fetchAlarmSettings();
-  fetchAndDisplayRecentVideo();
-  fetchUserInfo();
-  fetchAndDisplayBodyParts();
-
-  const notificationToggle = document.getElementById("notification_toggle");
-  const soundToggle = document.getElementById("sound_toggle");
-  const notificationInterval = document.getElementById("notification_interval");
-
-  if (notificationToggle) {
-    notificationToggle.addEventListener("change", updateAlarmSettings);
-  }
-  if (soundToggle) {
-    soundToggle.addEventListener("change", updateAlarmSettings);
-  }
-  if (notificationInterval) {
-    notificationInterval.addEventListener("change", updateAlarmSettings);
-  }
-});
-
-// updateUserBodyParts 함수 수정
-function updateUserBodyParts() {
-  const selectedBodyPartNames = selectedBodyParts
-    .filter((id) => bodyPartMap[id])
-    .map((id) => bodyPartMap[id].name);
-
-  const bodypartString = selectedBodyPartNames.join(",");
-
-  var formdata = new FormData();
-  formdata.append("bodypart", bodypartString);
-
-  var requestOptions = {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
-    },
-    body: formdata,
-    redirect: "follow",
-  };
-
-  fetch("http://3.37.18.8:8000/users/survey/", requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      console.log("Body parts updated successfully:", result);
-      fetchAndDisplayBodyParts(); // 업데이트 후 다시 불러오기
-    })
-    .catch((error) => console.log("error", error));
-}
-
-// fetchAndDisplayBodyParts 함수 수정
-function fetchAndDisplayBodyParts() {
-  var requestOptions = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
-    },
-    redirect: "follow",
-  };
-
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      userBodyParts = result.bodypart.map((part) => part.id);
-      displayBodyParts();
-      initializeSelectedBodyParts();
-    })
-    .catch((error) => console.log("error", error));
-}
