@@ -1,0 +1,89 @@
+.delete-account-modal_container {
+  /*팝업 배경*/
+  display: none; /*평소에는 보이지 않도록 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.delete-account-modal_wrap {
+  /*팝업*/
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 20px;
+  width: 600px;
+  height: 300px;
+  margin-bottom: 50px;
+}
+
+.delete-account-modal_close-btn {
+  display: flex;
+  margin-left: auto;
+}
+
+.delete-account-modal_wrap span {
+  color: red;
+  font-weight: bold;
+}
+
+.delete-account-modal_wrap p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  margin-top: 5px;
+  margin-bottom: 40px;
+}
+
+.delete-account-modal_form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.delete-account-modal_form input {
+  padding: 15px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  width: 100%;
+}
+
+#check_new-pw {
+  margin-top: 20px;
+}
+
+.delete-account-modal_finished {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.delete-account-modal_next {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  background-color: #6166f5;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.delete-account-modal_next:hover {
+  background-color: #3838d4;
+}
