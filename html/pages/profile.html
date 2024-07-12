@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>내 프로필</title>
-    <script src="../../js/utils/token-for-test.js"></script>
-    <!--하드코드된 토큰, 나중에 지우기-->
+
     <script
       src="https://kit.fontawesome.com/9125fcc41c.js"
       crossorigin="anonymous"
@@ -38,12 +37,16 @@
         <div class="profileMenu">
           <div class="profileMenuTitle">아이디</div>
           <div class="profileMenuValue" id="nickname">아기사자</div>
-          <button class="profileMenuEditButton">변경하기</button>
+          <button class="profileMenuEditButton" id="nicknameEditBtn">
+            변경하기
+          </button>
         </div>
         <div class="profileMenu">
           <div class="profileMenuTitle">비밀번호</div>
           <div class="profileMenuValue"></div>
-          <button class="profileMenuEditButton">변경하기</button>
+          <button class="profileMenuEditButton" id="passwordEditBtn">
+            변경하기
+          </button>
         </div>
         <div class="profileMenu">
           <div class="profileMenuTitle">이름</div>
