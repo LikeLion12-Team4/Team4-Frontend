@@ -33,7 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var requestOptions = {
       method: "PUT",
       headers: {
-        Authorization: "Bearer " + accessToken,
+        // Authorization: "Bearer " + accessToken,
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIwNzUzMDE1LCJpYXQiOjE3MjA3NDk0MTUsImp0aSI6IjJlOWQwOWQwMTZmMTQyNmNiZWNjNDg0ZGZlOTkxODE1IiwidXNlcl9pZCI6MjF9.RHxaEcw0gERJ2onP7p-70wjo5bAWnBvT07hNqgh6tkw",
       },
       body: formdata,
       redirect: "follow",
