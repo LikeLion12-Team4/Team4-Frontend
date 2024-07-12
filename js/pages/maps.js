@@ -1,3 +1,9 @@
+var mapContainer = document.getElementById("map_container"), // 지도를 표시할 div
+  mapOption = {
+    center: new kakao.maps.LatLng(37.56645, 126.97796), // 지도의 중심좌표 내 현위치로 바꾸기
+    level: 3, // 지도의 확대 레벨
+  };
+var map = new kakao.maps.Map(mapContainer, mapOption);
 //마커 클릭해야 보이도록 숨기기
 $("#modal").hide();
 //보이게 하는 함수
@@ -22,10 +28,10 @@ var search_yoga = "요가",
   search_fila = "필라테스",
   search_orth = "정형외과";
 //마커 이미지 설정
-var yoga_image = "../../assets/icons/marker_pilates.png",
-  health_image = "../../assets/icons/marker_fitness.png",
-  fila_image = "../../assets/icons/marker_pilates.png",
-  orth_image = "../../assets/icons/marker_orthopedics.png";
+// var yoga_image = "../../assets/icons/marker_yoga.png",
+//   health_image = "https://ifh.cc/g/g8AFCT.png",
+//   fila_image = "../../assets/icons/marker_pilates.png",
+//   orth_image = "../../assets/icons/marker_orthopedics.png";
 
 /****************************지도 생성******************************/
 var mapContainer = document.getElementById("map_container"), // 지도를 표시할 div
@@ -130,10 +136,11 @@ var ps = new kakao.maps.services.Places();
 function searchPlacesAndDisplayMarkers(keyword, markerArray) {
   ps.keywordSearch(keyword, function (data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-      var markerImage = getImageForKeyword(keyword);
+      // var markerImage = getImageForKeyword(keyword);
       for (var i = 0; i < data.length; i++) {
         var place = data[i];
-        displayMarker2(place, markerImage, markerArray);
+        // displayMarker2(place, markerImage, markerArray,);
+        displayMarker2(place, keyword, markerArray);
       }
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
       console.log("검색 결과가 없습니다.");
@@ -188,12 +195,17 @@ function closeOverlay() {
 }
 
 // 마커를 지도에 표시하고 생성된 마커 객체를 반환하는 함수
-function displayMarker2(place, image, markerArray) {
+function displayMarker2(place, keyword, markerArray) {
+  if (keyword == "요가") var image = "https://ifh.cc/g/g8AFCT.png";
+  else if (keyword == "헬스") var image = "../../assets/icons/marker_yoga.svg";
+  else if (keyword == "필라테스")
+    var image = "../../assets/icons/marker_yoga.svg";
+  else var image = "../../assets/icons/marker_yoga.svg";
+  var markerImage = new kakao.maps.MarkerImage(image, imageSize, imageOption);
   // 마커를 생성하고 지도에 표시합니다
   var marker = new kakao.maps.Marker({
     map: map,
     position: new kakao.maps.LatLng(place.y, place.x),
-    image: image,
   });
   //클릭하면 모달 띄우기
   kakao.maps.event.addListener(marker, "click", function () {
@@ -206,26 +218,26 @@ function displayMarker2(place, image, markerArray) {
 }
 
 // 키워드에 따른 이미지를 반환하는 함수
-function getImageForKeyword(keyword) {
-  var image = "";
-  switch (keyword) {
-    case "요가":
-      image = yoga_image;
-      break;
-    case "헬스":
-      image = health_image;
-      break;
-    case "필라테스":
-      image = fila_image;
-      break;
-    case "정형외과":
-      image = orth_image;
+// function getImageForKeyword(keyword) {
+//   var image = "";
+//   switch (keyword) {
+//     case "요가":
+//       image = yoga_image;
+//       break;
+//     case "헬스":
+//       image = health_image;
+//       break;
+//     case "필라테스":
+//       image = fila_image;
+//       break;
+//     case "정형외과":
+//       image = orth_image;
 
-      break;
-  }
-  var markerImage = new kakao.maps.MarkerImage(image, imageSize, imageOption);
-  return markerImage;
-}
+//       break;
+//   }
+//   var markerImage = new kakao.maps.MarkerImage(image, imageSize, imageOption);
+//   return markerImage;
+// }
 /****************************카테고리별 마커 띄우기 ******************************/
 // 모든 마커를 숨기는 함수
 function hideAllMarkers() {

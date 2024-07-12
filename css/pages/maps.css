@@ -26,7 +26,7 @@ header {
 .button-group {
   position: absolute;
   top: 10px;
-  left: 10%;
+  left: 11%;
   transform: translateX(-50%);
   width: 350px;
   height: 50px;
