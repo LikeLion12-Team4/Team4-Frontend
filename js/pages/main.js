@@ -1,15 +1,19 @@
 window.addEventListener('load', function() {
     var allElements = this.document.getElementsByTagName('*');
-    // var isLogin = sessionStorage.getItem("isLogin");
-  var isLogin = false;
-  console.log(isLogin);
-  if (isLogin) {
-    this.document.querySelector(".category_container").style.visibility = "visible";
-    this.document.querySelector(".login_btn").style.display = "none";
-    this.document.querySelector('.signup_btn').style.display = "none";
-    this.document.querySelector('.logout_btn').style.display = "flex";
-    this.document.querySelector('.welcome_msg').style.visibility = "visible";
-  }
+    var isLogin = sessionStorage.getItem("isLogin");
+
+    if(isLogin) {
+        document.querySelector(".category_container").style.visibility = "visible";
+    }
+    console.log(isLogin);
+    // else {
+    //     this.document.querySelector(".login_btn").style.display = "block";
+    //     this.document.querySelector(".signup_btn").style.display = "block";
+    //     this.document.querySelector(".logout_btn").style.visibility = "hidden";
+    //     this.document.querySelector('.welcome_msg').style.visibility = "hidden";
+
+
+    // }
     Array.prototype.forEach.call(allElements, function(el) {
         var includePath = el.dataset.includePath;
         if (includePath) {

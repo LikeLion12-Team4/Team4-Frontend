@@ -76,7 +76,7 @@ header {
 
 .user_button a {
   margin-right: 20px;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   display: flex;
   background-color: white;
   color: black;
@@ -86,6 +86,8 @@ header {
 
 .login_btn {
   color: #6266ed;
+  /* visibility: visible; */
+  display: block;
 }
 
 @media screen and (max-width: 960px) {
@@ -122,9 +124,15 @@ header {
 }
 
 .logout_btn {
+  /* visibility: hidden; */
   display: none;
 }
 
 .welcome_msg {
   display: none;
+}
+
+.signup_btn{
+  /* visibility: visible; */
+  display: block;
 }

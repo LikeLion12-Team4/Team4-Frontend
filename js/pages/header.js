@@ -1,27 +1,28 @@
 window.addEventListener('load', function() {
-    var allElements = this.document.getElementsByTagName('*');
-    // var isLogin = sessionStorage.getItem("isLogin");
-  var isLogin = false;
-  console.log(isLogin);
-  if (isLogin) {
-    this.document.querySelector(".login_btn").style.display = "none";
-    this.document.querySelector('.signup_btn').style.display = "none";
-    this.document.querySelector('.logout_btn').style.display = "flex";
-    this.document.querySelector('.welcome_msg').style.visibility = "visible";
-  }
-    Array.prototype.forEach.call(allElements, function(el) {
-        var includePath = el.dataset.includePath;
-        if (includePath) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    el.outerHTML = this.responseText;
-                }
-            };
-            xhttp.open('GET', includePath, true);
-            xhttp.send();
-        }
-    });
+  var isLogin = sessionStorage.getItem("isLogin");
+
+    console.log(isLogin);
+    // if (isLogin) {
+        
+    //     document.querySelector(".login_btn").style.visibility = "hidden";
+    //     document.querySelector('.signup_btn').style.visibility = "hidden";
+    //     document.querySelector('.logout_btn').style.visibility = "visible";
+    //     document.querySelector('.welcome_msg').style.visibility = "visible";
+    // }
+    var isLogin = sessionStorage.getItem("isLogin") === "true";
+
+    if (isLogin) {
+        // 로그인 상태일 때의 코드
+        document.querySelector(".logout_btn").style.display = "block";
+        document.querySelector(".login_btn").style.display = "none";
+        document.querySelector('.signup_btn').style.display = "none";
+    } else {
+        // 비로그인 상태일 때의 코드
+        document.querySelector(".logout_btn").style.display = "none";
+        document.querySelector(".login_btn").style.display = "block";
+        document.querySelector('.signup_btn').style.display = "block";
+    }
+
 });
 
 const hardcodedToken = window.APP_CONFIG.hardcodedToken;
