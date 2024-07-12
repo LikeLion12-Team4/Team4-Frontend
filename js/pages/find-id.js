@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         console.log(data);
         // alert("아이디 찾기 성공!");
-        alert(data.email);
         // window.findEmail = data.email;
         sessionStorage.setItem("username", data.username);
         window.location.replace("get-id.html");

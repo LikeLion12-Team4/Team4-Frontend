@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../../css/pages/profile.css" />
     <link rel="stylesheet" href="../../css/components/header.css" />
     <link rel="stylesheet" href="../../css/pages/change-id-modal.css" />
+    <link rel="stylesheet" href="../../css/pages/delete-account-modal.css" />
     <link rel="stylesheet" href="../../css/pages/form-validation.css" />
     <link rel="stylesheet" href="../../css/pages/change-pw-modal.css" />
     <link rel="stylesheet" href="../../css/pages/form-validation.css" />
@@ -138,6 +139,36 @@
           <div class="change-pw-modal_finished">
             <button type="button" class="change-pw-modal_next">
               변경 완료
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--회원 탈퇴 변경 모달-->
+    <div class="delete-account-modal_container">
+      <div class="delete-account-modal_wrap">
+        <button type="button" class="delete-account-modal_close-btn">
+          <img src="../../assets/icons/close.svg" />
+        </button>
+        <div class="delete-account-modal_title">
+          <p><span>회원탈퇴</span>를 위해 현재 비밀번호를 입력해주세요!</p>
+        </div>
+
+        <div class="delete-account-modal_content">
+          <div class="delete-account-modal_form">
+            <div class="field">
+              <input
+                type="password"
+                id="my-pw"
+                placeholder="현재 비밀번호를 입력해주세요"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <div class="delete-account-modal_finished">
+            <button type="button" class="delete-account-modal_next">
+              회원탈퇴
             </button>
           </div>
         </div>
