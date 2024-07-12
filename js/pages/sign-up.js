@@ -254,7 +254,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         console.log(data);
         sessionStorage.setItem("username", username);
-        alert(data.user.username);
         alert("회원가입이 성공적으로 완료되었습니다!");
 
         // 서버로부터 받은 토큰을 쿠키에 저장합니다.

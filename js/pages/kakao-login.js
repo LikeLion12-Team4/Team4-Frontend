@@ -137,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => {
         console.log("error", error);
-        alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
       });
   }
   kakaoLoginForm();
