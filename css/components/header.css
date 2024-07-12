@@ -4,7 +4,6 @@ body {
   padding: 30px 0 0 0;
   font-family: Arial, sans-serif;
   width: 100%;
-
 }
 
 a {
@@ -70,7 +69,6 @@ header {
   justify-content: space-around;
 }
 
-
 .user_button a {
   margin-right: 20px;
   padding: 5px 10px;
@@ -79,10 +77,6 @@ header {
   color: black;
   border-radius: 5px;
   font-size: 13px;
-}
-
-.login_btn {
-  color: #6266ed;
 }
 
 @media screen and (max-width: 960px) {
@@ -118,10 +112,31 @@ header {
   width: 100%;
 }
 
-.logout_btn {
-  display: none;
+.welcome_msg {
+  visibility: hidden;
+  color: white;
+  margin-right: 20px;
 }
 
-.welcome_msg {
-  display: none;
+.login_btn {
+  color: #6266ed;
+  visibility: visible;
+  /* display: block; */
+}
+
+.logout_btn {
+  visibility: hidden;
+  padding: 0;
+  margin-top: 10px;
+  height: 50%;
+  /* display: none; */
+}
+
+.signup_btn {
+  visibility: visible;
+  /* display: block; */
+}
+
+.user_name {
+  font-weight: bold;
 }

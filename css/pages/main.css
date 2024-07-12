@@ -18,6 +18,9 @@ body {
     
 }
 
+.category_container {
+    visibility: hidden;
+}
 .category p,
 .last_category p {
     padding: 20px;
@@ -149,7 +152,13 @@ body {
     margin-right: 10px;
 }
 
+/* .logout_btn {
+    visibility: hidden;
+}
 
+.welcome_msg {
+    visibility: hidden;
+} */
 
 
 

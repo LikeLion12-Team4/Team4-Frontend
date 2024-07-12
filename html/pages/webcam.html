@@ -13,18 +13,17 @@
     <header data-include-path="../../html/components/header.html"></header>
     <div class="container">
       <div class="camera-container"></div>
-        <div class="camera">
-          <video
-            id="webcam"
-            autoplay
-            playsinline
-            width="640"
-            height="480"
-          ></video>
-          <canvas id="outputCanvas"></canvas>
-        </div>
-        <span class="sub-title">웹캠을 통해 현재 자세를 확인하세요!</span>
+      <div class="camera">
+        <video
+          id="webcam"
+          autoplay
+          playsinline
+          width="640"
+          height="480"
+        ></video>
+        <canvas id="outputCanvas" width="640" height="480"></canvas>
       </div>
+      <span class="sub-title">웹캠을 통해 현재 자세를 확인하세요!</span>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>

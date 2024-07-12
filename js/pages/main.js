@@ -1,5 +1,17 @@
 window.addEventListener('load', function() {
     var allElements = this.document.getElementsByTagName('*');
+    var isLogin = sessionStorage.getItem("isLogin");
+
+    if(isLogin) {
+        document.querySelector(".category_container").style.visibility = "visible";
+    }
+    console.log(isLogin);
+    // else {
+    //     this.document.querySelector(".login_btn").style.display = "block";
+    //     this.document.querySelector(".signup_btn").style.display = "block";
+    //     this.document.querySelector(".logout_btn").style.visibility = "hidden";
+    //     this.document.querySelector('.welcome_msg').style.visibility = "hidden";
+    // }
     Array.prototype.forEach.call(allElements, function(el) {
         var includePath = el.dataset.includePath;
         if (includePath) {
@@ -63,19 +75,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     //dot
-    const slides = document.querySelectorAll(".video_container");
-    const dots = document.querySelectorAll(".dot");
+    // const slides = document.querySelectorAll(".video_container");
+    // const dots = document.querySelectorAll(".dot");
 
-    dots.forEach((dot, index) => {
-        dot.addEventListener("click", function() {
-            dot.firstChild.classList.remove("active");
-            this.classList.add("active");
+    // dots.forEach((dot, index) => {
+    //     dot.addEventListener("click", function() {
+    //         dot.firstChild.classList.remove("active");
+    //         this.classList.add("active");
 
-            slides.forEach((slide, slideIndex) => {
-                slide.style.transform = 'translateX(-${index *100}%';
-            });
-        });
-    });
+    //         slides.forEach((slide, slideIndex) => {
+    //             slide.style.transform = 'translateX(-${index *100}%';
+    //         });
+    //     });
+    // });
     
     
     const lastCategory = document.querySelector('.last_category');
@@ -143,11 +155,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             videoCard.classList.add('video_card');
 
                             videoCard.innerHTML = `
-                                <img src="${video.thumbnail}" alt="${video.title}">
-                                <a href="${video.youtubelink}" target="_blank">
-                                    <div class="video_comment">${video.title}</div>
-                                </a>
-                                <div class="bodypart">${video.bodypart.bodyname}</div>
+                                    <a href="${video.youtubelink}" target="_blank">
+                                        <div class= "video_card">
+                                        <img src="${video.thumbnail}" alt="${video.title}">
+                                        <span class="bodypart">${video.bodypart.bodyname}분</span>
+                                        <span class="video_comment">${video.title}</span>
+                                        <i class="fa-solid fa-heart" data-video-id="${video.id}"></i>
+                                    </a>
+                                
                             `;
 
                             searchResults.appendChild(videoCard);
@@ -162,13 +177,45 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.send();
     });
-
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+          var cookie = cookies[i];
+          while (cookie.charAt(0) === " ") {
+            cookie = cookie.substring(1, cookie.length);
+          }
+          if (cookie.indexOf(nameEQ) === 0) {
+            return cookie.substring(nameEQ.length, cookie.length);
+          }
+        }
+        return null;
+      }
+      
+      function getToken() {
+        return getCookie("accessToken") || null;
+      }
+      var name ='';
+      function getUserInfo() {
+        var requestOptions = {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+          redirect: "follow",
+        };
+      
+        fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+          .then((response) => response.json())
+          .then((result) => {
+            name = result.username;
+            document.querySelector('.user_name').innerText = name;
+            console.log(name)
+            
+          })
+          .catch((error) => console.log("error", error));
+      }
+      getUserInfo();
     
 });
-
-
-
-
-
-
 
