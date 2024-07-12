@@ -1,236 +1,326 @@
-// maps.js
-document.addEventListener("DOMContentLoaded", function () {
-  var mapContainer = document.getElementById("map_container");
-  var mapOption = {
-    center: new kakao.maps.LatLng(37.603137093485785, 126.9563494979624),
-    level: 2,
+//마커 클릭해야 보이도록 숨기기
+$("#modal").hide();
+//보이게 하는 함수
+function out() {
+  document.getElementById("modal").style.display = "none";
+}
+//마커 기본 설정
+var imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
+  imageOption = { offset: new kakao.maps.Point(27, 69) };
+//현재 위치 주소
+var loc_dong = "";
+//마커 배열
+var yogaMarkers = [];
+var healthMarkers = [];
+var pilatesMarkers = [];
+var orthopedicsMarkers = [];
+//오버레이 배열
+var overlays = [];
+//검색어
+var search_yoga = "요가",
+  search_health = "헬스",
+  search_fila = "필라테스",
+  search_orth = "정형외과";
+//마커 이미지 설정
+var yoga_image = "../../assets/icons/yoga.svg",
+  health_image = "../../assets/icons/health.svg",
+  fila_image = "../../assets/icons/fila.svg",
+  orth_image = "../../assets/icons/orth.svg";
+
+/****************************지도 생성******************************/
+var mapContainer = document.getElementById("map_container"), // 지도를 표시할 div
+  mapOption = {
+    center: new kakao.maps.LatLng(37.56645, 126.97796), // 지도의 중심좌표 내 현위치로 바꾸기
+    level: 3, // 지도의 확대 레벨
   };
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+/****************************현재 위치 + 법정동 가져오기 ******************************/
+// HTML5의 geolocation으로 사용할 수 있는지 확인합니다
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function (position) {
+    var lat = position.coords.latitude; // 위도
+    var lon = position.coords.longitude; // 경도
+    var locPosition = new kakao.maps.LatLng(lat, lon); // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 
-  var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
+    // 마커와 인포윈도우를 표시합니다
+    displayMarker(locPosition);
 
-  // 정형외과 마커가 표시될 좌표 배열입니다
-  var orthopedicsPositions = [
-    new kakao.maps.LatLng(37.603137093485785, 126.9563494979624),
+    // 현재 위치의 현재 위치 주소를 얻어옵니다
+    getLegalDongAddressFromLocPosition(locPosition, function (loc_dong) {
+      if (loc_dong) {
+        console.log("현재 위치 주소:", loc_dong);
+
+        searchPlacesAndDisplayMarkers(search_yoga, yogaMarkers);
+        searchPlacesAndDisplayMarkers(search_health, healthMarkers);
+        searchPlacesAndDisplayMarkers(search_fila, pilatesMarkers);
+        searchPlacesAndDisplayMarkers(search_orth, orthopedicsMarkers);
+      } else {
+        console.log("현재 위치 주소를 가져오지 못했습니다.");
+      }
+    });
+  });
+} else {
+  // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
+
+  var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+
+  displayMarker(locPosition);
+  // 현재 위치의 현재 위치 주소를 얻어옵니다
+  getLegalDongAddressFromLocPosition(locPosition, function (loc_dong) {
+    if (loc_dong) {
+      console.log("현재 위치 주소:", loc_dong);
+      searchPlacesAndDisplayMarkers(search_yoga, yogaMarkers);
+      searchPlacesAndDisplayMarkers(search_health, healthMarkers);
+      searchPlacesAndDisplayMarkers(search_fila, pilatesMarkers);
+      searchPlacesAndDisplayMarkers(search_orth, orthopedicsMarkers);
+    } else {
+      console.log("현재 위치 주소를 가져오지 못했습니다.");
+    }
+  });
+}
+
+//현재 위치 표현 함수
+function displayMarker(locPosition) {
+  var image = "../../assets/icons/marker_loc.svg";
+  var markerImage = new kakao.maps.MarkerImage(image, imageSize, imageOption);
+  // 마커를 생성합니다
+  var marker = new kakao.maps.Marker({
+    map: map,
+    position: locPosition,
+    image: markerImage,
+  });
+
+  // 지도 중심좌표를 접속위치로 변경합니다
+  map.setCenter(locPosition);
+}
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소를 받아오는 함수
+function getLegalDongAddressFromLocPosition(locPosition, callback) {
+  geocoder.coord2Address(
+    locPosition.getLng(),
+    locPosition.getLat(),
+    function (result, status) {
+      if (status === kakao.maps.services.Status.OK) {
+        var fullAddress = result[0].address.address_name; // "시도 시군구 동 번지" 형태의 주소
+        var splitAddress = fullAddress.split(" "); // 공백을 기준으로 주소를 분리
+
+        // 시군구까지의 주소는 시도부터 시군구까지의 문자열입니다
+        var loc_dong = splitAddress.slice(2, 3).join(" "); //구만
+        (search_yoga = loc_dong + " 요가"),
+          (search_health = loc_dong + " 헬스"),
+          (search_fila = loc_dong + " 필라테스"),
+          (search_orth = loc_dong + " 정형외과");
+        callback(loc_dong);
+        console.log(loc_dong);
+      } else {
+        console.error("시군구까지의 주소를 가져오지 못했습니다.");
+        callback(null);
+      }
+    }
+  );
+}
+/****************************받아온 주소로 장소 검색하기 ******************************/
+//장소 검색 객체
+var ps = new kakao.maps.services.Places();
+
+// 키워드로 장소를 검색하여 마커를 생성하는 함수
+function searchPlacesAndDisplayMarkers(keyword, markerArray) {
+  ps.keywordSearch(keyword, function (data, status, pagination) {
+    if (status === kakao.maps.services.Status.OK) {
+      var markerImage = getImageForKeyword(keyword);
+      for (var i = 0; i < data.length; i++) {
+        var place = data[i];
+        displayMarker2(place, markerImage, markerArray);
+      }
+    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+      console.log("검색 결과가 없습니다.");
+    } else if (status === kakao.maps.services.Status.ERROR) {
+      console.log("검색 중 오류가 발생했습니다.");
+    }
+  });
+}
+
+var overlay = null;
+function openCustomOverlay(place) {
+  console.log(place);
+  var content = `
+    <div class="customoverlay">
+        <div class="desc">
+            <div class="title">${place.place_name}</div>
+            <div class="content">주소 : ${place.address_name}</div>
+            <div class="content">전화번호 : ${
+              place.phone ? place.phone : "전화번호 정보 없음"
+            }</div>
+            <div class="content"><a href="${
+              place.place_url
+            }" target="_blank" class="link">더 자세한 정보 보러가기</a></div>
+        </div>
+    </div>
+    `;
+  //존재할시 위치 바꾸기
+  if (overlay) {
+    overlay.setContent(content);
+    overlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
+    overlay.setMap(map);
+    overlays.push(overlay);
+  } else {
+    // 새로 생성
+    overlay = new kakao.maps.CustomOverlay({
+      content: content,
+      map: map,
+      position: new kakao.maps.LatLng(place.y, place.x),
+      xAnchor: 0.5,
+      yAnchor: 1.3,
+    });
+    overlays.push(overlay);
+  }
+}
+
+// Function to close the custom overlay
+function closeOverlay() {
+  if (overlay) {
+    overlay.setMap(null);
+    overlay = null;
+  }
+}
+
+// 마커를 지도에 표시하고 생성된 마커 객체를 반환하는 함수
+function displayMarker2(place, image, markerArray) {
+  // 마커를 생성하고 지도에 표시합니다
+  var marker = new kakao.maps.Marker({
+    map: map,
+    position: new kakao.maps.LatLng(place.y, place.x),
+    image: image,
+  });
+  //클릭하면 모달 띄우기
+  kakao.maps.event.addListener(marker, "click", function () {
+    openCustomOverlay(place);
+  });
+  //마커랑 같은 배열 넣어서 연결 시켜주기
+  markerArray.push(marker);
+
+  return marker; // 생성된 마커 객체 반환
+}
+
+// 키워드에 따른 이미지를 반환하는 함수
+function getImageForKeyword(keyword) {
+  var image = "";
+  switch (keyword) {
+    case "요가":
+      image = yoga_image;
+      break;
+    case "헬스":
+      image = health_image;
+      break;
+    case "필라테스":
+      image = fila_image;
+      break;
+    case "정형외과":
+      image = orth_image;
+
+      break;
+  }
+  var markerImage = new kakao.maps.MarkerImage(image, imageSize, imageOption);
+  return markerImage;
+}
+/****************************카테고리별 마커 띄우기 ******************************/
+// 모든 마커를 숨기는 함수
+function hideAllMarkers() {
+  var allMarkers = [
+    yogaMarkers,
+    healthMarkers,
+    pilatesMarkers,
+    orthopedicsMarkers,
   ];
-
-  // 필라테스 마커가 표시될 좌표 배열입니다
-  var pilatesPositions = [new kakao.maps.LatLng(37.602966, 126.954956)];
-
-  // 헬스장 마커가 표시될 좌표 배열입니다
-  var fitnessPositions = [new kakao.maps.LatLng(37.600827, 126.956377)];
-
-  // 요가 마커가 표시될 좌표 배열입니다
-  var yogaPositions = [new kakao.maps.LatLng(37.6015, 126.9555)];
-
-  var markerImageSrc = "https://ifh.cc/g/ZpfNFH.png"; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
-  (orthopedicsMarkers = []), // 정형외과 마커 객체를 가지고 있을 배열입니다
-    (pilatesMarkers = []), // 필라테스 마커 객체를 가지고 있을 배열입니다
-    (fitnessMarkers = []), // 헬스장 마커 객체를 가지고 있을 배열입니다
-    (yogaMarkers = []); // 요가 마커 객체를 가지고 있을 배열입니다
-
-  createOrthopedicsMarkers(); // 정형외과 마커를 생성하고 정형외과 마커 배열에 추가합니다
-  createPilatesMarkers(); // 필라테스 마커를 생성하고 필라테스 마커 배열에 추가합니다
-  createFitnessMarkers(); // 헬스장 마커를 생성하고 헬스장 마커 배열에 추가합니다
-  createYogaMarkers(); // 요가 마커를 생성하고 요가 마커 배열에 추가합니다
-
-  changeMarker("orthopedics"); // 지도에 정형외과 마커가 보이도록 설정합니다
-
-  // 마커이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수입니다
-  function createMarkerImage(src, size, options) {
-    var markerImage = new kakao.maps.MarkerImage(src, size, options);
-    return markerImage;
-  }
-
-  // 좌표와 마커이미지를 받아 마커를 생성하여 리턴하는 함수입니다
-  function createMarker(position, image) {
-    var marker = new kakao.maps.Marker({
-      position: position,
-      image: image,
-    });
-
-    return marker;
-  }
-
-  // 정형외과 마커를 생성하고 정형외과 마커 배열에 추가하는 함수입니다
-  function createOrthopedicsMarkers() {
-    for (var i = 0; i < orthopedicsPositions.length; i++) {
-      var imageSize = new kakao.maps.Size(83, 83),
-        imageOptions = {
-          spriteOrigin: new kakao.maps.Point(0, 0),
-          spriteSize: new kakao.maps.Size(83, 332),
-        };
-
-      // 마커이미지와 마커를 생성합니다
-      var markerImage = createMarkerImage(
-          markerImageSrc,
-          imageSize,
-          imageOptions
-        ),
-        marker = createMarker(orthopedicsPositions[i], markerImage);
-
-      // 생성된 마커를 정형외과 마커 배열에 추가합니다
-      orthopedicsMarkers.push(marker);
+  for (var i = 0; i < allMarkers.length; i++) {
+    for (var j = 0; j < allMarkers[i].length; j++) {
+      allMarkers[i][j].setMap(null);
     }
   }
+}
 
-  // 정형외과 마커들의 지도 표시 여부를 설정하는 함수입니다
-  function setOrthopedicsMarkers(map) {
-    for (var i = 0; i < orthopedicsMarkers.length; i++) {
-      orthopedicsMarkers[i].setMap(map);
-    }
+function hideAllOverlays() {
+  for (var i = 0; i < overlays.length; i++) {
+    overlays[i].setMap(null);
   }
+  overlays = [];
+}
 
-  // 필라테스 마커를 생성하고 필라테스 마커 배열에 추가하는 함수입니다
-  function createPilatesMarkers() {
-    for (var i = 0; i < pilatesPositions.length; i++) {
-      var imageSize = new kakao.maps.Size(83, 83),
-        imageOptions = {
-          spriteOrigin: new kakao.maps.Point(0, 83),
-          spriteSize: new kakao.maps.Size(83, 332),
-        };
-
-      // 마커이미지와 마커를 생성합니다
-      var markerImage = createMarkerImage(
-          markerImageSrc,
-          imageSize,
-          imageOptions
-        ),
-        marker = createMarker(pilatesPositions[i], markerImage);
-
-      // 생성된 마커를 필라테스 마커 배열에 추가합니다
-      pilatesMarkers.push(marker);
-    }
+// 특정 마커 배열의 마커들만 지도에 표시하는 함수 +오버레이
+function showMarkers(markerArray) {
+  for (var i = 0; i < markerArray.length; i++) {
+    markerArray[i].setMap(map);
   }
+}
 
-  // 필라테스 마커들의 지도 표시 여부를 설정하는 함수입니다
-  function setPilatesMarkers(map) {
-    for (var i = 0; i < pilatesMarkers.length; i++) {
-      pilatesMarkers[i].setMap(map);
-    }
-  }
+// 버튼 클릭 이벤트 리스너 등록
+document.getElementById("btn1").addEventListener("click", function () {
+  hideAllMarkers();
+  hideAllOverlays();
+  showMarkers(orthopedicsMarkers);
+});
 
-  // 헬스장 마커를 생성하고 헬스장 마커 배열에 추가하는 함수입니다
-  function createFitnessMarkers() {
-    for (var i = 0; i < fitnessPositions.length; i++) {
-      var imageSize = new kakao.maps.Size(83, 83),
-        imageOptions = {
-          spriteOrigin: new kakao.maps.Point(0, 166),
-          spriteSize: new kakao.maps.Size(83, 332),
-        };
+document.getElementById("btn2").addEventListener("click", function () {
+  hideAllMarkers();
+  hideAllOverlays();
+  showMarkers(healthMarkers);
+});
 
-      // 마커이미지와 마커를 생성합니다
-      var markerImage = createMarkerImage(
-          markerImageSrc,
-          imageSize,
-          imageOptions
-        ),
-        marker = createMarker(fitnessPositions[i], markerImage);
+document.getElementById("btn3").addEventListener("click", function () {
+  hideAllMarkers();
+  hideAllOverlays();
+  showMarkers(pilatesMarkers);
+});
 
-      // 생성된 마커를 헬스장 마커 배열에 추가합니다
-      fitnessMarkers.push(marker);
-    }
-  }
+document.getElementById("btn4").addEventListener("click", function () {
+  hideAllMarkers();
+  hideAllOverlays();
+  showMarkers(yogaMarkers);
+});
 
-  // 헬스장 마커들의 지도 표시 여부를 설정하는 함수입니다
-  function setFitnessMarkers(map) {
-    for (var i = 0; i < fitnessMarkers.length; i++) {
-      fitnessMarkers[i].setMap(map);
-    }
-  }
-
-  // 요가 마커를 생성하고 요가 마커 배열에 추가하는 함수입니다
-  function createYogaMarkers() {
-    for (var i = 0; i < yogaPositions.length; i++) {
-      var imageSize = new kakao.maps.Size(83, 83),
-        imageOptions = {
-          spriteOrigin: new kakao.maps.Point(0, 249),
-          spriteSize: new kakao.maps.Size(83, 332),
-        };
-
-      // 마커이미지와 마커를 생성합니다
-      var markerImage = createMarkerImage(
-          markerImageSrc,
-          imageSize,
-          imageOptions
-        ),
-        marker = createMarker(yogaPositions[i], markerImage);
-
-      // 생성된 마커를 요가 마커 배열에 추가합니다
-      yogaMarkers.push(marker);
-    }
-  }
-
-  // 요가 마커들의 지도 표시 여부를 설정하는 함수입니다
-  function setYogaMarkers(map) {
-    for (var i = 0; i < yogaMarkers.length; i++) {
-      yogaMarkers[i].setMap(map);
-    }
-  }
-
-  // 카테고리 클릭 이벤트 리스너를 설정합니다.
-  document
-    .getElementById("orthopedicsMenu")
-    .addEventListener("click", function () {
-      changeMarker("orthopedics", map);
-    });
-  document.getElementById("pilatesMenu").addEventListener("click", function () {
-    changeMarker("pilates", map);
+//버튼 변하게
+document.getElementById("btn1").addEventListener("click", function () {
+  // 모든 버튼의 active 클래스 제거
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.classList.remove("active");
   });
-  document.getElementById("fitnessMenu").addEventListener("click", function () {
-    changeMarker("fitness", map);
+  // 현재 클릭된 버튼에 active 클래스 추가
+  this.classList.add("active");
+
+  // 마커 숨기고 필요한 마커 그룹 보이기
+  hideAllMarkers();
+  showMarkers(orthopedicsMarkers);
+});
+
+document.getElementById("btn2").addEventListener("click", function () {
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.classList.remove("active");
   });
-  document.getElementById("yogaMenu").addEventListener("click", function () {
-    changeMarker("yoga", map);
+  this.classList.add("active");
+
+  hideAllMarkers();
+  showMarkers(healthMarkers);
+});
+
+document.getElementById("btn3").addEventListener("click", function () {
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.classList.remove("active");
   });
+  this.classList.add("active");
 
-  // 카테고리를 클릭했을 때 type에 따라 카테고리의 스타일과 지도에 표시되는 마커를 변경합니다
-  function changeMarker(type, map) {
-    var orthopedicsMenu = document.getElementById("orthopedicsMenu");
-    var pilatesMenu = document.getElementById("pilatesMenu");
-    var fitnessMenu = document.getElementById("fitnessMenu");
-    var yogaMenu = document.getElementById("yogaMenu");
+  hideAllMarkers();
+  showMarkers(pilatesMarkers);
+});
 
-    // 정형외과 카테고리가 클릭됐을 때
-    if (type === "orthopedics") {
-      orthopedicsMenu.className = "menu_selected";
-      pilatesMenu.className = "";
-      fitnessMenu.className = "";
-      yogaMenu.className = "";
+document.getElementById("btn4").addEventListener("click", function () {
+  document.querySelectorAll(".btn").forEach(function (btn) {
+    btn.classList.remove("active");
+  });
+  this.classList.add("active");
 
-      setOrthopedicsMarkers(map);
-      setPilatesMarkers(null);
-      setFitnessMarkers(null);
-      setYogaMarkers(null);
-    } else if (type === "pilates") {
-      orthopedicsMenu.className = "";
-      pilatesMenu.className = "menu_selected";
-      fitnessMenu.className = "";
-      yogaMenu.className = "";
-
-      setOrthopedicsMarkers(null);
-      setPilatesMarkers(map);
-      setFitnessMarkers(null);
-      setYogaMarkers(null);
-    } else if (type === "fitness") {
-      orthopedicsMenu.className = "";
-      pilatesMenu.className = "";
-      fitnessMenu.className = "menu_selected";
-      yogaMenu.className = "";
-
-      setOrthopedicsMarkers(null);
-      setPilatesMarkers(null);
-      setFitnessMarkers(map);
-      setYogaMarkers(null);
-    } else if (type === "yoga") {
-      orthopedicsMenu.className = "";
-      pilatesMenu.className = "";
-      fitnessMenu.className = "";
-      yogaMenu.className = "menu_selected";
-
-      setOrthopedicsMarkers(null);
-      setPilatesMarkers(null);
-      setFitnessMarkers(null);
-      setYogaMarkers(map);
-    }
-  }
+  hideAllMarkers();
+  showMarkers(yogaMarkers);
 });
