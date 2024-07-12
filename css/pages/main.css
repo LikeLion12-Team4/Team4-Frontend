@@ -152,13 +152,13 @@ body {
     margin-right: 10px;
 }
 
-.logout_btn {
-    display: none;
+/* .logout_btn {
+    visibility: hidden;
 }
 
 .welcome_msg {
     visibility: hidden;
-}
+} */
 
 
 
