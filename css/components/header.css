@@ -30,12 +30,15 @@ header {
   /* padding: 5px 20px; */
 }
 
+
+
 .site_name {
   color: white;
   font-weight: bold;
   margin-top: 7px;
   display: flex;
-}
+  }
+
 
 .header_logo {
   width: 40px;

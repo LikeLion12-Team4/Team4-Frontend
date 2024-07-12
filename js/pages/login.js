@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var accessToken = data.token; // 서버로부터 받은 토큰
         // 토큰을 쿠키에 저장합니다.
         setCookie("accessToken", accessToken, 1);
+        sessionStorage.setItem("isLogin", true);
         // 로그인이 성공하면 다음 동작을 수행합니다.
         window.location.replace("main.html");
       })
