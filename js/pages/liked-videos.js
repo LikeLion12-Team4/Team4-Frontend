@@ -71,6 +71,7 @@ async function fetchAndCreateVideoCards() {
 }
 
 // 비디오 카드를 생성하는 함수
+
 function createVideoCards(data) {
   const container = document.getElementById("videoContainer");
   container.innerHTML = "";
@@ -82,10 +83,12 @@ function createVideoCards(data) {
     const card = document.createElement("div");
     card.className = "video_card";
     card.innerHTML = `
-      <img src="${video.thumbnail}" alt="${video.title}" />
-      <span class="video_min">${video.length}분</span>
-      <span class="bodypart">${video.bodypart.bodyname}</span>
-      <span class="video_comment">${video.title}</span>
+      <a href="${video.youtubelink}" target="_blank" rel="noopener noreferrer" class="video-link">
+        <img src="${video.thumbnail}" alt="${video.title}" />
+        <span class="video_min">${video.length}분</span>
+        <span class="bodypart">${video.bodypart.bodyname}</span>
+        <span class="video_comment">${video.title}</span>
+      </a>
       <i class="fa-solid fa-heart" data-video-id="${video.id}"></i>
     `;
     container.appendChild(card);
@@ -93,6 +96,11 @@ function createVideoCards(data) {
     // 하트 아이콘에 이벤트 리스너 추가
     const heartIcon = card.querySelector(".fa-heart");
     heartIcon.addEventListener("click", handleHeartClick);
+
+    // 하트 아이콘 클릭 시 이벤트 전파 중단
+    heartIcon.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
   });
 }
 
