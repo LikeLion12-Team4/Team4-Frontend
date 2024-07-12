@@ -22,10 +22,10 @@ var search_yoga = "요가",
   search_fila = "필라테스",
   search_orth = "정형외과";
 //마커 이미지 설정
-var yoga_image = "../../assets/icons/yoga.svg",
-  health_image = "../../assets/icons/health.svg",
-  fila_image = "../../assets/icons/fila.svg",
-  orth_image = "../../assets/icons/orth.svg";
+var yoga_image = "../../assets/icons/marker_pilates.png",
+  health_image = "../../assets/icons/marker_fitness.png",
+  fila_image = "../../assets/icons/marker_pilates.png",
+  orth_image = "../../assets/icons/marker_orthopedics.png";
 
 /****************************지도 생성******************************/
 var mapContainer = document.getElementById("map_container"), // 지도를 표시할 div
