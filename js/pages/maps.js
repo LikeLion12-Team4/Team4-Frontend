@@ -12,7 +12,10 @@ function out() {
 }
 //마커 기본 설정
 var imageSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
-  imageOption = { offset: new kakao.maps.Point(27, 69) };
+  imageOption = { offset: new kakao.maps.Point(27, 69) },
+  imageSize2 = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
+  imageOption2 = { offset: new kakao.maps.Point(27, 69) };
+
 //현재 위치 주소
 var loc_dong = "";
 //마커 배열
@@ -196,16 +199,21 @@ function closeOverlay() {
 
 // 마커를 지도에 표시하고 생성된 마커 객체를 반환하는 함수
 function displayMarker2(place, keyword, markerArray) {
-  if (keyword == "요가") var image = "https://ifh.cc/g/g8AFCT.png";
-  else if (keyword == "헬스") var image = "../../assets/icons/marker_yoga.svg";
-  else if (keyword == "필라테스")
-    var image = "../../assets/icons/marker_yoga.svg";
-  else var image = "../../assets/icons/marker_yoga.svg";
-  var markerImage = new kakao.maps.MarkerImage(image, imageSize, imageOption);
+  var image = "../../assets/icons/marker.svg";
+  // if (keyword=="요가")
+  //   var image = "../../assets/icons/yoga.svg";
+  // else if (keyword=="헬스")
+  //   var image = "../../assets/icons/fitness.svg";
+  // else if (keyword=="필라테스")
+  //   var image = "../../assets/icons/pila.svg";
+  // else
+  //   var image = "../../assets/icons/fitness.svg";
+  var markerImage = new kakao.maps.MarkerImage(image, imageSize2, imageOption2);
   // 마커를 생성하고 지도에 표시합니다
   var marker = new kakao.maps.Marker({
     map: map,
     position: new kakao.maps.LatLng(place.y, place.x),
+    image: markerImage,
   });
   //클릭하면 모달 띄우기
   kakao.maps.event.addListener(marker, "click", function () {

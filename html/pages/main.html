@@ -1,231 +1,87 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>자세차렷</title>
-    <link rel="stylesheet" href="../../css/components/header.css">
-    <link rel="stylesheet" href="../../css/pages/main.css">
-    <link rel="stylesheet" href="../../css/pages/search.css">
-    <link rel="stylesheet" href="../../css/pages/banner.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../../css/components/header.css" />
+    <link rel="stylesheet" href="../../css/pages/main.css" />
+    <link rel="stylesheet" href="../../css/pages/search.css" />
+    <link rel="stylesheet" href="../../css/pages/banner.css" />
+  </head>
+  <body>
     <header>
-        <nav class="navbar">
-          <ul class="navbar_menu">
-            <li>
-              <a href="../pages/main.html">
-                <img
-                  class="header_logo"
-                  src="../../assets/icons/logo.svg"
-                  alt="logo_img"/>
-                  <span class="site_name">자세차렷</span>
+      <nav class="navbar">
+        <ul class="navbar_menu">
+          <li>
+            <a href="../pages/main.html">
+              <img
+                class="header_logo"
+                src="../../assets/icons/logo.svg"
+                alt="logo_img"
+              />
+              <span class="site_name">자세차렷</span>
             </a>
-            </li>
-            <li><a href="../pages/introduction.html">서비스 소개</a></li>
-            <li><a href="../pages/maps.html">주변 자세교정 시설보기</a></li>
-            <li><a href="../pages/webcam.html">현재 나의 자세 보기</a></li>
-            <li><a href="../pages/mypage.html">마이페이지</a></li>
-          </ul>
-          <div class="user_button">
-            <a href="../pages/login.html" class ="login_btn">로그인</a>
-            <a href="../pages/sign-up.html" class ="signup_btn">회원가입</a>
-            <p class="welcome_msg"><span class="user_name"></span>님 안녕하세요!</p>
-            <a href="../pages/login.html" class="logout_btn">로그아웃</a>
-          </div>
-        </nav>
-      </header>
+          </li>
+          <li><a href="../pages/introduction.html">서비스 소개</a></li>
+          <li><a href="../pages/maps.html">주변 자세교정 시설보기</a></li>
+          <li><a href="../pages/webcam.html">현재 나의 자세 보기</a></li>
+          <li><a href="../pages/mypage.html">마이페이지</a></li>
+        </ul>
+        <div class="user_button">
+          <a href="../pages/login.html" class="login_btn">로그인</a>
+          <a href="../pages/sign-up.html" class="signup_btn">회원가입</a>
+          <p class="welcome_msg">
+            <span class="user_name"></span>님 안녕하세요!
+          </p>
+          <a href="../pages/login.html" class="logout_btn">로그아웃</a>
+        </div>
+      </nav>
+    </header>
     <main>
-        <div class="banner">
-            <img class="banner_logo" src="../../assets/icons/logo.svg" alt="banner_logo">
-            <h3>사무직 직장인의 건강한 자세 파트너, 자세차렷</h3>
-        </div>
-        <div class="search_box">
-            <form class="search_bar" action="" method="get">
-                <input class="search_txt" type="text" placeholder="검색">
-                <button class="search_btn" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
-        </div>
-        <section class="videos">
-            <div class="category_container">
-                <div class="category">
-                    <p><span class="user_name"></span> 님의 꼿꼿한 목을 위해! 목에 좋은 스트레칭</p>
-                    <div class="video_silder">
-                        <button class="left_btn">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <div class="video_container">
-                            <div class="video_card">
-                                <img src="../../assets/images/sky.jpg" alt="">
-                                <span class="video_min">1분</span>
-                                <span class="bodypart">목</span>
-                                <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                <i class="fa-regular fa-heart"></i>    
-                        </div>
-                            <div class="video_card">
-                                <img src="../../assets/images/sky.jpg" alt="">
-                                <span class="video_min">1분</span>
-                                <span class="bodypart">목</span>
-                                <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                <i class="fa-regular fa-heart"></i>    
-                        </div>
-                            <div class="video_card">
-                                <img src="../../assets/images/sky.jpg" alt="">
-                                <span class="video_min">1분</span>
-                                <span class="bodypart">목</span>
-                                <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                <i class="fa-regular fa-heart"></i>    
-                        </div>
-                            <div class="video_card">
-                                <img src="../../assets/images/sky.jpg" alt="">
-                                <span class="video_min">1분</span>
-                                <span class="bodypart">목</span>
-                                <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                <i class="fa-regular fa-heart"></i>    
-                        </div>
-                            <div class="video_card">
-                                    <img src="../../assets/images/sky.jpg" alt="">
-                                    <span class="video_min">1분</span>
-                                    <span class="bodypart">목</span>
-                                    <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                    <i class="fa-regular fa-heart"></i>    
-                            </div>
-                        </div>
-                        <button class="right_btn">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-                    </div>
-                    <div class="silde">
-                        <span class="dot" onclick="currentSlide(1)"></span>
-                        <span class="dot" onclick="currentSlide(2)"></span>
-                        <span class="dot" onclick="currentSlide(3)"></span>
-                    </div>
-                </div>
-    
-                <div class="category">
-                    <p><span class="user_name"></span>님의 꼿꼿한 목을 위해! 목에 좋은 스트레칭</p>
-                    <div class="video_silder">
-                        <button class="left_btn">
-                            <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <div class="video_container">
-                            <div class="video_card">
-                                <img src="../../assets/images/sky.jpg" alt="">
-                                <span class="video_min">3분</span>
-                                <span class="bodypart">목</span>
-                                <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                <i class="fa-regular fa-heart"></i>
-                            </div>
-                            <div class="video_card">
-                                <img src="../../assets/images/sky.jpg" alt="">
-                                <span class="video_min">3분</span>
-                                <span class="bodypart">목</span>
-                                <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                <i class="fa-regular fa-heart"></i>
-                            </div>
-                            <div class="video_card">
-                                <img src="../../assets/images/sky.jpg" alt="">
-                                <span class="video_min">3분</span>
-                                <span class="bodypart">목</span>
-                                <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                <i class="fa-regular fa-heart"></i>
-                            </div>
-                            <div class="video_card">
-                                <img src="../../assets/images/sky.jpg" alt="">
-                                <span class="video_min">3분</span>
-                                <span class="bodypart">목</span>
-                                <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                                <i class="fa-regular fa-heart"></i>
-                            </div>
-                        </div>
-                        <button class="right_btn">
-                            <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-                    </div>
-                    <div class="silde">
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                    </div>
-                </div>
-            </div>
-            
+      <section class="banner">
+        <img
+          src="../../assets/icons/logo.svg"
+          alt="banner_logo"
+          class="banner_logo"
+        />
+        <h3>사무직 직장인의 건강한 자세 파트너, 자세차렷</h3>
+      </section>
 
-            <div class="last_category">
-                <p>신체부위별 영상 보기</p>
-                <div class="bodypart_choice">
-                    <span data-bodypart="목">목</span>
-                    <span data-bodypart="손목">손목</span>
-                    <span data-bodypart="눈">눈</span>
-                    <span data-bodypart="허리">허리</span>
-                    <span data-bodypart="어깨">어깨</span>
-                </div>
-                <div class="video_silder">
-                    <button class="left_btn">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <div class="video_container">
-                        <div class="video_card">
-                            <img src="../../assets/images/sky.jpg" alt="">
-                            <span class="video_min">3분</span>
-                            <span class="bodypart">목</span>
-                            <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                        <div class="video_card">
-                            <img src="../../assets/images/sky.jpg" alt="">
-                            <span class="video_min">3분</span>
-                            <span class="bodypart">어깨</span>
-                            <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                        <div class="video_card">
-                            <img src="../../assets/images/sky.jpg" alt="">
-                            <span class="video_min">3분</span>
-                            <span class="bodypart">허리</span>
-                            <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                        <div class="video_card">
-                            <img src="../../assets/images/sky.jpg" alt="">
-                            <span class="video_min">3분</span>
-                            <span class="bodypart">손목</span>
-                            <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                        <div class="video_card">
-                            <img src="../../assets/images/sky.jpg" alt="">
-                            <span class="video_min">3분</span>
-                            <span class="bodypart">눈</span>
-                            <span class="video_comment">일자목 운동/ 거북목 스트레칭</span>
-                            <i class="fa-regular fa-heart"></i>
-                        </div>
-                    </div>
-                    <button class="right_btn">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-                <div class="silde">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
+      <section class="search_box">
+        <!-- 검색 바 구현 -->
+      </section>
+
+      <section class="videos">
+        <div class="category_container">
+          <!-- 동적으로 생성될 카테고리들 -->
+        </div>
+        <div class="last_category">
+          <p>신체부위별 영상 보기</p>
+          <div class="bodypart_choice">
+            <!-- 동적으로 생성될 신체 부위 선택 버튼들 -->
+          </div>
+          <div class="video_slider">
+            <button class="left_btn">&lt;</button>
+            <div id="lastVideoContainer" class="video_container">
+              <!-- 동적으로 생성될 비디오 카드들 -->
             </div>
-        </section>
+            <button class="right_btn">&gt;</button>
+          </div>
+        </div>
+      </section>
     </main>
     <section class="search_results">
-        <div class="video_container">
-            <!--검색 결과가 여기에 표시됩니다.-->
-        </div>
+      <div class="video_container">
+        <!--검색 결과가 여기에 표시됩니다.-->
+      </div>
     </section>
-</body>
+  </body>
 
-
-<script src="https://kit.fontawesome.com/817f949e69.js" 
-crossorigin="anonymous"></script>
-<script src="../../js/pages/header.js"></script>
-<script src="../../js/pages/main.js"></script>
-
+  <script
+    src="https://kit.fontawesome.com/817f949e69.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="../../js/pages/header.js"></script>
+  <script src="../../js/pages/main.js"></script>
 </html>
