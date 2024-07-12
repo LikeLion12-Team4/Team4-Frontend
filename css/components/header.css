@@ -1,9 +1,10 @@
 /* header css */
 body {
   margin: 0;
-  padding: 0;
+  padding: 30px 0 0 0;
   font-family: Arial, sans-serif;
   width: 100%;
+
 }
 
 a {
@@ -70,7 +71,8 @@ header {
 }
 
 
-.user_button a {
+.login_btn,
+.signup_btn {
   margin-right: 20px;
   padding: 5px 10px;
   display: flex;
@@ -80,7 +82,7 @@ header {
   font-size: 13px;
 }
 
-.user_button a:first-child {
+.login_btn {
   color: #6266ed;
 }
 
