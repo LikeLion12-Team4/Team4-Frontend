@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         console.log(data);
         alert("설문조사가 성공적으로 제출되었습니다!");
-        window.location.replace("index.html"); // 설문조사 성공 시 index.html로 이동
+        window.location.replace("main.html"); // 설문조사 성공 시 index.html로 이동
       })
       .catch((error) => {
         alert("설문조사 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
