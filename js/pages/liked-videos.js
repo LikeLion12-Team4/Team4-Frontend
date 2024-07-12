@@ -82,17 +82,28 @@ function createVideoCards(data) {
     const card = document.createElement("div");
     card.className = "video_card";
     card.innerHTML = `
-      <img src="${video.thumbnail}" alt="${video.title}" />
-      <span class="video_min">${video.length}분</span>
-      <span class="bodypart">${video.bodypart.bodyname}</span>
-      <span class="video_comment">${video.title}</span>
+      <a href="#" class="video-link" data-video-id="${video.id}" data-youtube-link="${video.youtubelink}">
+        <img src="${video.thumbnail}" alt="${video.title}" />
+        <span class="video_min">${video.length}분</span>
+        <span class="bodypart">${video.bodypart.bodyname}</span>
+        <span class="video_comment">${video.title}</span>
+      </a>
       <i class="fa-solid fa-heart" data-video-id="${video.id}"></i>
     `;
     container.appendChild(card);
 
+    // 비디오 링크에 이벤트 리스너 추가
+    const videoLink = card.querySelector(".video-link");
+    videoLink.addEventListener("click", handleVideoClick);
+
     // 하트 아이콘에 이벤트 리스너 추가
     const heartIcon = card.querySelector(".fa-heart");
     heartIcon.addEventListener("click", handleHeartClick);
+
+    // 하트 아이콘 클릭 시 이벤트 전파 중단
+    heartIcon.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
   });
 }
 
@@ -138,6 +149,33 @@ async function handleHeartClick(event) {
     }
   } catch (error) {
     console.error("Error:", error);
+  }
+}
+
+// 비디오 클릭 처리 함수
+async function handleVideoClick(event) {
+  event.preventDefault();
+  const videoId = event.currentTarget.dataset.videoId;
+  const youtubeLink = event.currentTarget.dataset.youtubeLink;
+
+  try {
+    // 서버에 비디오 조회 정보 전송
+    const response = await checkAndFetch(`${API_BASE_URL}/videos/${videoId}/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+
+    if (response.ok) {
+      console.log(`Video ${videoId} view recorded successfully`);
+      // 유튜브 링크 열기
+      window.open(youtubeLink, "_blank");
+    } else {
+      console.error(`Failed to record video ${videoId} view`);
+    }
+  } catch (error) {
+    console.error("Error recording video view:", error);
   }
 }
 
