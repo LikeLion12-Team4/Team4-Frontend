@@ -1,5 +1,42 @@
 //
-const hardcodedToken = window.APP_CONFIG.hardcodedToken;
+// const getToken() = window.APP_CONFIG.getToken();
+
+// 로그인 정보 가져오기
+
+let API_BASE_URL = "http://3.37.18.8:8000";
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var cookies = document.cookie.split(";");
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    while (cookie.charAt(0) === " ") {
+      cookie = cookie.substring(1, cookie.length);
+    }
+    if (cookie.indexOf(nameEQ) === 0) {
+      return cookie.substring(nameEQ.length, cookie.length);
+    }
+  }
+  return null;
+}
+
+function getToken() {
+  return getCookie("accessToken") || null;
+}
+
+function checkAndFetch(url, options) {
+  // 토큰 존재하는지 확인 후 fetch하는 로직
+  const token = getToken();
+  if (!token) {
+    window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 변경하세요
+    return Promise.reject("No token found");
+  }
+  options.headers = {
+    ...options.headers,
+    Authorization: `Bearer ${token}`,
+  };
+  return fetch(url, options);
+}
 
 // include.js
 window.addEventListener("load", function () {
@@ -22,10 +59,8 @@ window.addEventListener("load", function () {
 // API로부터 데이터를 가져와서 비디오 카드를 생성하는 함수
 async function fetchAndCreateVideoCards() {
   try {
-    const response = await fetch("http://3.37.18.8:8000/videolike/", {
-      headers: {
-        Authorization: `Bearer ${hardcodedToken}`,
-      },
+    const response = await checkAndFetch(`${API_BASE_URL}/videolike/`, {
+      method: "GET",
     });
     const data = await response.json();
     console.log("API Response:", data);
@@ -71,19 +106,19 @@ async function handleHeartClick(event) {
     let response;
     if (isLiked) {
       // 좋아요 취소
-      response = await fetch(`http://3.37.18.8:8000/video_id/${videoId}/`, {
+      response = await checkAndFetch(`${API_BASE_URL}/video_id/${videoId}/`, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${hardcodedToken}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         redirect: "follow",
       });
     } else {
       // 좋아요 추가
-      response = await fetch(`http://3.37.18.8:8000/video_id/${videoId}/`, {
+      response = await checkAndFetch(`${API_BASE_URL}/video_id/${videoId}/`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${hardcodedToken}`,
+          Authorization: `Bearer ${getToken()}`,
         },
         redirect: "follow",
       });
@@ -106,5 +141,14 @@ async function handleHeartClick(event) {
   }
 }
 
-// 페이지 로드 시 비디오 카드 생성
-fetchAndCreateVideoCards();
+document.addEventListener("DOMContentLoaded", function (event) {
+  event.preventDefault(); // 기본 제출 동작 막기
+
+  const token = getToken();
+  if (!token) {
+    window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 리다이렉트시캄ㅇ
+    return;
+  }
+  // 페이지 로드 시 비디오 카드 생성
+  fetchAndCreateVideoCards();
+});
