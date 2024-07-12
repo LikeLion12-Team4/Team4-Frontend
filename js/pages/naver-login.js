@@ -3,7 +3,7 @@ function submitLoginForm(event) {
 
   // 서버에 로그인 요청을 보냅니다.
   var requestOptions = {
-    method: "GET",
+    method: "POST",
     redirect: "follow",
   };
 
