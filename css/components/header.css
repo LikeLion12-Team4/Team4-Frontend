@@ -122,6 +122,9 @@ header {
   color: #6266ed;
   visibility: visible;
   /* display: block; */
+  padding: 0;
+  margin-top: 10px;
+  height: 50%;
 }
 
 .logout_btn {
@@ -135,6 +138,9 @@ header {
 .signup_btn {
   visibility: visible;
   /* display: block; */
+  padding: 0;
+  margin-top: 10px;
+  height: 50%;
 }
 
 .user_name {
