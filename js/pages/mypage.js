@@ -1,5 +1,42 @@
 // 토큰 하드코딩.. 로그인 완성되면 변경하자..
-const hardcodedToken = window.APP_CONFIG.hardcodedToken;
+//const getToken() = window.APP_CONFIG.getToken();
+
+// 로그인 정보 가져오기
+
+let API_SERVER_DOMAIN = "http://3.37.18.8:8000";
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var cookies = document.cookie.split(";");
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    while (cookie.charAt(0) === " ") {
+      cookie = cookie.substring(1, cookie.length);
+    }
+    if (cookie.indexOf(nameEQ) === 0) {
+      return cookie.substring(nameEQ.length, cookie.length);
+    }
+  }
+  return null;
+}
+
+function getToken() {
+  return getCookie("accessToken") || null;
+}
+
+function checkAndFetch(url, options) {
+  // 토큰 존재하는지 확인 후 fetch하는 로직
+  const token = getToken();
+  if (!token) {
+    window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 변경하세요
+    return Promise.reject("No token found");
+  }
+  options.headers = {
+    ...options.headers,
+    Authorization: `Bearer ${token}`,
+  };
+  return fetch(url, options);
+}
 
 // include.js
 window.addEventListener("load", function () {
@@ -38,12 +75,12 @@ function fetchAlarmSettings() {
   var requestOptions = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       if (result.is_option) {
@@ -77,7 +114,7 @@ function updateAlarmSettings() {
   var requestOptions = {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -91,13 +128,13 @@ function updateAlarmSettings() {
   var requestOptions = {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     body: formdata,
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("알림 설정이 업데이트되었습니다:", result);
@@ -107,7 +144,7 @@ function updateAlarmSettings() {
 
 // 최근 시청한 영상 정보 가져오기 및 표시
 function fetchAndDisplayRecentVideo() {
-  const token = hardcodedToken;
+  const token = getToken();
 
   var requestOptions = {
     method: "GET",
@@ -117,7 +154,7 @@ function fetchAndDisplayRecentVideo() {
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -145,12 +182,12 @@ function fetchUserInfo() {
   var requestOptions = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       // 닉네임 업데이트
@@ -290,13 +327,13 @@ function updateUserBodyParts() {
   var requestOptions = {
     method: "PUT",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     body: formdata,
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/survey/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/users/survey/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("Body parts updated successfully:", result);
@@ -313,12 +350,12 @@ function fetchAndDisplayBodyParts() {
   var requestOptions = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${hardcodedToken}`,
+      Authorization: `Bearer ${getToken()}`,
     },
     redirect: "follow",
   };
 
-  fetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       userBodyParts = result.bodypart.map((part) => part.id);
@@ -368,7 +405,15 @@ function createBodyPartBlock(partName, engName) {
 }
 
 // 이벤트 리스너 추가
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function (event) {
+  event.preventDefault(); // 기본 제출 동작 막기
+
+  const token = getToken();
+  if (!token) {
+    window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 리다이렉트시캄ㅇ
+    return;
+  }
+
   fetchAlarmSettings();
   fetchAndDisplayRecentVideo();
   fetchUserInfo();
