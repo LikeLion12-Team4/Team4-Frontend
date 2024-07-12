@@ -1,5 +1,15 @@
 window.addEventListener('load', function() {
     var allElements = this.document.getElementsByTagName('*');
+    // var isLogin = sessionStorage.getItem("isLogin");
+  var isLogin = false;
+  console.log(isLogin);
+  if (isLogin) {
+    this.document.querySelector(".category_container").style.visibility = "visible";
+    this.document.querySelector(".login_btn").style.display = "none";
+    this.document.querySelector('.signup_btn').style.display = "none";
+    this.document.querySelector('.logout_btn').style.display = "flex";
+    this.document.querySelector('.welcome_msg').style.visibility = "visible";
+  }
     Array.prototype.forEach.call(allElements, function(el) {
         var includePath = el.dataset.includePath;
         if (includePath) {
@@ -63,19 +73,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     //dot
-    const slides = document.querySelectorAll(".video_container");
-    const dots = document.querySelectorAll(".dot");
+    // const slides = document.querySelectorAll(".video_container");
+    // const dots = document.querySelectorAll(".dot");
 
-    dots.forEach((dot, index) => {
-        dot.addEventListener("click", function() {
-            dot.firstChild.classList.remove("active");
-            this.classList.add("active");
+    // dots.forEach((dot, index) => {
+    //     dot.addEventListener("click", function() {
+    //         dot.firstChild.classList.remove("active");
+    //         this.classList.add("active");
 
-            slides.forEach((slide, slideIndex) => {
-                slide.style.transform = 'translateX(-${index *100}%';
-            });
-        });
-    });
+    //         slides.forEach((slide, slideIndex) => {
+    //             slide.style.transform = 'translateX(-${index *100}%';
+    //         });
+    //     });
+    // });
     
     
     const lastCategory = document.querySelector('.last_category');
@@ -143,11 +153,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             videoCard.classList.add('video_card');
 
                             videoCard.innerHTML = `
-                                <img src="${video.thumbnail}" alt="${video.title}">
-                                <a href="${video.youtubelink}" target="_blank">
-                                    <div class="video_comment">${video.title}</div>
-                                </a>
-                                <div class="bodypart">${video.bodypart.bodyname}</div>
+                                    <a href="${video.youtubelink}" target="_blank">
+                                        <div class= "video_card">
+                                        <img src="${video.thumbnail}" alt="${video.title}">
+                                        <span class="bodypart">${video.bodypart.bodyname}분</span>
+                                        <span class="video_comment">${video.title}</span>
+                                        <i class="fa-solid fa-heart" data-video-id="${video.id}"></i>
+                                    </a>
+                                
                             `;
 
                             searchResults.appendChild(videoCard);
@@ -162,13 +175,4 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.send();
     });
-
-    
 });
-
-
-
-
-
-
-
