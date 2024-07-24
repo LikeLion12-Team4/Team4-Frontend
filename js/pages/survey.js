@@ -218,7 +218,7 @@
 // });
 
 document.addEventListener("DOMContentLoaded", function () {
-  var API_SERVER_DOMAIN = "http://3.37.18.8:8000/users/survey/";
+  var API_SERVER_DOMAIN = "http://3.37.90.114:8000/users/survey/";
 
   var username = sessionStorage.getItem("username");
   console.log(username);

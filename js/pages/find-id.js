@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var API_SERVER_DOMAIN = "http://3.37.18.8:8000/users/find_id/";
-  var API_SERVER_DOMAIN_EMAIL_SEND = "http://3.37.18.8:8000/email/send/";
-  var API_SERVER_DOMAIN_EMAIL_VERIFY = "http://3.37.18.8:8000/email/verify/";
+  var API_SERVER_DOMAIN = "http://3.37.90.114:8000/users/find_id/";
+  var API_SERVER_DOMAIN_EMAIL_SEND = "http://3.37.90.114:8000/email/send/";
+  var API_SERVER_DOMAIN_EMAIL_VERIFY = "http://3.37.90.114:8000/email/verify/";
 
   function getCookie(name) {
     var nameEQ = name + "=";

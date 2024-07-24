@@ -207,9 +207,9 @@
 
 // // 토큰 저장+로그인 유지 -> 오케이
 document.addEventListener("DOMContentLoaded", function () {
-  var API_SERVER_DOMAIN_JOIN = "http://3.37.18.8:8000/users/join/";
-  var API_SERVER_DOMAIN_EMAIL_SEND = "http://3.37.18.8:8000/email/send/";
-  var API_SERVER_DOMAIN_EMAIL_VERIFY = "http://3.37.18.8:8000/email/verify/";
+  var API_SERVER_DOMAIN_JOIN = "http://3.37.90.114:8000/users/join/";
+  var API_SERVER_DOMAIN_EMAIL_SEND = "http://3.37.90.114:8000/email/send/";
+  var API_SERVER_DOMAIN_EMAIL_VERIFY = "http://3.37.90.114:8000/email/verify/";
 
   function setCookie(name, value, days) {
     var expires = "";
