@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // 서버에 로그인 요청을 보냅니다.
-    fetch("http://3.37.18.8:8000/kakao/login/finish/", requestOptions)
+    fetch("http://3.37.90.114:8000/kakao/login/finish/", requestOptions)
       .then((response) => {
         if (response.status != 200) {
           throw new Error("Login failed");
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((data) => {
         console.log(data);
-        alert("회원가입이 성공적으로 완료되었습니다!");
+        alert("로그인이 성공적으로 완료되었습니다!");
 
         // 서버로부터 받은 토큰을 쿠키에 저장합니다.
         var token = data.access_token;
@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         return fetch(
-          "http://3.37.18.8:8000/kakao/jwt/",
+          "http://3.37.90.114:8000/kakao/jwt/",
           additionalRequestOptions
         );
       })
