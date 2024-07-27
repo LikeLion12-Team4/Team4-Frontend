@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NaverLoginSDK</title>
+  </head>
+
+  <body>
+    <!-- LoginWithNaverId javascript SDK -->
+    <script
+      type="text/javascript"
+      src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
+      charset="utf-8"
+    ></script>
+
+    <!-- LoginWithNaverId Javascript 설정 정보 및 초기화 -->
+    <script>
+      var naverLogin = new naver.LoginWithNaverId({
+        clientId: "zYwQyJbcQEHaGmhJn_cv", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+        callbackUrl: "http://127.0.0.1:8000/html/pages/naver-signUp.html", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+        isPopup: false,
+        callbackHandle: false,
+      });
+
+      // 네아로 로그인 정보를 초기화하기 위하여 init 호출
+      naverLogin.init();
+
+      // callback의 처리, 정상적으로 callback 처리가 완료될 경우 survey로 redirect
+      window.addEventListener("load", function () {
+        naverLogin.getLoginStatus(function (status) {
+          if (status) {
+            // 필수적으로 받아야하는 프로필 정보가 있다면 callback 처리 시점에 체크
+            var email = naverLogin.user.getEmail();
+            console.log(email);
+            if (email == undefined || email == null) {
+              alert("이메일은 필수정보입니다. 정보제공을 동의해주세요.");
+              naverLogin.reprompt();
+              return;
+            }
+
+            sessionStorage.setItem("username", email);
+            alert("회원가입이 성공적으로 완료되었습니다!");
+
+            window.location.replace("survey.html");
+          } else {
+            console.log("callback 처리에 실패하였습니다.");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
