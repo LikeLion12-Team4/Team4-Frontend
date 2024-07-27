@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setCookie("refreshToken", additionalData.refresh_token, 1);
 
         // 회원가입 성공 시 설문 페이지로 이동
-        window.location.replace("main.html");
+        window.location.replace("survey.html");
       })
       .catch((error) => {
         console.log("error", error);

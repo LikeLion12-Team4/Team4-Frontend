@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="text/javascript"
+      src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"
+      charset="utf-8"
+    ></script>
+
     <title>자세차렷</title>
     <link rel="stylesheet" href="../../css/pages/sign-up.css" />
     <link rel="stylesheet" href="../../css/pages/logo-header.css" />
@@ -25,10 +31,10 @@
           >소셜 로그인으로 간편하게 이용해보세요!</span
         >
         <div class="sign-up_social-login_icon">
-          <div class="naver-login">
-            <a href="#"
+          <div id="naverIdLogin">
+            <!-- <a href="#"
               ><img src="../../assets/icons/naver.svg" alt="naver-login"
-            /></a>
+            /></a> -->
           </div>
           <div class="kakao-login">
             <a href="#"
@@ -138,5 +144,6 @@
     <script src="../../js/pages/sign-up.js"></script>
     <script src="../../js/utils/form-validation.js"></script>
     <script src="../../js/utils/hide-pw.js"></script>
+    <script src="../../js/pages/naver-signUp.js"></script>
   </body>
 </html>
