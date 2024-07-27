@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var API_SERVER_DOMAIN_JOIN = "http://3.37.18.8:8000/users/reset_pwd/";
+  var API_SERVER_DOMAIN_JOIN = "http://3.37.90.114:8000/users/reset_pwd/";
 
   function getCookie(name) {
     var nameEQ = name + "=";

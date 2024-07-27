@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var API_SERVER_DOMAIN = "http://3.37.18.8:8000/users/login/";
+  var API_SERVER_DOMAIN = "http://3.37.90.114:8000/users/login/";
 
   function submitLoginForm(event) {
     event.preventDefault(); // 기본 제출 동작을 막습니다.

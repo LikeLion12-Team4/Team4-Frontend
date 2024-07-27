@@ -5,8 +5,12 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
+  margin-top: 30px;
+}
+
+body {
+  height: 100vh;
   background: linear-gradient(to bottom, #ffffff, #b8b8f7);
-  /* background-color: red; */
 }
 .camera-container {
   display: flex;
@@ -14,35 +18,48 @@
   position: absolute;
   justify-content: center;
   align-items: center;
-  width: 700px;
-  height: 600px;
+  width: 890px;
+  height: 690px;
   border: 6px solid rgb(81, 81, 224);
   border-radius: 15px;
   background-color: white;
 }
+.container {
+  position: relative;
+  width: 832px;
+  height: 624px;
+  margin: 0 auto;
+  margin-top: 100px;
+  border: 1px solid black;
+}
 .sub-title {
-  margin-top: 550px;
-  font-size: 20px;
+  margin-top: 655px;
+  font-size: 17px;
   font-weight: bolder;
   position: absolute;
-
   z-index: 2;
 }
 .camera {
-  display: flex;
-  margin-top: 90px;
-  margin-right: 100px;
-  width: 640px;
-  height: 480px;
-  margin: auto;
-  border: 0px solid black;
-  border-radius: 500px;
-  z-index: 1;
+  position: relative;
+  width: 832px;
+  height: 624px;
+  margin: 0 auto;
+  border: 1px solid black;
 }
+video {
+  /* position: fixed; */
+  width: 832px;
+  height: 624px;
+  /* background-color: red; */
+}
+
 video,
 canvas {
-  width: 640px;
-  height: 480px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 canvas {
   z-index: 1;

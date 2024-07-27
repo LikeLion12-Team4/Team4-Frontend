@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>내 주변 자세교정 시설</title>
     <script
       src="https://kit.fontawesome.com/9125fcc41c.js"
@@ -12,47 +13,25 @@
     <link rel="stylesheet" href="../../css/pages/maps.css" />
     <link rel="stylesheet" href="../../css/components/header.css" />
   </head>
+  <header data-include-path="../../html/components/header.html"></header>
   <body>
-    <header data-include-path="../../html/components/header.html"></header>
-
     <div id="mapwrap">
       <!-- 지도가 표시될 div -->
       <div id="map_container" style="width: 100%; height: 100vh"></div>
       <!-- 지도 위에 표시될 마커 카테고리 -->
-      <div class="category">
-        <ul>
-          <li id="orthopedicsMenu" onclick="changeMarker('orthopedics')">
-            <span class="ico_comm ico_orthopedics"></span>
-            정형외과
-          </li>
-          <li id="pilatesMenu" onclick="changeMarker('pilates')">
-            <span class="ico_comm ico_pilates"></span>
-            필라테스
-          </li>
-          <li id="fitnessMenu" onclick="changeMarker('fitness')">
-            <span class="ico_comm ico_fitness"></span>
-            헬스장
-          </li>
-          <li id="yogaMenu" onclick="changeMarker('yoga')">
-            <span class="ico_comm ico_yoga"></span>
-            요가
-          </li>
-        </ul>
+      <div class="button-group">
+        <button class="btn" id="btn1">정형외과</button>
+        <button class="btn" id="btn2">헬스장</button>
+        <button class="btn" id="btn3">필라테스</button>
+        <button class="btn" id="btn4">요가</button>
       </div>
     </div>
 
-    <!--appkey 삽입부분-->
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=79b84750b6a7d831b0a221614f5329ae"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=310d087a59dbd562341fecd8c3ad7c2f&libraries=services"
     ></script>
-
-    <!--라이브러리 불러오기 부분-->
-    <script
-      type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"
-    ></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!--지도 생성부분-->
     <script src="../../js/pages/maps.js"></script>
   </body>
