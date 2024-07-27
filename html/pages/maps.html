@@ -29,10 +29,17 @@
 
     <script
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=310d087a59dbd562341fecd8c3ad7c2f&libraries=services"
+      src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=310d087a59dbd562341fecd8c3ad7c2f&libraries=services"
     ></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!--지도 생성부분-->
-    <script src="../../js/pages/maps.js"></script>
+    <script>
+      // Kakao Maps API가 로드된 후 maps.js 실행
+      kakao.maps.load(function () {
+        var script = document.createElement("script");
+        script.src = "../../js/pages/maps.js";
+        document.body.appendChild(script);
+      });
+    </script>
   </body>
 </html>
