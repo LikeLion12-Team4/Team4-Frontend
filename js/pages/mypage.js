@@ -3,7 +3,7 @@
 
 // 로그인 정보 가져오기
 
-let API_SERVER_DOMAIN = "http://3.37.18.8:8000";
+let API_SERVER_DOMAIN = "http://3.37.90.114:8000";
 
 function getCookie(name) {
   var nameEQ = name + "=";
@@ -80,7 +80,7 @@ function fetchAlarmSettings() {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
+  checkAndFetch("http://3.37.90.114:8000/alarms/option/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       if (result.is_option) {
@@ -134,7 +134,7 @@ function updateAlarmSettings() {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.18.8:8000/alarms/option/", requestOptions)
+  checkAndFetch("http://3.37.90.114:8000/alarms/option/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("알림 설정이 업데이트되었습니다:", result);
@@ -154,7 +154,7 @@ function fetchAndDisplayRecentVideo() {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.90.114:8000/users/user/", requestOptions)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -187,7 +187,7 @@ function fetchUserInfo() {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.90.114:8000/users/user/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       // 닉네임 업데이트
@@ -333,7 +333,7 @@ function updateUserBodyParts() {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.18.8:8000/users/survey/", requestOptions)
+  checkAndFetch("http://3.37.90.114:8000/users/survey/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("Body parts updated successfully:", result);
@@ -355,7 +355,7 @@ function fetchAndDisplayBodyParts() {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.18.8:8000/users/user/", requestOptions)
+  checkAndFetch("http://3.37.90.114:8000/users/user/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       userBodyParts = result.bodypart.map((part) => part.id);
