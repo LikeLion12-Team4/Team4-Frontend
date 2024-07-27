@@ -3,7 +3,7 @@
 
 // 로그인 정보 가져오기
 
-let API_BASE_URL = "http://3.37.18.8:8000";
+let API_BASE_URL = "http://3.37.90.114:8000";
 
 function getCookie(name) {
   var nameEQ = name + "=";
