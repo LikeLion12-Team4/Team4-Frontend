@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI 자세 코치</title>
+    <script
+      src="https://kit.fontawesome.com/9125fcc41c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../../css/pages/AI-chat.css" />
+    <link rel="stylesheet" href="../../css/components/header.css" />
+    <link rel="stylesheet" href="../../css/pages/logo-header.css" />
+  </head>
+  <header data-include-path="../../html/components/header.html"></header>
+  <body>
+    <div class="chat-container">
+      <div class="chat-box">
+        <div class="guide-message">
+          <img
+            id="AI-chatbot-icon"
+            src="../../assets/images/AI-chatbot.svg"
+            alt="AI-chatbot"
+          />
+          <p>안녕하세요! 저에게 아래 예시와 같은 질문을 해보세요!</p>
+        </div>
+        <div class="suggestions-field">
+          <ul class="suggestions">
+            <li>나의 자세 데이터를 기반으로 내 자세 피드백 부탁해</li>
+            <li>사무실에서 간단히 스트레칭 할 수 있는 운동 영상 추천해줘</li>
+            <li>자세차렷 이용 방법이 궁금해</li>
+            <li>거북목 증후군이 뭐야?</li>
+          </ul>
+        </div>
+        <div class="input-field">
+          <input type="text" placeholder="궁금한 점을 물어보세요!" />
+          <div class="send-chat-btn">
+            <img
+              class="send-chat-btn-img"
+              src="../../assets/icons/chat-icon.svg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../js/pages/AI-chat.js"></script>
+  </body>
+</html>
