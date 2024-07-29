@@ -6,7 +6,7 @@ window.addEventListener("load", function () {
   
     if (isLogin) {
       document.querySelector(".category_container").style.visibility = "visible";
-      fetchLikedVideos().then(() => fetchAndDisplayVideos());
+      fetchLikedVideos().then(() => fetchAndDisplayUserVideos());
     } else {
       document.querySelector(".category_container").style.visibility = "visible";
       fetchAndDisplayRandomVideos();
@@ -158,6 +158,49 @@ window.addEventListener("load", function () {
         displayVideos(videos);
       })
       .catch((error) => console.error("Error:", error));
+
+  }
+  
+  function fetchAndDisplayUserVideos() {
+    const token = getToken();
+    if (!token) {
+      console.error("No token found. User might not be logged in.");
+      fetchAndDisplayRandomVideos();
+      return;
+    }
+  
+    Promise.all([
+      fetch("http://3.37.90.114:8000/users/user/", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => response.json()),
+      fetch("http://3.37.90.114:8000/videos/", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }).then(response => response.json())
+    ])
+    .then(([userData, videos]) => {
+      const selectedBodyParts = userData.bodypart.map(part => part.bodyname);
+
+      const filteredVideos = {};
+      for (const bodypart in videos) {
+        if (selectedBodyParts.includes(bodypart)) {
+          filteredVideos[bodypart] = videos[bodypart];
+        }
+      }
+      
+      displayVideos(filteredVideos);
+    
+      createLastCategory(Object.values(videos).flat());
+    })
+    .catch((error) => {
+      console.error("Error fetching user data or videos:", error);
+      fetchAndDisplayRandomVideos();
+    });
   }
   
   function addEventListeners() {
@@ -271,7 +314,6 @@ window.addEventListener("load", function () {
     })
       .then((response) => response.json())
       .then((videos) => {
-        // Assuming `videos` is an array
         const allVideos = Array.isArray(videos) ? videos : Object.values(videos).flat();
         const shuffledVideos = shuffleArray(allVideos);
         const selectedVideos = shuffledVideos.slice(0, 40);
@@ -321,4 +363,5 @@ window.addEventListener("load", function () {
   document.addEventListener("DOMContentLoaded", function () {
     getUserInfo();
   });
+  
   
