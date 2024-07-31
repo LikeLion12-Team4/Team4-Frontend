@@ -194,8 +194,15 @@ document.addEventListener("DOMContentLoaded", function () {
         setCookie("accessToken", additionalData.access_token, 1);
         setCookie("refreshToken", additionalData.refresh_token, 1);
 
-        // 회원가입 성공 시 설문 페이지로 이동
-        window.location.replace("main.html");
+        // 로그인 상태를 세션 스토리지에 저장합니다.
+        sessionStorage.setItem("isLogin", "true");
+
+        // is_created 값을 확인하여 페이지를 이동합니다.
+        if (additionalData.user_info.is_created) {
+          window.location.replace("survey.html");
+        } else {
+          window.location.replace("main.html");
+        }
       })
       .catch((error) => {
         console.log("error", error);
