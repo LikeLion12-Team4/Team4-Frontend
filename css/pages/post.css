@@ -75,7 +75,7 @@ hr {
   border: none;
   height: 1px;
   background-color: #bebebe;
-  width: 910px; /* 구분선 너비 : 추후 조정 */
+  width: 840px; /* 구분선 너비 : 추후 조정 */
   margin-bottom: 45px;
 }
 
@@ -87,14 +87,7 @@ hr {
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 40px 0 20px 0;
-}
-
-/* 첫 번째 행 스타일 */
-#first_row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  margin: 10px 0 20px 0;
 }
 
 /* 카테고리 선택 스타일 */
@@ -162,49 +155,18 @@ hr {
   background-color: #4a4ec2;
 }
 
-/* 사진 첨부 부분 */
-
-.imageUploadContainer {
-  margin-top: 20px;
-}
-
-.imageUploadLabel {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #6166f5;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.imageUploadLabel:hover {
-  background-color: #4a4ec2;
-}
-
-.imageUploadInput {
-  display: none;
-}
-
-.imagePreview {
-  margin-top: 10px;
-  max-width: 300px;
-}
-
-.imagePreview img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
-
-.imagePreview p {
-  margin-top: 5px;
-  font-size: 14px;
-  color: #666;
+#row5,
+#row6 {
+  display: flex;
+  flex-direction: row;
 }
 
 #row5 {
-  display: flex;
-  flex-direction: row;
+  margin-right: 13px;
+}
+
+#row5 i {
+  font-size: 20px;
 }
 
 #writer_container {
@@ -217,6 +179,8 @@ hr {
 #row3 {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin: 0 0 20px 0;
 }
 
 #time_info {
@@ -230,7 +194,7 @@ hr {
 
 #title {
   font-size: 28px;
-  font-weight: 700;
+  /*font-weight: 700;*/
   margin-bottom: 20px;
 }
 
@@ -238,22 +202,23 @@ hr {
   font-size: 17px;
   font-weight: 500;
   margin-bottom: 12px;
+  color: #6166f5;
 }
 
 #writer_pic {
   background-image: url(../../assets/images/시승연.png);
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  margin-right: 8px;
+  margin-right: 12px;
 }
 
 #writer_nickname {
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 #time_info {
@@ -263,4 +228,20 @@ hr {
 
 #time_info #posted_time {
   color: #6166f5;
+}
+
+#row1,
+#row2,
+#row4,
+#row5,
+#row6 {
+  padding-left: 5px;
+}
+
+#row1 {
+  height: 30px;
+}
+
+#post_content {
+  margin-bottom: 20px;
 }
