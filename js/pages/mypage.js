@@ -110,7 +110,7 @@ function updateAlarmSettings() {
   formdata.append("is_alarm", isAlarm);
   formdata.append("is_volumn", isVolumn);
   formdata.append("is_option", true);
-  const FCM = sessionStorage.getItem("FCM");
+  var FCM = sessionStorage.getItem("FCM");
   console.log(isAlarm);
   if (isAlarm === false) {
     FCM = "";

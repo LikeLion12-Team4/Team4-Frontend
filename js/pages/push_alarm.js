@@ -1,3 +1,4 @@
+console.log("dd");
 // Firebase 초기 설정
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import {

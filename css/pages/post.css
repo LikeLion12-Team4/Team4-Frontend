@@ -206,3 +206,61 @@ hr {
   display: flex;
   flex-direction: row;
 }
+
+#writer_container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+#row3 {
+  display: flex;
+  flex-direction: row;
+}
+
+#time_info {
+  display: flex;
+  flex-direction: row;
+}
+
+#posted_day {
+  margin-right: 10px;
+}
+
+#title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+#category {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+#writer_pic {
+  background-image: url(../../assets/images/시승연.png);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 8px;
+}
+
+#writer_nickname {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#time_info {
+  color: #a9a9a9;
+  font-size: 14px;
+}
+
+#time_info #posted_time {
+  color: #6166f5;
+}
