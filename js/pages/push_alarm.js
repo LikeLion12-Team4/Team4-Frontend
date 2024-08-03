@@ -49,6 +49,7 @@ async function registerServiceWorkerAndGetToken() {
     //await deleteToken(messaging);
     if (currentToken) {
       console.log("FCM Token:", currentToken);
+      sessionStorage.setItem("FCM", currentToken);
     } else {
       console.log(
         "No registration token available. Request permission to generate one."

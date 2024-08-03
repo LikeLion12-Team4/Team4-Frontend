@@ -4,6 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>글쓰기</title>
+    <script
+      src="https://kit.fontawesome.com/9125fcc41c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../../css/pages/posting.css" />
+    <link rel="stylesheet" href="../../css/components/header.css" />
   </head>
-  <body></body>
+  <header data-include-path="../../html/components/header.html"></header>
+  <body>
+    <div class="title">
+      <div class="titleContainer">
+        <div class="titleText">글쓰기</div>
+        <div class="titleIcon">
+          <i class="fa-solid fa-pen"></i>
+        </div>
+      </div>
+      <div class="greetings">
+        타인을 비방하거나 불쾌감을 주는 게시글은 운영 원칙에 따라 조치될 수
+        있어요.
+      </div>
+    </div>
+    <hr />
+    <!--구분선-->
+
+    <div class="postingContainer">
+      <div id="first_row">
+        <div class="category">
+          <select class="categorySelect">
+            <option value="">카테고리를 선택해주세요.</option>
+            <option value="1">병원 후기</option>
+            <option value="2">영상 후기</option>
+            <option value="3">제품 추천</option>
+            <option value="4">홍보</option>
+            <option value="5">자유게시판</option>
+          </select>
+        </div>
+        <div class="postingTitle">
+          <input
+            type="text"
+            class="postingTitleInput"
+            placeholder="제목을 입력해주세요."
+          />
+        </div>
+      </div>
+      <div class="postingContent">
+        <textarea
+          class="postingContentInput"
+          placeholder="내용을 입력해주세요."
+        ></textarea>
+      </div>
+
+      <div class="imageUploadContainer">
+        <label for="imageUpload" class="imageUploadLabel">사진 첨부</label>
+        <input
+          type="file"
+          id="imageUpload"
+          class="imageUploadInput"
+          accept="image/*"
+        />
+        <div id="imagePreview" class="imagePreview"></div>
+      </div>
+
+      <div class="postingButton">
+        <button class="postingButtonSubmit">등록</button>
+      </div>
+    </div>
+
+    <script src="../../js/pages/posting.js"></script>
+  </body>
 </html>
