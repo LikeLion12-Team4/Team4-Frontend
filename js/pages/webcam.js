@@ -1,6 +1,8 @@
 const videoElement = document.getElementById("webcam");
 const canvasElement = document.getElementById("outputCanvas");
 const canvasCtx = canvasElement.getContext("2d");
+const msg1 = $("#alert-msg1");
+const msg2 = $("#alert-msg2");
 
 // Initialize MediaPipe Pose
 const pose = new Pose({
@@ -36,8 +38,8 @@ faceMesh.onResults(onFaceMeshResults);
 // Initialize Camera
 const camera = new Camera(videoElement, {
   onFrame: async () => {
-    await pose.send({image: videoElement});
-    await faceMesh.send({image: videoElement});
+    await pose.send({ image: videoElement });
+    await faceMesh.send({ image: videoElement });
   },
   width: 832,
   height: 624,
@@ -80,8 +82,14 @@ function onFaceMeshResults(results) {
   //canvasCtx.fillText(`Distance: (${distance})`, 10, 100);
 
   if (distance < 70) {
-    canvasCtx.fillText(`거북목 자세입니다 !`, 10, 25);
     color = "#FF0000";
+    $(".camera-container").css("border", "6px solid #FF0000");
+    msg1.text("현재 나쁜 자세입니다.");
+    msg2.text("자세를 바르게 해주세요.");
+  } else {
+    msg1.text("현재 좋은 자세입니다.");
+    msg2.text("이렇게 계속 유지해주세요!");
+    $(".camera-container").css("border", "6px solid rgb(81, 81, 224)");
   }
 
   canvasCtx.restore();
@@ -105,13 +113,23 @@ function onPoseResults(results) {
   canvasCtx.save();
   canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
   canvasCtx.fillStyle = "yellow";
-  canvasCtx.font = "20px Arial";
+  // canvasCtx.font = "20px Arial";
   if (leftShoulder.y - rightShoulder.y > 0.065) {
-    canvasCtx.fillText(`자세가 왼쪽으로 삐뚤어져 있습니다 !`, 10, 55);
+    // canvasCtx.fillText(`자세가 왼쪽으로 삐뚤어져 있습니다 !`, 10, 55);
     color = "#FFFF00";
+    msg1.text("현재 나쁜 자세입니다.");
+    msg2.text("자세를 바르게 해주세요.");
+    $(".camera-container").css("border", "6px solid #FF0000");
   } else if (rightShoulder.y - leftShoulder.y > 0.065) {
-    canvasCtx.fillText(`자세가 오른쪽으로 삐뚤어져 있습니다 !`, 10, 55);
+    // canvasCtx.fillText(`자세가 오른쪽으로 삐뚤어져 있습니다 !`, 10, 55);
     color = "#FFFF00";
+    msg1.text("현재 나쁜 자세입니다.");
+    msg2.text("자세를 바르게 해주세요.");
+    $(".camera-container").css("border", "6px solid #FF0000");
+  } else {
+    msg1.text("현재 좋은 자세입니다.");
+    msg2.text("이렇게 계속 유지해주세요!");
+    $(".camera-container").css("border", "6px solid rgb(81, 81, 224)");
   }
   canvasCtx.fillStyle = "red";
   // Draw the pose landmarks
@@ -151,8 +169,8 @@ videoElement.style.height = "100%";
 navigator.mediaDevices
   .getUserMedia({
     video: {
-      width: {ideal: 832},
-      height: {ideal: 624},
+      width: { ideal: 832 },
+      height: { ideal: 624 },
     },
   })
   .then((stream) => {

@@ -10,7 +10,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  background: linear-gradient(180deg, #ffffff 40%, #6166f545);
+  background: linear-gradient(180deg, #ffffff 55%, #6166f545);
 }
 
 header {
@@ -27,17 +27,17 @@ header {
   height: 100vh;
 }
 
-.chat-box {
+/* .chat-box {
   background: #ffffff10;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: 800px;
-  height: 700px;
+  height: 800px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 
 .guide-message {
   display: flex;
@@ -172,5 +172,6 @@ input[type="text"] {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 800px;
-  height: 700px;
+  height: 800px;
+  padding-bottom: 60px;
 }
