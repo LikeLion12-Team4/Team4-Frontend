@@ -91,8 +91,8 @@ function fetchAlarmSettings() {
           result.interval;
       } else {
         // 초기값 설정
-        document.getElementById("notification_toggle").checked = true;
-        document.getElementById("sound_toggle").checked = true;
+        document.getElementById("notification_toggle").checked = false;
+        document.getElementById("sound_toggle").checked = false;
         document.getElementById("notification_interval").value = 10;
       }
     })
@@ -104,13 +104,17 @@ function updateAlarmSettings() {
   const isAlarm = document.getElementById("notification_toggle").checked;
   const isVolumn = document.getElementById("sound_toggle").checked;
   const interval = document.getElementById("notification_interval").value;
-
+  if (isAlarm === true) {
+    document.write(
+      '<script src="../../js/pages/push_alarm.js" type="module"></script>'
+    );
+  }
   var formdata = new FormData();
   formdata.append("interval", interval);
   formdata.append("is_alarm", isAlarm);
   formdata.append("is_volumn", isVolumn);
   formdata.append("is_option", true);
-
+  const FCM = sessionStorage.getItem("FCM");
   var requestOptions = {
     method: "PUT",
     headers: {
@@ -122,6 +126,7 @@ function updateAlarmSettings() {
       is_alarm: isAlarm,
       is_volumn: isVolumn,
       is_option: true,
+      fcm_token: FCM,
     }),
     redirect: "follow",
   };
