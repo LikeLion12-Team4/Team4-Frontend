@@ -14,7 +14,6 @@
 
   <body>
     <header data-include-path="../../html/components/header.html"></header>
-
     <div class="chat-container">
       <div class="chat-box active">
         <div class="main-screen">
@@ -29,10 +28,14 @@
 
           <div class="suggestions-field">
             <ul class="suggestions">
-              <li>나의 자세 데이터를 기반으로 내 자세 피드백 부탁해</li>
-              <li>사무실에서 간단히 스트레칭 할 수 있는 운동 영상 추천해줘</li>
-              <li>자세차렷 이용 방법이 궁금해</li>
-              <li>거북목 증후군이 뭐야?</li>
+              <li id="feedback">
+                나의 자세 데이터를 기반으로 내 자세 피드백 부탁해
+              </li>
+              <li id="video">
+                사무실에서 간단히 스트레칭 할 수 있는 운동 영상 추천해줘
+              </li>
+              <li id="method">자세차렷 이용 방법이 궁금해</li>
+              <li id="turtle">거북목 증후군이 뭐야?</li>
             </ul>
           </div>
         </div>
@@ -61,5 +64,6 @@
       </div>
     </div>
     <script src="../../js/pages/AI-chat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </body>
 </html>

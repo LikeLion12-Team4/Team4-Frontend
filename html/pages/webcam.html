@@ -22,14 +22,24 @@
           height="480"
         ></video>
         <canvas id="outputCanvas" width="640" height="480"></canvas>
+        <div id="msg-container">
+          <div id="alert-msg1">웹캠을 통해</div>
+          <div id="alert-msg2">현재 나의 자세를 확인해보세요!</div>
+        </div>
+        <input
+          id="start-btn"
+          type="button"
+          onclick="window.open('webcam2.html','_blank')"
+          value="실시간 자세 추적 시작"
+        />
       </div>
-      <span class="sub-title">웹캠을 통해 현재 자세를 확인하세요!</span>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../../js/pages/webcam.js"></script>
   </body>
 </html>
