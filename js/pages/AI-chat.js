@@ -207,12 +207,27 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// API 키 부분 삭제!!
-const apiEndpoint = "https://api.openai.com/v1/chat/completions";
-
 // ChatGPT API 요청 함수
 async function fetchAIResponse(prompt) {
+  const apiKey = "";
+  const apiEndpoint = "https://api.openai.com/v1/chat/completions";
   // API 요청에 사용할 옵션을 정의
+  var requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: formdata,
+    redirect: "follow",
+  };
+
+  checkAndFetch("http://3.37.90.114:8000/", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("불러오기 성공", result);
+      apiKey = result.value;
+    })
+    .catch((error) => console.log("error", error));
   const requestOptions = {
     method: "POST",
     // API 요청의 헤더를 설정

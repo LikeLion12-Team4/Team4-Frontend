@@ -91,8 +91,8 @@ function fetchAlarmSettings() {
           result.interval;
       } else {
         // 초기값 설정
-        document.getElementById("notification_toggle").checked = true;
-        document.getElementById("sound_toggle").checked = true;
+        document.getElementById("notification_toggle").checked = false;
+        document.getElementById("sound_toggle").checked = false;
         document.getElementById("notification_interval").value = 10;
       }
     })
@@ -110,7 +110,11 @@ function updateAlarmSettings() {
   formdata.append("is_alarm", isAlarm);
   formdata.append("is_volumn", isVolumn);
   formdata.append("is_option", true);
-
+  var FCM = sessionStorage.getItem("FCM");
+  console.log(isAlarm);
+  if (isAlarm === false) {
+    FCM = "";
+  }
   var requestOptions = {
     method: "PUT",
     headers: {
@@ -122,6 +126,7 @@ function updateAlarmSettings() {
       is_alarm: isAlarm,
       is_volumn: isVolumn,
       is_option: true,
+      fcm_token: FCM,
     }),
     redirect: "follow",
   };
