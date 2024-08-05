@@ -1,40 +1,59 @@
+var stand_up="";
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var cookies = document.cookie.split(";");
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    while (cookie.charAt(0) === " ") {
+      cookie = cookie.substring(1, cookie.length);
+    }
+    if (cookie.indexOf(nameEQ) === 0) {
+      return cookie.substring(nameEQ.length, cookie.length);
+    }
+  }
+  return null;
+}
+
+function getToken() {
+  return getCookie("accessToken") || null;
+}
+
+function checkAndFetch(url, options) {
+  // 토큰 존재하는지 확인 후 fetch하는 로직
+  const token = getToken();
+  if (!token) {
+    window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 변경하세요
+    return Promise.reject("No token found");
+  }
+  options.headers = {
+    ...options.headers,
+    Authorization: `Bearer ${token}`,
+  };
+  return fetch(url, options);
+}
 document.addEventListener("DOMContentLoaded", function () {
   const chatBox = document.querySelector(".chat-box");
   const inputChat = document.querySelector(".input-chat");
 
-  //사용자 데이터 불러오는 코드
-  function getCookie(name) {
-    var nameEQ = name + "=";
-    var cookies = document.cookie.split(";");
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-      while (cookie.charAt(0) === " ") {
-        cookie = cookie.substring(1, cookie.length);
-      }
-      if (cookie.indexOf(nameEQ) === 0) {
-        return cookie.substring(nameEQ.length, cookie.length);
-      }
-    }
-    return null;
-  }
+  //chatbot 
+  var Options = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+    // body: formdata,
+    redirect: "follow",
+  };
 
-  function getToken() {
-    return getCookie("accessToken") || null;
-  }
-
-  function checkAndFetch(url, options) {
-    // 토큰 존재하는지 확인 후 fetch하는 로직
-    const token = getToken();
-    if (!token) {
-      window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 변경하세요
-      return Promise.reject("No token found");
-    }
-    options.headers = {
-      ...options.headers,
-      Authorization: `Bearer ${token}`,
-    };
-    return fetch(url, options);
-  }
+  checkAndFetch("https://stand-up-back.store/chatbot/", Options)
+    .then((response) => response.json())
+    .then((result) => {
+      console.log("불러오기 성공");
+      stand_up = result.find(item=>item.id===1).value;
+    })
+    .catch((error) => alert("로그인이 필요한 서비스입니다.")
+    
+    );
   //사용자 데이터 불러오기
   var requestOptions = {
     method: "GET",
@@ -49,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((result) => {
       const right_num = result.right_num;
-      console.log(right_num);
       const left_num = result.left_num;
       const turtle_num = result.turtle_num;
       checkAndFetch("https://stand-up-back.store/users/user", requestOptions)
@@ -91,6 +109,11 @@ document.addEventListener("DOMContentLoaded", function () {
           else {
             message +=
               "아주 좋은 자세를 유지하고 계세요! 앞으로도 바른 자세 유지하시면 될 것 같습니다.";
+          }
+
+          //자세데이터 없을때
+          if(right_num===null){
+            message=`현재 저장된 ${name}님의 자세데이터가 없습니다. "현재 나의 자세보기" 페이지에서 실시간 자세 추적을 시작해보세요!`
           }
         });
     })
@@ -138,12 +161,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       return addChat(message, "AI");
     }
-    if (msg.includes("영상 추천")) {
-      if (msg.includes("사무실") | msg.includes("간단")) {
-        //영상가져오기
-      }
-      return addChat(message, "AI");
-    }
+    // if (msg.includes("영상 추천")) {
+    //   if (msg.includes("사무실") | msg.includes("간단")) {
+    //     //영상가져오기
+    //   }
+    //   return addChat(message, "AI");
+    // }
     if (
       msg.includes("자세차렷 이용방법") | msg.includes("자세차렷이용방법") ||
       msg.includes("자세차렷 이용 방법")
@@ -189,7 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
     $(".main-screen").hide();
     const text = $("#video").text();
     addChat(text, "user");
-    addChat(message, "AI");
   });
   $("#method").on("click", function (e) {
     $(".main-screen").hide();
@@ -209,31 +231,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ChatGPT API 요청 함수
 async function fetchAIResponse(prompt) {
-  const apiKey = "";
   const apiEndpoint = "https://api.openai.com/v1/chat/completions";
-  // API 요청에 사용할 옵션을 정의
-  var requestOptions = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-    body: formdata,
-    redirect: "follow",
-  };
-
-  checkAndFetch("https://stand-up-back.store", requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      console.log("불러오기 성공", result);
-      apiKey = result.value;
-    })
-    .catch((error) => console.log("error", error));
   const requestOptions = {
     method: "POST",
     // API 요청의 헤더를 설정
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${stand_up}`,
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo", // 사용할 AI 모델
