@@ -1,5 +1,5 @@
 // 전역 변수
-const API_BASE_URL = 'https://stand-up-back.store/';
+const API_BASE_URL = 'https://stand-up-back.store';
 const POSTS_PER_PAGE = 15;
 let currentPage = 1;
 let currentPageGroup = 1;

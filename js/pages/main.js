@@ -28,7 +28,7 @@ window.addEventListener("load", function () {
   });
   
   function fetchLikedVideos() {
-    return fetch("https://stand-up-back.store//videolike/", {
+    return fetch("https://stand-up-back.store/videolike/", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getToken()}`,
@@ -147,7 +147,7 @@ window.addEventListener("load", function () {
   }
   
   function fetchAndDisplayVideos() {
-    fetch("https://stand-up-back.store//videos/", {
+    fetch("https://stand-up-back.store/videos/", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getToken()}`,
@@ -170,13 +170,13 @@ window.addEventListener("load", function () {
     }
   
     Promise.all([
-      fetch("https://stand-up-back.store//users/user/", {
+      fetch("https://stand-up-back.store/users/user/", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }).then(response => response.json()),
-      fetch("https://stand-up-back.store//videos/", {
+      fetch("https://stand-up-back.store/videos/", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -220,7 +220,7 @@ window.addEventListener("load", function () {
     const isLiked = heartIcon.classList.contains("fa-solid");
   
     const method = isLiked ? "DELETE" : "POST";
-    const url = `https://stand-up-back.store//video_id/${videoId}/`;
+    const url = `https://stand-up-back.store/video_id/${videoId}/`;
   
     fetch(url, {
       method: method,
@@ -258,7 +258,7 @@ window.addEventListener("load", function () {
     const videoId = link.dataset.videoId;
     const youtubeLink = link.dataset.youtubeLink;
   
-    fetch(`https://stand-up-back.store//videos/${videoId}/`, {
+    fetch(`https://stand-up-back.store/videos/${videoId}/`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getToken()}`,
@@ -285,7 +285,7 @@ window.addEventListener("load", function () {
   }
   
   function getUserInfo() {
-    fetch("https://stand-up-back.store//users/user/", {
+    fetch("https://stand-up-back.store/users/user/", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${getToken()}`,
@@ -309,7 +309,7 @@ window.addEventListener("load", function () {
   }
   
   function fetchAndDisplayRandomVideos() {
-    fetch("https://stand-up-back.store//videos/", {
+    fetch("https://stand-up-back.store/videos/", {
       method: "GET",
     })
       .then((response) => response.json())
