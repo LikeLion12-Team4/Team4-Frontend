@@ -1,4 +1,4 @@
-let API_BASE_URL = "https://stand-up.store";
+let API_BASE_URL = "https://stand-up-back.store";
 
 function getCookie(name) {
   var nameEQ = name + "=";
