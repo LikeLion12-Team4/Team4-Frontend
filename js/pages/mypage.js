@@ -188,7 +188,7 @@ function fetchUserInfo() {
       // 닉네임 업데이트
       const nicknameElements = document.querySelectorAll(".nickname");
       nicknameElements.forEach((element) => {
-        element.textContent = result.username;
+        element.textContent = result.fullname;
       });
 
       // 이메일 업데이트
