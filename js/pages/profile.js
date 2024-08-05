@@ -63,7 +63,7 @@ function fetchUserInfo() {
     .then((result) => {
       const nicknameElements = document.querySelectorAll(".nickname");
       nicknameElements.forEach((element) => {
-        element.textContent = result.username;
+        element.textContent = result.fullname;
       });
 
       const idElement = document.querySelector(
