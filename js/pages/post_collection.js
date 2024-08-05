@@ -1,16 +1,13 @@
-// 전역 변수
 const API_BASE_URL = 'https://stand-up-back.store';
-const POSTS_PER_PAGE = 15;
-let currentPage = 1;
-let currentPageGroup = 1;
-const PAGES_PER_GROUP = 5;
-let totalPosts = 0;
-let totalPages = 0;
 
-console.log('스크립트 시작: ' + new Date().toLocaleTimeString());
+const CATEGORIES = [
+  { id: 3, name: "제품 추천" },
+  { id: 2, name: "영상 후기" },
+  { id: 1, name: "병원 후기" },
+  { id: 4, name: "홍보" }
+];
 
-window.addEventListener('load', function() {
-    console.log('window load 이벤트 발생: ' + new Date().toLocaleTimeString());
+window.addEventListener("load", function() {
     var allElements = document.getElementsByTagName('*');
     Array.prototype.forEach.call(allElements, function(el) {
         var includePath = el.dataset.includePath;
@@ -28,12 +25,9 @@ window.addEventListener('load', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOMContentLoaded 이벤트 발생: ' + new Date().toLocaleTimeString());
-    setupPagination();
-    loadPosts();
-    setupEventListeners();
-    getUserInfo();
     updateCategoryTitle();
+    checkLoginStatus();
+    setupEventListeners();
 });
 
 function updateCategoryTitle() {
@@ -47,20 +41,46 @@ function updateCategoryTitle() {
     }
 }
 
-function setupEventListeners() {
-    console.log('setupEventListeners 실행: ' + new Date().toLocaleTimeString());
-    const writeButton = document.querySelector('.post_button') || document.querySelector('button:contains("글쓰기")');
-    if (writeButton) {
-        writeButton.addEventListener('click', redirectToPostingPage);
+function checkLoginStatus() {
+    const token = getToken();
+    if (token) {
+        getUserInfo();
+        loadPosts();
     } else {
-        console.log('글쓰기 버튼을 찾을 수 없습니다.');
+        displayLoginMessage();
     }
 }
 
+function displayLoginMessage() {
+    const messageDiv = document.createElement('div');
+    messageDiv.textContent = '게시글을 보려면 로그인이 필요합니다.';
+    messageDiv.style.textAlign = 'center';
+    messageDiv.style.marginTop = '20px';
+
+    const loginButton = document.createElement('button');
+    loginButton.textContent = '로그인';
+    loginButton.onclick = function() {
+        window.location.href = '../../components/login.html';
+    };
+    messageDiv.appendChild(document.createElement('br'));
+    messageDiv.appendChild(loginButton);
+
+    const mainContent = document.querySelector('main') || document.body;
+    mainContent.innerHTML = '';
+    mainContent.appendChild(messageDiv);
+}
+
 async function loadPosts() {
-    console.log('loadPosts 시작: ' + new Date().toLocaleTimeString());
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryId = urlParams.get('id');
+    
+    if (!categoryId) {
+        console.error('카테고리 ID가 없습니다.');
+        return;
+    }
+
     try {
-        const response = await fetch(`${API_BASE_URL}/post/?page=${currentPage}&page_size=${POSTS_PER_PAGE}`, {
+        const response = await fetch(`${API_BASE_URL}/post/${categoryId}/`, {
             headers: {
                 'Authorization': `Bearer ${getToken()}`
             }
@@ -69,29 +89,12 @@ async function loadPosts() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log('서버에서 받은 데이터:', data);
 
-        totalPosts = data.total_count;
-        totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
-
-        displayPosts(data.posts);
-        setupPagination();
-        updatePaginationButtons();
-        console.log('loadPosts 완료: ' + new Date().toLocaleTimeString());
+        displayPosts(data);
     } catch (error) {
         console.error('게시글 로드 중 오류 발생:', error);
         displayErrorMessage('게시글을 불러오는 데 실패했습니다. 나중에 다시 시도해 주세요.');
-    }
-}
-
-function displayErrorMessage(message) {
-    const errorDiv = document.createElement('div');
-    errorDiv.textContent = message;
-    errorDiv.style.color = 'red';
-    const postTable = document.querySelector('.post_table');
-    if (postTable) {
-        postTable.before(errorDiv);
-    } else {
-        document.body.prepend(errorDiv);
     }
 }
 
@@ -103,7 +106,7 @@ function displayPosts(posts) {
     }
     tableBody.innerHTML = '';
 
-    if (posts.length === 0) {
+    if (!posts || posts.length === 0) {
         const row = tableBody.insertRow();
         row.innerHTML = '<td colspan="5">게시글이 없습니다.</td>';
         return;
@@ -114,79 +117,30 @@ function displayPosts(posts) {
         row.innerHTML = `
             <td>${post.id}</td>
             <td>${post.title}</td>
-            <td>${post.user.username}</td>
+            <td>${post.user_name || 'Unknown'}</td>
             <td>${new Date(post.created_at).toLocaleString()}</td>
-            <td>${post.postlikes_num}</td>
+            <td>${post.num || 0}</td>
         `;
     });
 }
 
-function setupPagination() {
-    console.log('setupPagination 실행: ' + new Date().toLocaleTimeString());
-    const paginationElement = document.querySelector('.pagination');
-    if (!paginationElement) {
-        console.error('pagination 요소를 찾을 수 없습니다.');
-        return;
+
+
+function setupEventListeners() {
+    const writeButton = document.querySelector('.post_button') || document.querySelector('button:contains("글쓰기")');
+    if (writeButton) {
+        writeButton.addEventListener('click', redirectToPostingPage);
+    } else {
+        console.log('글쓰기 버튼을 찾을 수 없습니다.');
     }
-    paginationElement.innerHTML = '';
-
-    const prevButton = document.createElement('button');
-    prevButton.innerText = '이전';
-    prevButton.addEventListener('click', () => {
-        if (currentPageGroup > 1) {
-            currentPageGroup--;
-            currentPage = (currentPageGroup - 1) * PAGES_PER_GROUP + 1;
-            loadPosts();
-        }
-    });
-    paginationElement.appendChild(prevButton);
-
-    const startPage = (currentPageGroup - 1) * PAGES_PER_GROUP + 1;
-    const endPage = Math.min(startPage + PAGES_PER_GROUP - 1, totalPages);
-
-    for (let i = startPage; i <= endPage; i++) {
-        const button = document.createElement('button');
-        button.innerText = i;
-        button.classList.toggle('active', i === currentPage);
-        button.addEventListener('click', () => {
-            currentPage = i;
-            loadPosts();
-        });
-        paginationElement.appendChild(button);
-    }
-
-    const nextButton = document.createElement('button');
-    nextButton.innerText = '다음';
-    nextButton.addEventListener('click', () => {
-        if (currentPageGroup * PAGES_PER_GROUP < totalPages) {
-            currentPageGroup++;
-            currentPage = (currentPageGroup - 1) * PAGES_PER_GROUP + 1;
-            loadPosts();
-        }
-    });
-    paginationElement.appendChild(nextButton);
-}
-
-function updatePaginationButtons() {
-    const buttons = document.querySelectorAll('.pagination button');
-    const startPage = (currentPageGroup - 1) * PAGES_PER_GROUP + 1;
-
-    buttons.forEach((button, index) => {
-        if (index === 0) {
-            button.disabled = currentPageGroup === 1;
-        } else if (index === buttons.length - 1) {
-            button.disabled = currentPageGroup * PAGES_PER_GROUP >= totalPages;
-        } else {
-            const pageNum = startPage + index - 1;
-            button.innerText = pageNum;
-            button.classList.toggle('active', pageNum === currentPage);
-        }
-    });
 }
 
 function redirectToPostingPage() {
-    console.log('redirectToPostingPage 실행: ' + new Date().toLocaleTimeString());
     window.location.href = 'posting.html';
+}
+
+function getToken() {
+    return getCookie("accessToken");
 }
 
 function getCookie(name) {
@@ -195,18 +149,11 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
-function getToken() {
-    const token = getCookie("accessToken");
-    console.log('Current token:', token);
-    return token || null;
-}
-
 function getUserInfo() {
-    console.log('getUserInfo 시작: ' + new Date().toLocaleTimeString());
     const token = getToken();
     if (!token) {
         console.error('토큰이 없습니다.');
-        displayErrorMessage('로그인이 필요합니다.');
+        displayLoginMessage();
         return;
     }
     fetch(`${API_BASE_URL}/users/user/`, {
@@ -238,4 +185,16 @@ function getUserInfo() {
         console.error("사용자 정보 가져오기 오류", error);
         displayErrorMessage(error.message);
     });
+}
+
+function displayErrorMessage(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.textContent = message;
+    errorDiv.style.color = 'red';
+    const postTable = document.querySelector('.post_table');
+    if (postTable) {
+        postTable.before(errorDiv);
+    } else {
+        document.body.prepend(errorDiv);
+    }
 }

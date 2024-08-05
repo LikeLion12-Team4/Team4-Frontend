@@ -293,7 +293,7 @@ window.addEventListener("load", function () {
     })
       .then((response) => response.json())
       .then((result) => {
-        const name = result.username;
+        const name = result.fullname;
         document.querySelector(".user_name").innerText = name;
         console.log(name);
       })
