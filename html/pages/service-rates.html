@@ -51,4 +51,22 @@
 <script src="https://kit.fontawesome.com/817f949e69.js" 
 crossorigin="anonymous"></script>
 <script src="../../js/pages/header.js"></script>
+<script>
+    window.addEventListener("load", function () {
+  var allElements = document.getElementsByTagName("*");
+  Array.prototype.forEach.call(allElements, function (el) {
+    var includePath = el.dataset.includePath;
+    if (includePath) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          el.outerHTML = this.responseText;
+        }
+      };
+      xhttp.open("GET", includePath, true);
+      xhttp.send();
+    }
+  });
+});
+</script>
 </html>

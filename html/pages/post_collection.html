@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>병원후기</title>
+    <link rel="stylesheet" href="../../css/pages/post_collection.css">
+</head>
+<body>
+    <header data-include-path="../../html/components/header.html"></header>
+
+    <main>
+        <h2 id="category_title">병원후기</h2>
+        <hr>
+        <table class="post_table">
+            <thead>
+                <tr>
+                    <th>글번호</th>
+                    <th>글제목</th>
+                    <th>아이디</th>
+                    <th>작성시간</th>
+                    <th>좋아요 수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 요기에 게시글이 동적으로 추가됨 -->
+            </tbody>
+        </table>
+        <div class="bottom_container">
+            <div class="pagination">
+                <!-- 여기에 페이지 넘기는 버튼 생성됨 -->
+            </div>
+            <button class="post_button" onclick="redirectToPostingPage()">글쓰기</button>
+        </div>
+    </main>
+    <script src="../../js/pages/post_collection.js"></script>
+</body>
+</html>
