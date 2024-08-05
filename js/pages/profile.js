@@ -1,5 +1,3 @@
-// const getToken() = window.APP_CONFIG.getToken();
-
 let API_BASE_URL = "https://stand-up.store";
 
 function getCookie(name) {
@@ -34,7 +32,6 @@ function checkAndFetch(url, options) {
   return fetch(url, options);
 }
 
-// include.js
 window.addEventListener("load", function () {
   var allElements = document.getElementsByTagName("*");
   Array.prototype.forEach.call(allElements, function (el) {
@@ -52,7 +49,6 @@ window.addEventListener("load", function () {
   });
 });
 
-// 사용자 정보를 가져오는 함수
 function fetchUserInfo() {
   var requestOptions = {
     method: "GET",
@@ -62,16 +58,14 @@ function fetchUserInfo() {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.90.114:8000/users/user/", requestOptions)
+  checkAndFetch(`${API_BASE_URL}/users/user/`, requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      // 닉네임 업데이트
       const nicknameElements = document.querySelectorAll(".nickname");
       nicknameElements.forEach((element) => {
         element.textContent = result.username;
       });
 
-      // 아이디 업데이트
       const idElement = document.querySelector(
         ".profileMenu:nth-child(2) .profileMenuValue"
       );
@@ -79,7 +73,6 @@ function fetchUserInfo() {
         idElement.textContent = result.username;
       }
 
-      // 이름 업데이트
       const nameElement = document.querySelector(
         ".profileMenu:nth-child(4) .profileMenuValue"
       );
@@ -87,7 +80,6 @@ function fetchUserInfo() {
         nameElement.textContent = result.fullname;
       }
 
-      // 이메일 업데이트
       const emailElement = document.querySelector(
         ".profileMenu:nth-child(5) .profileMenuValue"
       );
@@ -98,7 +90,6 @@ function fetchUserInfo() {
     .catch((error) => console.log("error", error));
 }
 
-// 모달 관련 변수
 const changeIdModal = document.querySelector(".change-id-modal_container");
 const changePwModal = document.querySelector(".change-pw-modal_container");
 const changeIdBtn = document.querySelector(
@@ -112,17 +103,14 @@ const closePwModalBtn = document.querySelector(".change-pw-modal_close-btn");
 const saveIdBtn = document.querySelector(".change-id-modal_next");
 const savePwBtn = document.querySelector(".change-pw-modal_next");
 
-// 아이디 변경 모달 열기
 changeIdBtn.addEventListener("click", () => {
   changeIdModal.style.display = "flex";
 });
 
-// 비밀번호 변경 모달 열기
 changePwBtn.addEventListener("click", () => {
   changePwModal.style.display = "flex";
 });
 
-// 모달 닫기
 closeIdModalBtn.addEventListener("click", () => {
   changeIdModal.style.display = "none";
 });
@@ -131,7 +119,6 @@ closePwModalBtn.addEventListener("click", () => {
   changePwModal.style.display = "none";
 });
 
-// 아이디 변경 저장
 saveIdBtn.addEventListener("click", () => {
   const newId = document.getElementById("sign-up_id").value;
   if (validateId(newId)) {
@@ -141,13 +128,11 @@ saveIdBtn.addEventListener("click", () => {
   }
 });
 
-// 아이디 유효성 검사
 function validateId(id) {
   const idRegex = /^[a-zA-Z0-9]{4,12}$/;
   return idRegex.test(id);
 }
 
-// 아이디 업데이트 API 호출
 function updateUserId(newId) {
   var formdata = new FormData();
   formdata.append("username", newId);
@@ -171,7 +156,7 @@ function updateUserId(newId) {
       console.log("아이디가 성공적으로 변경되었습니다:", result);
       changeIdModal.style.display = "none";
       alert("아이디가 성공적으로 변경되었습니다.");
-      fetchUserInfo(); // 사용자 정보 새로고침
+      fetchUserInfo();
     })
     .catch((error) => {
       console.log("error", error);
@@ -179,7 +164,6 @@ function updateUserId(newId) {
     });
 }
 
-// 비밀번호 변경 저장
 savePwBtn.addEventListener("click", () => {
   const newPw = document.getElementById("new-pw").value;
   const checkNewPw = document.getElementById("check_new-pw").value;
@@ -196,14 +180,11 @@ savePwBtn.addEventListener("click", () => {
   }
 });
 
-// 비밀번호 유효성 검사
 function validatePassword(password, confirmPassword) {
-  // 8자 이상, 15자 이하, 영문, 숫자, 특수문자 중 2가지 이상 조합
   const pwRegex = /^(?=.*[A-Za-z])(?=.*[\d@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,15}$/;
   return pwRegex.test(password) && password === confirmPassword;
 }
 
-// 비밀번호 업데이트 API 호출
 function updateUserPassword(newPassword, confirmPassword) {
   var formdata = new FormData();
   formdata.append("password", newPassword);
@@ -228,7 +209,6 @@ function updateUserPassword(newPassword, confirmPassword) {
       console.log("비밀번호가 성공적으로 변경되었습니다:", result);
       changePwModal.style.display = "none";
       alert("비밀번호가 성공적으로 변경되었습니다.");
-      // 비밀번호 입력 필드 초기화
       document.getElementById("new-pw").value = "";
       document.getElementById("check_new-pw").value = "";
     })
@@ -238,14 +218,10 @@ function updateUserPassword(newPassword, confirmPassword) {
     });
 }
 
-// 페이지 로드 시 사용자 정보 가져오기
 document.addEventListener("DOMContentLoaded", function () {
   fetchUserInfo();
 });
 
-// 회원 탈퇴 로직 구현
-
-// 회원 탈퇴 관련 변수
 const deleteAccountModal = document.querySelector(
   ".delete-account-modal_container"
 );
@@ -257,17 +233,14 @@ const confirmDeleteAccountBtn = document.querySelector(
   ".delete-account-modal_next"
 );
 
-// 회원 탈퇴 모달 열기
 deleteAccountBtn.addEventListener("click", () => {
   deleteAccountModal.style.display = "flex";
 });
 
-// 회원 탈퇴 모달 닫기
 closeDeleteAccountModalBtn.addEventListener("click", () => {
   deleteAccountModal.style.display = "none";
 });
 
-// 회원 탈퇴 처리
 confirmDeleteAccountBtn.addEventListener("click", () => {
   const currentPassword = document.getElementById("my-pw").value;
   if (currentPassword) {
@@ -277,7 +250,6 @@ confirmDeleteAccountBtn.addEventListener("click", () => {
   }
 });
 
-// 회원 탈퇴 API 호출
 function deleteAccount(password) {
   var requestOptions = {
     method: "DELETE",
@@ -291,7 +263,6 @@ function deleteAccount(password) {
   checkAndFetch(`${API_BASE_URL}/users/quit/`, requestOptions)
     .then((response) => {
       if (response.status === 204) {
-        // 성공적으로 삭제되었지만 내용이 없는 경우
         return { success: true, message: "회원 탈퇴가 완료되었습니다." };
       }
       if (!response.ok) {
@@ -305,23 +276,18 @@ function deleteAccount(password) {
         result.message ||
           "회원 탈퇴가 완료되었습니다. 이용해 주셔서 감사합니다."
       );
-      // 로그아웃 처리 (쿠키 삭제)
       document.cookie =
         "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      // 로그인 페이지로 리다이렉트
       window.location.href = "../../html/pages/login.html";
     })
     .catch((error) => {
       console.error("Error:", error);
       if (error.name === "SyntaxError") {
-        // JSON 파싱 오류가 발생했지만, 실제로는 작업이 성공했을 수 있음
         alert(
           "회원 탈퇴가 처리되었을 수 있습니다. 로그아웃 후 다시 로그인을 시도해주세요."
         );
-        // 로그아웃 처리 (쿠키 삭제)
         document.cookie =
           "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        // 로그인 페이지로 리다이렉트
         window.location.href = "../../html/pages/login.html";
       } else {
         alert("회원 탈퇴 처리 중 오류가 발생했습니다. 다시 시도해주세요.");
