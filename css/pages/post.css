@@ -167,6 +167,7 @@ hr {
 
 #row5 i {
   font-size: 20px;
+  cursor: pointer;
 }
 
 #writer_container {
@@ -205,7 +206,8 @@ hr {
   color: #6166f5;
 }
 
-#writer_pic {
+#writer_pic,
+.commentPic {
   background-image: url(../../assets/images/시승연.png);
   width: 45px;
   height: 45px;
@@ -216,18 +218,21 @@ hr {
   margin-right: 12px;
 }
 
-#writer_nickname {
+#writer_nickname,
+.commentWriter {
   font-size: 16px;
   font-weight: 600;
+  color: #6166f5;
 }
 
-#time_info {
+#time_info,
+.commentTime,
+.replyBtn {
   color: #a9a9a9;
   font-size: 14px;
 }
 
 #time_info #posted_time {
-  color: #6166f5;
 }
 
 #row1,
@@ -244,4 +249,41 @@ hr {
 
 #post_content {
   margin-bottom: 20px;
+}
+
+.commentContent {
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+}
+
+.comment .commentTime {
+}
+
+.replyBtn {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #7f7f7f;
+}
+
+.commentWriter {
+  margin-bottom: 3px;
+}
+
+#delete_and_edit_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#delete_and_edit_btn #delete_post {
+  margin: 0 10px 0 630px;
+  cursor: pointer;
+}
+
+#delete_and_edit_btn #edit_post {
+  cursor: pointer;
 }

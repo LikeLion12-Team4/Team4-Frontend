@@ -1,6 +1,6 @@
 // 로그인 정보 가져오기
 
-let API_SERVER_DOMAIN = "http://3.37.90.114:8000";
+let API_SERVER_DOMAIN = "https://stand-up-back.store";
 
 function getCookie(name) {
   var nameEQ = name + "=";
@@ -44,7 +44,7 @@ function fetchUserInfo() {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.90.114:8000/users/user/", requestOptions)
+  checkAndFetch("https://stand-up-back.store/users/user/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       // 닉네임 업데이트

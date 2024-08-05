@@ -28,7 +28,7 @@
           <div id="writer_nickname">아기사자</div>
           <div id="time_info">
             <div id="posted_day">2024-08-03</div>
-            <div id="posted_time">20:08</div>
+            <div id="posted_time">20:07</div>
           </div>
         </div>
       </div>
@@ -60,8 +60,43 @@
           댓글
           <div id="comment_count" style="margin-left: 4px">2</div>
         </div>
+        <div id="delete_and_edit_btn">
+          <div id="delete_post">삭제</div>
+          <div id="edit_post">수정</div>
+        </div>
       </div>
+      <!-- 여기에 닫는 태그 추가 -->
       <hr />
+
+      <div id="commentsContainer"></div>
+      <form id="commentForm">
+        <textarea
+          id="commentContent"
+          placeholder="댓글을 입력하세요"
+        ></textarea>
+        <button type="submit">댓글 작성</button>
+      </form>
+
+      <!--게시글 확인용, 추후 삭제 예정-->
+      <div class="post-lookup-form">
+        <h3>게시글 조회</h3>
+        <form id="postLookupForm">
+          <input
+            type="number"
+            id="forumIdInput"
+            placeholder="게시판 ID를 입력하세요"
+            required
+          />
+          <input
+            type="number"
+            id="postIdInput"
+            placeholder="게시글 ID를 입력하세요"
+            required
+          />
+          <button type="submit">조회</button>
+        </form>
+      </div>
+      <div id="postDetails" style="display: none"></div>
     </div>
 
     <script src="../../js/pages/post.js"></script>
