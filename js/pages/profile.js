@@ -1,6 +1,6 @@
 // const getToken() = window.APP_CONFIG.getToken();
 
-let API_BASE_URL = "https://stand-up-back.store";
+let API_BASE_URL = "https://stand-up.store";
 
 function getCookie(name) {
   var nameEQ = name + "=";
