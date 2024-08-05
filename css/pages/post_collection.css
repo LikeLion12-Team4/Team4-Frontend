@@ -1,0 +1,115 @@
+
+
+main {
+    background: linear-gradient(180deg, #ffffff 55%, #6166f527);
+    min-height: 100vh;
+    display: flex;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    margin: 20px 50px;
+    color: #6266ED;
+}
+
+hr {
+    margin: 15px 50px;
+    width: 90vw;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.post_table {
+    width: 90vw;
+    border-collapse: collapse;
+    margin: 0 50px;
+    table-layout: fixed;  /* 추가: 고정 테이블 레이아웃 사용 */
+}
+
+.post_table th,
+.post_table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;  /* 추가: 내용이 넘치면 숨김 */
+    text-overflow: ellipsis;  /* 추가: 넘치는 텍스트에 ... 표시 */
+    white-space: nowrap;  /* 추가: 텍스트 줄바꿈 방지 */
+    text-align: center;
+}
+
+/* 각 열의 너비 지정 */
+.post_table th:nth-child(1),
+.post_table td:nth-child(1) {
+    width: 10%;  /* 글번호 */
+}
+
+.post_table th:nth-child(2),
+.post_table td:nth-child(2) {
+    width: 40%;  /* 글제목 */
+}
+
+.post_table th:nth-child(3),
+.post_table td:nth-child(3) {
+    width: 15%;  /* 아이디 */
+}
+
+.post_table th:nth-child(4),
+.post_table td:nth-child(4) {
+    width: 25%;  /* 작성시간 */
+}
+
+.post_table th:nth-child(5),
+.post_table td:nth-child(5) {
+    width: 10%;  /* 좋아요 수 */
+}
+
+.post_table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+}
+
+.bottom_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 50px;
+    margin-top: auto;
+}
+
+.pagination {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.pagination button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+}
+
+.pagination button.active {
+    background-color: #6266ED;
+    color: #fff;
+    border-color: #6266ED;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.post_button {
+    padding: 10px 20px;
+    background-color: #6266ED;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
