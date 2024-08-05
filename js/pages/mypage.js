@@ -3,7 +3,7 @@
 
 // 로그인 정보 가져오기
 
-let API_SERVER_DOMAIN = "https://stand-up-back.store";
+let API_SERVER_DOMAIN = "https://stand-up-back.store/";
 
 function getCookie(name) {
   var nameEQ = name + "=";
@@ -83,18 +83,9 @@ function fetchAlarmSettings() {
   checkAndFetch("https://stand-up-back.store/alarms/option/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
-      if (result.is_option) {
-        document.getElementById("notification_toggle").checked =
-          result.is_alarm;
-        document.getElementById("sound_toggle").checked = result.is_volumn;
-        document.getElementById("notification_interval").value =
-          result.interval;
-      } else {
-        // 초기값 설정
-        document.getElementById("notification_toggle").checked = false;
-        document.getElementById("sound_toggle").checked = false;
-        document.getElementById("notification_interval").value = 10;
-      }
+      document.getElementById("notification_toggle").checked = result.is_alarm;
+      document.getElementById("sound_toggle").checked = result.is_volumn;
+      document.getElementById("notification_interval").value = result.interval;
     })
     .catch((error) => console.log("error", error));
 }
