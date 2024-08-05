@@ -1,4 +1,4 @@
-var stand_up = "";
+var stand_up="";
 function getCookie(name) {
   var nameEQ = name + "=";
   var cookies = document.cookie.split(";");
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const chatBox = document.querySelector(".chat-box");
   const inputChat = document.querySelector(".input-chat");
 
-  //chatbot
+  //chatbot 
   var Options = {
     method: "GET",
     headers: {
@@ -45,13 +45,15 @@ document.addEventListener("DOMContentLoaded", function () {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.90.114:8000/chatbot/", Options)
+  checkAndFetch("https://stand-up-back.store/chatbot/", Options)
     .then((response) => response.json())
     .then((result) => {
       console.log("불러오기 성공");
-      stand_up = result.find((item) => item.id === 1).value;
+      stand_up = result.find(item=>item.id===1).value;
     })
-    .catch((error) => alert("로그인이 필요한 서비스입니다."));
+    .catch((error) => alert("로그인이 필요한 서비스입니다.")
+    
+    );
   //사용자 데이터 불러오기
   var requestOptions = {
     method: "GET",
@@ -62,13 +64,13 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   var message = "";
   var name = "";
-  checkAndFetch("http://3.37.90.114:8000/posedata/", requestOptions)
+  checkAndFetch("https://stand-up-back.store/posedata/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       const right_num = result.right_num;
       const left_num = result.left_num;
       const turtle_num = result.turtle_num;
-      checkAndFetch("http://3.37.90.114:8000/users/user", requestOptions)
+      checkAndFetch("https://stand-up-back.store/users/user", requestOptions)
         .then((response) => response.json())
         .then((result) => {
           name = result.fullname;
@@ -110,8 +112,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           //자세데이터 없을때
-          if (right_num === null) {
-            message = `현재 저장된 ${name}님의 자세데이터가 없습니다. "현재 나의 자세보기" 페이지에서 실시간 자세 추적을 시작해보세요!`;
+          if(right_num===null){
+            message=`현재 저장된 ${name}님의 자세데이터가 없습니다. "현재 나의 자세보기" 페이지에서 실시간 자세 추적을 시작해보세요!`
           }
         });
     })
