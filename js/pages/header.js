@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
       redirect: "follow",
     };
 
-    fetch("https://stand-up-back.store//users/user/", requestOptions)
+    fetch("https://stand-up-back.store/users/user/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         name = result.username;
