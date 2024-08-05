@@ -75,7 +75,10 @@ header {
 #notification,
 #map,
 #video,
-#devTeam {
+#devTeam,
+#webcam,
+#aiChat,
+#community {
   padding: 20px 0 20px 0;
   margin: 10px 0 10px 0;
   font-size: 17px;
@@ -83,7 +86,9 @@ header {
 }
 
 #notification,
-#video {
+#webcam,
+#community,
+#devTeam {
   width: 100%;
   background-color: #ffffff;
 }
