@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
       redirect: "follow",
     };
 
-    fetch("http://3.37.90.114:8000/naver/login/finish/", requestOptions)
+    fetch("https://stand-up-back.store/naver/login/finish/", requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         return fetch(
-          "http://3.37.90.114:8000/naver/jwt/",
+          "https://stand-up-back.store/naver/jwt/",
           additionalRequestOptions
         );
       })
@@ -233,7 +233,7 @@ function refreshAccessToken() {
   var refreshToken = getCookie("refresh_token");
   if (refreshToken) {
     // 리프레시 토큰을 사용해 새로운 액세스 토큰을 받아옵니다.
-    fetch("http://3.37.90.114:8000/naver/login/finish/", {
+    fetch("https://stand-up-back.store/naver/login/finish/", {
       method: "POST",
       body: JSON.stringify({ refresh_token: refreshToken }),
       headers: {

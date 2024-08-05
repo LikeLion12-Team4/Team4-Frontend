@@ -45,14 +45,14 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   var message = "";
   var name = "";
-  checkAndFetch("http://3.37.90.114:8000/posedata/", requestOptions)
+  checkAndFetch("https://stand-up-back.store/posedata/", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       const right_num = result.right_num;
       console.log(right_num);
       const left_num = result.left_num;
       const turtle_num = result.turtle_num;
-      checkAndFetch("http://3.37.90.114:8000/users/user", requestOptions)
+      checkAndFetch("https://stand-up-back.store/users/user", requestOptions)
         .then((response) => response.json())
         .then((result) => {
           name = result.fullname;
@@ -221,7 +221,7 @@ async function fetchAIResponse(prompt) {
     redirect: "follow",
   };
 
-  checkAndFetch("http://3.37.90.114:8000/", requestOptions)
+  checkAndFetch("https://stand-up-back.store", requestOptions)
     .then((response) => response.json())
     .then((result) => {
       console.log("불러오기 성공", result);
