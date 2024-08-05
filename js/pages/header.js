@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("https://stand-up-back.store/users/user/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        name = result.username;
+        name = result.fullname;
         document.querySelector(".user_name").innerText = name;
         console.log(name);
       })
@@ -101,3 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // 로그아웃 버튼에 이벤트 리스너를 추가합니다.
   document.querySelector(".logout_btn").addEventListener("click", logout);
 });
+
+
+
+

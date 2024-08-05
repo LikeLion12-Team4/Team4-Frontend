@@ -1,4 +1,10 @@
 /* header css */
+
+@import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 body {
   margin: 0;
   padding: 30px 0 0 0;
@@ -24,7 +30,7 @@ header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #6266ed;
+  background-color: #6166F5;
   height: 50px;
   padding: 0px 20px;
 }
@@ -54,7 +60,7 @@ header {
 }
 
 .navbar_menu li {
-  margin: 0px 20px;
+  margin: 0px 15px;
   font-size: 14px;
   position: relative;
 }
@@ -121,9 +127,8 @@ header {
 }
 
 .login_btn {
-  color: #6266ed;
+  color: #6166F5;
   visibility: visible;
-  /* display: block; */
   padding: 0;
   margin-top: 10px;
   height: 50%;
@@ -134,12 +139,10 @@ header {
   padding: 0;
   margin-top: 10px;
   height: 50%;
-  /* display: none; */
 }
 
 .signup_btn {
   visibility: visible;
-  /* display: block; */
   padding: 0;
   margin-top: 10px;
   height: 50%;

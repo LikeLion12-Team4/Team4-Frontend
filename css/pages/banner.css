@@ -1,5 +1,10 @@
+@import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 .banner {
-    background-color: #6266ED;
+    background-color: #6166F5;
     display: flex;
     justify-content: center;
     align-items: center;

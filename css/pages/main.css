@@ -1,9 +1,11 @@
-
+@import url('//fonts.googleapis.com/earlyaccess/notosanskr.css');
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
 
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -27,7 +29,7 @@ body {
 .last_category p {
     padding: 20px;
     margin-bottom: 0;
-    color: #6266ED;
+    color: #6166F5;
     font-weight: bold;
 }
 
@@ -134,7 +136,7 @@ body {
 }
 
 .video_card .fa-heart:active{
-    color: #6266ED;
+    color: #6166F5;
 }
 
 .silde {
