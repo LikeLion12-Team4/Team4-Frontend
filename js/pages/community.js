@@ -1,17 +1,17 @@
 const API_BASE_URL = 'https://stand-up-back.store';
 
 const CATEGORIES = [
-  { id: 3, name: "제품 추천" },
-  { id: 2, name: "영상 후기" },
-  { id: 1, name: "병원 후기" },
-  { id: 4, name: "홍보" }
+  { id: 3, name: "제품 추천 게시판" },
+  { id: 2, name: "영상 후기 게시판" },
+  { id: 1, name: "병원 후기 게시판" },
+  { id: 4, name: "홍보 게시판" }
 ];
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("DOMContentLoaded event fired");
   loadHeaders();
-  loadCategoryPosts();
   setupMoreButtons();
+  loadAllCategoryPosts();
 });
 
 function loadHeaders() {
@@ -34,99 +34,112 @@ function loadHeaders() {
 }
 
 function setupMoreButtons() {
-  console.log("Setting up more buttons");
-  const moreButtons = document.querySelectorAll('.post_category_header .more_btn');
-  moreButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const category = this.dataset.category;
-      const categoryObj = CATEGORIES.find(c => c.name === category);
-      if (categoryObj) {
-        window.location.href = `post_collection.html?category=${encodeURIComponent(category)}&id=${categoryObj.id}`;
+  const moreButtons = document.querySelectorAll('.post_category_header');
+  moreButtons.forEach((header, index) => {
+    const moreButton = header.querySelector('button') || document.createElement('button');
+    moreButton.textContent = '더보기 +';
+    moreButton.addEventListener('click', () => {
+      const categoryId = CATEGORIES[index].id;
+      window.location.href = `post_collection.html?category=${encodeURIComponent(CATEGORIES[index].name)}&id=${categoryId}`;
+    });
+    if (!header.querySelector('button')) {
+      header.appendChild(moreButton);
+    }
+  });
+}
+
+function loadAllCategoryPosts() {
+  CATEGORIES.forEach(category => {
+    loadPostsForCategory(category.id);
+  });
+}
+
+
+async function loadPostsForCategory(categoryId) {
+  console.log(`Loading posts for category ID: ${categoryId}`);
+  try {
+    const response = await fetch(`${API_BASE_URL}/forums/${categoryId}/`, {
+      headers: {
+        'Authorization': `Bearer ${getToken()}`
       }
     });
-  });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(`Received data for category ${categoryId}:`, data);
+    
+    // 여기서 실제 게시글 데이터를 가져오는 추가 요청을 보냅니다.
+    const postsResponse = await fetch(`${API_BASE_URL}/post/${categoryId}/`, {
+      headers: {
+        'Authorization': `Bearer ${getToken()}`
+      }
+    });
+
+    if (!postsResponse.ok) {
+      throw new Error(`HTTP error! status: ${postsResponse.status}`);
+    }
+
+    const postsData = await postsResponse.json();
+    console.log(`Received posts for category ${categoryId}:`, postsData);
+    
+    displayPosts(categoryId, postsData);
+  } catch (error) {
+    console.error(`Error fetching posts for category ${categoryId}:`, error);
+    displayErrorMessage(categoryId, '게시글을 불러오는데 실패했습니다.');
+  }
 }
 
-function loadCategoryPosts() {
-  console.log("Loading category posts");
-  CATEGORIES.forEach(category => {
-    console.log(`Fetching posts for category: ${category.name}`);
-    fetch(`${API_BASE_URL}/forums/${category.id}/`)  // 헤더 부분 제거
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(`Received data for ${category.name}:`, data);
-        displayCategoryPosts(category.name, data);
-      })
-      .catch(error => {
-        console.error('Error fetching posts for category:', category.name, error);
-        displayErrorMessage(category.name, error.message);
-      });
-  });
-}
-
-function displayCategoryPosts(categoryName, data) {
-  console.log(`Displaying posts for category: ${categoryName}`);
+function displayPosts(categoryId, posts) {
+  console.log(`Displaying posts for category ${categoryId}`);
   
-  // categoryName을 가지고 있는 <p> 요소를 찾기
-  const categoryHeader = Array.from(document.querySelectorAll('.post_category_header p'))
-    .find(header => header.textContent.trim() === categoryName);
+  const category = CATEGORIES.find(c => c.id === categoryId);
+  const postContainer = document.querySelector(`.post_category:nth-child(${CATEGORIES.indexOf(category) + 1}) .category_post_contents`);
   
-  if (!categoryHeader) {
-    console.error(`Category header element not found for: ${categoryName}`);
+  if (!postContainer) {
+    console.error(`Post container for category ${categoryId} not found`);
     return;
   }
 
-  // 가장 가까운 .post_category 요소를 찾고 그 안의 .category_post_contents 요소를 찾음
-  const categoryContent = categoryHeader.closest('.post_category').querySelector('.category_post_contents');
+  postContainer.innerHTML = ''; // 기존 내용을 지움
 
-  if (!categoryContent) {
-    console.error(`Category content element not found for: ${categoryName}`);
-    return;
-  }
-
-  categoryContent.innerHTML = ''; // 기존 내용을 지움
-
-  if (!data || !data.results || data.results.length === 0) {
-    categoryContent.innerHTML = '<p>이 카테고리에 게시글이 없습니다.</p>';
+  if (!posts || posts.length === 0) {
+    postContainer.innerHTML = '<p>이 카테고리에 게시글이 없습니다.</p>';
     return;
   }
 
   const postList = document.createElement('ul');
   postList.className = 'post-list';
 
-  data.results.slice(0, 5).forEach(post => {
+  posts.slice(0, 5).forEach(post => {
     const listItem = document.createElement('li');
     listItem.className = 'post-item';
+    
+    const createdAt = new Date(post.created_at);
+    const formattedDate = `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')} ${createdAt.getHours().toString().padStart(2, '0')}:${createdAt.getMinutes().toString().padStart(2, '0')}`;
+
     listItem.innerHTML = `
       <a href="/post_detail.html?id=${post.id}" class="post-link">
-        ${post.title}
+        <span class="post-title">${post.title}</span>
+        <span class="post-author">${post.user.username}</span>
+        <span class="post-date">${formattedDate}</span>
       </a>
     `;
     postList.appendChild(listItem);
   });
 
-  categoryContent.appendChild(postList);
-  console.log(`Posts displayed for category: ${categoryName}`);
+  postContainer.appendChild(postList);
+  console.log(`Posts displayed for category ${categoryId}`);
 }
 
-function displayErrorMessage(categoryName, message) {
-  const categoryHeader = Array.from(document.querySelectorAll('.post_category_header p'))
-    .find(header => header.textContent.trim() === categoryName);
+function displayErrorMessage(categoryId, message) {
+  const category = CATEGORIES.find(c => c.id === categoryId);
+  const postContainer = document.querySelector(`.post_category:nth-child(${CATEGORIES.indexOf(category) + 1}) .category_post_contents`);
   
-  if (!categoryHeader) {
-    console.error(`Category header element not found for: ${categoryName}`);
-    return;
-  }
-
-  const categoryContent = categoryHeader.closest('.post_category').querySelector('.category_post_contents');
-
-  if (categoryContent) {
-    categoryContent.innerHTML = `<p>Error loading posts: ${message}</p>`;
+  if (postContainer) {
+    postContainer.innerHTML = `<p>Error: ${message}</p>`;
   }
 }
 
@@ -139,4 +152,6 @@ function getCookie(name) {
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(";").shift();
 }
+
+
 

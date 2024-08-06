@@ -114,11 +114,22 @@ function displayPosts(posts) {
 
     posts.forEach(post => {
         const row = tableBody.insertRow();
+        const createdAt = new Date(post.created_at);
+        const formattedDate = `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')} ${createdAt.getHours().toString().padStart(2, '0')}:${createdAt.getMinutes().toString().padStart(2, '0')}`;
+        
+        // 작성자 이름을 가져오는 로직 수정
+        let authorName = 'Unknown';
+        if (post.user && post.user.username) {
+            authorName = post.user.username;
+        } else if (post.user_name) {
+            authorName = post.user_name;
+        }
+
         row.innerHTML = `
             <td>${post.id}</td>
-            <td>${post.title}</td>
-            <td>${post.user_name || 'Unknown'}</td>
-            <td>${new Date(post.created_at).toLocaleString()}</td>
+            <td><a href="/post_detail.html?id=${post.id}">${post.title}</a></td>
+            <td>${authorName}</td>
+            <td>${formattedDate}</td>
             <td>${post.num || 0}</td>
         `;
     });
