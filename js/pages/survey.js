@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
   var API_SERVER_DOMAIN = "https://stand-up-back.store/users/survey/";
 
-  var username = sessionStorage.getItem("username");
-  console.log(username);
+  var fullname = sessionStorage.getItem("fullname");
+  console.log(fullname);
 
-  var sent = username;
-  if (username) {
-    document.querySelector(".username").innerText = sent;
+  var sent = fullname;
+  if (fullname) {
+    document.querySelector(".fullname").innerText = sent;
   } else {
-    console.log("No username found in session storage.");
+    console.log("No fullname found in session storage.");
   }
 
   function getCookie(name) {
