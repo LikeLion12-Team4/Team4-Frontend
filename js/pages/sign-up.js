@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then((data) => {
         console.log(data);
-        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("fullname", fullname);
         alert("회원가입이 성공적으로 완료되었습니다!");
         setCookie("accessToken", data.token, 1);
         window.location.replace("survey.html");
