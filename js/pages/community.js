@@ -4,7 +4,8 @@ const CATEGORIES = [
   { id: 3, name: "제품 추천 게시판" },
   { id: 2, name: "영상 후기 게시판" },
   { id: 1, name: "병원 후기 게시판" },
-  { id: 4, name: "홍보 게시판" }
+  { id: 4, name: "홍보 게시판" },
+  { id: 5, name: "자유 게시판"}
 ];
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -121,11 +122,12 @@ function displayPosts(categoryId, posts) {
     const formattedDate = `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')} ${createdAt.getHours().toString().padStart(2, '0')}:${createdAt.getMinutes().toString().padStart(2, '0')}`;
 
     listItem.innerHTML = `
-      <a href="/post_detail.html?id=${post.id}" class="post-link">
+      <a href="post.html?id=${post.id}" class="post-link">
         <span class="post-title">${post.title}</span>
         <span class="post-author">${post.user.username}</span>
         <span class="post-date">${formattedDate}</span>
       </a>
+  
     `;
     postList.appendChild(listItem);
   });
