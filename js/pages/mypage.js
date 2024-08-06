@@ -114,7 +114,7 @@ function updateAlarmSettings() {
     body: JSON.stringify({
       interval: interval,
       is_alarm: isAlarm,
-      is_volumn: isVolumn,
+      is_volumn: false,
       is_option: true,
       fcm_token: FCM,
     }),
