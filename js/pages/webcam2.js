@@ -203,7 +203,10 @@ function onFaceMeshResults(results) {
       redirect: "follow",
     };
 
-    checkAndFetch("https://stand-up-back.store/pushlive/", requestOptions3)
+    checkAndFetch(
+      "https://stand-up-back.store/alarms/pushlive/",
+      requestOptions3
+    )
       .then((response) => response.json())
       .then((result) => {
         console.log("실시간 푸시알림:", result);
@@ -257,7 +260,10 @@ function onPoseResults(results) {
       redirect: "follow",
     };
 
-    checkAndFetch("https://stand-up-back.store/pushlive/", requestOptions3)
+    checkAndFetch(
+      "https://stand-up-back.store/alarms/pushlive/",
+      requestOptions3
+    )
       .then((response) => response.json())
       .then((result) => {
         console.log("실시간 푸시알림:", result);
@@ -283,7 +289,10 @@ function onPoseResults(results) {
       redirect: "follow",
     };
 
-    checkAndFetch("https://stand-up-back.store/pushlive/", requestOptions3)
+    checkAndFetch(
+      "https://stand-up-back.store/alarms/pushlive/",
+      requestOptions3
+    )
       .then((response) => response.json())
       .then((result) => {
         console.log("실시간 푸시알림:", result);
