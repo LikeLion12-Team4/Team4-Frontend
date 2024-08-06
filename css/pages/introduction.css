@@ -66,12 +66,12 @@ header {
   width: 40px;
   height: 40px;
   margin-right: 5px;
+  margin-top: 5px;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-#introduction,
 #notification,
 #map,
 #video,
@@ -85,10 +85,10 @@ header {
   line-height: 1.7;
 }
 
-#notification,
-#webcam,
-#community,
-#devTeam {
+#introduction,
+#map,
+#video,
+#aiChat {
   width: 100%;
   background-color: #ffffff;
 }
