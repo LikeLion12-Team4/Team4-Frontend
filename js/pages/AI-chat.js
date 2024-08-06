@@ -1,4 +1,4 @@
-var stand_up="";
+var stand_up = "";
 function getCookie(name) {
   var nameEQ = name + "=";
   var cookies = document.cookie.split(";");
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const chatBox = document.querySelector(".chat-box");
   const inputChat = document.querySelector(".input-chat");
 
-  //chatbot 
+  //chatbot
   var Options = {
     method: "GET",
     headers: {
@@ -49,11 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((result) => {
       console.log("불러오기 성공");
-      stand_up = result.find(item=>item.id===1).value;
+      stand_up = result.find((item) => item.id === 1).value;
     })
-    .catch((error) => alert("로그인이 필요한 서비스입니다.")
-    
-    );
+    .catch((error) => alert("로그인이 필요한 서비스입니다."));
   //사용자 데이터 불러오기
   var requestOptions = {
     method: "GET",
@@ -112,8 +110,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           //자세데이터 없을때
-          if(right_num===null){
-            message=`현재 저장된 ${name}님의 자세데이터가 없습니다. "현재 나의 자세보기" 페이지에서 실시간 자세 추적을 시작해보세요!`
+          if (right_num === null) {
+            message = `현재 저장된 ${name}님의 자세데이터가 없습니다. "현재 나의 자세보기" 페이지에서 실시간 자세 추적을 시작해보세요!`;
           }
         });
     })
@@ -171,16 +169,16 @@ document.addEventListener("DOMContentLoaded", function () {
       msg.includes("자세차렷 이용방법") | msg.includes("자세차렷이용방법") ||
       msg.includes("자세차렷 이용 방법")
     ) {
-      message = "어쩌구 저쩌구해서 사용하면 돼 ~~";
-      return addChat(message, "AI");
+      const message2 = "어쩌구 저쩌구해서 사용하면 돼 ~~";
+      return addChat(message2, "AI");
     }
     if (msg.includes("안녕")) {
-      message = `안녕하세요. ${name}님만의 AI자세코치입니다. 궁금한 점을 물어보세요!`;
-      return addChat(message, "AI");
+      const message2 = `안녕하세요. ${name}님만의 AI자세코치입니다. 궁금한 점을 물어보세요!`;
+      return addChat(message2, "AI");
     }
     if (msg.includes("감사") | msg.includes("고마워")) {
-      message = `아닙니다. ${name}님만의 AI자세코치이니 언제든 편하게 질문하세요!`;
-      return addChat(message, "AI");
+      const message = `아닙니다. ${name}님만의 AI자세코치이니 언제든 편하게 질문하세요!`;
+      return addChat(message2, "AI");
     }
 
     //ChatGPT API 사용할 경우
