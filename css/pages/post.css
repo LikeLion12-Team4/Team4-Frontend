@@ -258,9 +258,6 @@ hr {
   font-size: 15px;
 }
 
-.comment .commentTime {
-}
-
 .replyBtn {
   margin-left: 10px;
   cursor: pointer;
@@ -278,7 +275,7 @@ hr {
 }
 
 #delete_and_edit_btn #delete_post {
-  margin: 0 10px 0 630px;
+  margin: 0 10px 0 0px;
   cursor: pointer;
 }
 
@@ -316,4 +313,52 @@ hr {
 .commentContainer {
   margin-left: 7px;
   margin-bottom: 15px;
+}
+
+#post_image img {
+  width: 80%;
+}
+
+#interaction_row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px; /* 간격 조정 */
+}
+
+#row5,
+#row6 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#row5 {
+  margin-right: 13px;
+}
+
+#row5 i {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#delete_and_edit_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 10px; /* 간격 조정 */
+}
+
+#delete_and_edit_btn #delete_post {
+  margin: 0 10px 0 0px;
+  cursor: pointer;
+}
+
+#delete_and_edit_btn #edit_post {
+  cursor: pointer;
+}
+
+#likelike,
+#comcom {
+  width: 55px;
 }

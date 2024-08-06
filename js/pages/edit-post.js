@@ -116,14 +116,19 @@ window.addEventListener("load", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const token = getToken();
   if (!token) {
-    window.location.href = "../../html/pages/login.html"; // 로그인 페이지 URL로 리다이렉트
+    window.location.href = "../../html/pages/login.html";
     return;
   }
 
-  // fetchUserInfo 함수가 정의되어 있다고 가정
-  // fetchUserInfo();
+  currentPostId = getPostIdFromUrl();
+  if (!currentPostId) {
+    alert("게시글 ID를 찾을 수 없습니다.");
+    window.location.href = "../../html/pages/community.html";
+    return;
+  }
 
-  // 이미지 삽입부분
+  fetchPostDetails(currentPostId);
+
   const imageUploadInput = document.getElementById("imageUpload");
   const imagePreview = document.getElementById("imagePreview");
 
@@ -145,29 +150,52 @@ document.addEventListener("DOMContentLoaded", function () {
         reader.readAsDataURL(file);
       }
     });
-  } else {
-    console.error("이미지 업로드 요소를 찾을 수 없습니다.");
   }
 
-  // 게시글 등록 버튼 클릭 이벤트
-  const postingButton = document.querySelector(".postingButtonSubmit");
+  const postingButton = document.querySelector(".postingButton");
   if (postingButton) {
     postingButton.addEventListener("click", function (event) {
       event.preventDefault();
-      submitPost();
+      updatePost();
     });
-  } else {
-    console.error("게시글 등록 버튼을 찾을 수 없습니다.");
   }
 });
 
-function submitPost() {
-  const title = document.querySelector(".postingTitleInput").value;
-  const content = document.querySelector(".postingContentInput").value;
+function getPostIdFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("id");
+}
+
+function fetchPostDetails(postId) {
+  checkAndFetch(`${API_SERVER_DOMAIN}/post/get/${postId}/`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((post) => {
+      fillPostForm(post);
+    })
+    .catch((error) => {
+      console.error("게시글 정보 가져오기 실패:", error);
+      alert("게시글 정보를 가져오는데 실패했습니다.");
+    });
+}
+
+function fillPostForm(post) {
+  document.querySelector(".categorySelect").value = post.forum.id;
+  document.querySelector(".postingTitle").value = post.title;
+  document.querySelector(".postingContent").value = post.content;
+
+  if (post.image) {
+    const imagePreview = document.getElementById("imagePreview");
+    imagePreview.innerHTML = `<img src="${post.image}" alt="현재 이미지"><p>현재 이미지</p>`;
+  }
+}
+
+function updatePost() {
+  const title = document.querySelector(".postingTitle").value;
+  const content = document.querySelector(".postingContent").value;
   const categorySelect = document.querySelector(".categorySelect");
   const categoryId = categorySelect.value;
-  const categoryName =
-    categorySelect.options[categorySelect.selectedIndex].text;
   const imageFile = document.getElementById("imageUpload").files[0];
 
   if (!title || !content || !categoryId) {
@@ -183,29 +211,18 @@ function submitPost() {
     formData.append("image", imageFile);
   }
 
-  const API_URL = `${API_SERVER_DOMAIN}/post/${categoryId}/`;
-
-  checkAndFetch(API_URL, {
-    method: "POST",
+  checkAndFetch(`${API_SERVER_DOMAIN}/post/retrieve/${currentPostId}/`, {
+    method: "PUT",
     body: formData,
   })
-    .then((response) => {
-      if (!response.ok) {
-        return response.text().then((text) => {
-          throw new Error(
-            `HTTP error! status: ${response.status}, body: ${text}`
-          );
-        });
-      }
-      return response.json();
-    })
+    .then((response) => response.json())
     .then((data) => {
-      console.log("게시글이 성공적으로 등록되었습니다:", data);
-      alert("게시글이 성공적으로 등록되었습니다.");
-      window.location.href = `../../html/pages/post.html?id=${data.id}`;
+      console.log("게시글이 성공적으로 수정되었습니다:", data);
+      alert("게시글이 성공적으로 수정되었습니다.");
+      window.location.href = `../../html/pages/post.html?id=${currentPostId}`;
     })
     .catch((error) => {
-      console.error("게시글 등록 중 오류 발생:", error);
-      alert(`게시글 등록 중 오류가 발생했습니다: ${error.message}`);
+      console.error("게시글 수정 중 오류 발생:", error);
+      alert(`게시글 수정 중 오류가 발생했습니다: ${error.message}`);
     });
 }

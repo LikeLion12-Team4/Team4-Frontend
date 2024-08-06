@@ -46,24 +46,26 @@ function checkAndFetch(url, options = {}) {
     return Promise.reject("No token found");
   }
 
-  // 기본 headers 설정
+  if (!(options.body instanceof FormData)) {
+    options.headers = {
+      ...options.headers,
+      "Content-Type": "application/json",
+    };
+  }
+
   options.headers = {
     ...options.headers,
     Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
   };
 
   return fetch(url, options).then((response) => {
     if (!response.ok) {
-      // 401 오류 시 로그인 페이지로 리다이렉트
-      if (response.status === 401) {
-        window.location.href = "../../html/pages/login.html";
-      }
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     return response;
   });
 }
+
 function fetchPostDetails(postId) {
   currentPostId = postId;
   return checkAndFetch(`${API_SERVER_DOMAIN}/post/get/${postId}/`, {
@@ -145,6 +147,19 @@ function displayPostDetails(post) {
         );
     }
 
+    // 이미지 표시
+    const postImageContainer = document.querySelector("#post_image");
+    if (postImageContainer && post.image) {
+      console.log("Original Image URL:", post.image);
+      const img = document.createElement("img");
+      img.src = post.image.startsWith("http")
+        ? post.image
+        : `${API_SERVER_DOMAIN}${post.image}`;
+      console.log("Full Image URL:", img.src);
+      img.alt = "게시글 이미지";
+      postImageContainer.appendChild(img);
+    }
+
     // 수정/삭제 버튼 컨테이너 스타일 조정
     const deleteAndEditBtn = document.querySelector("#delete_and_edit_btn");
     if (deleteAndEditBtn) {
@@ -153,6 +168,14 @@ function displayPostDetails(post) {
     }
   } catch (error) {
     console.error("Error displaying post details:", error);
+  }
+
+  // 수정 버튼 처리
+  const editButton = document.querySelector("#edit_post");
+  if (editButton) {
+    editButton.onclick = () => {
+      window.location.href = `../../html/pages/edit-post.html?id=${post.id}`;
+    };
   }
 }
 
@@ -236,13 +259,13 @@ function createCommentElement(comment) {
 
 function deletePost(postId) {
   if (confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
-    return checkAndFetch(`${API_SERVER_DOMAIN}/post/${postId}/`, {
+    return checkAndFetch(`${API_SERVER_DOMAIN}/post/retrieve/${postId}/`, {
       method: "DELETE",
     })
       .then((response) => {
         if (response.ok) {
           alert("게시글이 성공적으로 삭제되었습니다.");
-          window.location.href = "../../html/pages/community.html"; // 게시글 목록 페이지 URL로 변경
+          window.location.href = "../../html/pages/community.html";
         } else {
           throw new Error("게시글 삭제에 실패했습니다.");
         }
