@@ -107,30 +107,29 @@ function onFaceMeshResults(results) {
     Math.pow((chinLandmark.x - shoulderMidpoint.x) * canvasElement.width, 2) +
       Math.pow((chinLandmark.y - shoulderMidpoint.y) * canvasElement.height, 2)
   );
-
-  var set_dis = 0;
-  setTimeout(function () {
-    var requestOptions = {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        distance: distance,
-      }),
-      redirect: "follow",
-    };
-
-    checkAndFetch("https://stand-up-back.store/posedata/", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("좋은 자세 추출 완료:", result);
-        set_dis = result.distance;
-      })
-      .catch((error) => console.log("error", error));
-  }, 7000);
   //좋은 자세 추출
+  // var set_dis = 0;
+  // setTimeout(function () {
+  //   var requestOptions = {
+  //     method: "PUT",
+  //     headers: {
+  //       Authorization: `Bearer ${getToken()}`,
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       distance: distance,
+  //     }),
+  //     redirect: "follow",
+  //   };
+
+  //   checkAndFetch("https://stand-up-back.store/posedata/", requestOptions)
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       console.log("좋은 자세 추출 완료:", result);
+  //       set_dis = result.distance;
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // }, 7000);
 
   canvasCtx.beginPath();
   canvasCtx.arc(
@@ -183,7 +182,7 @@ function onFaceMeshResults(results) {
   //   canvasCtx.restore();
   // }, 11000);
   //시간 지연 x
-  if (distance < set_dis - 15) {
+  if (distance < 70) {
     // canvasCtx.fillText(`거북목 자세입니다 !`, 10, 25);
     color = "#FF0000";
     $(".camera-container").css("border", "6px solid #FF0000");
@@ -211,7 +210,7 @@ function onFaceMeshResults(results) {
         // set_dis = result.distance;
       })
       .catch((error) => console.log("error", error));
-  } else if (distance >= set_dis) {
+  } else if (distance >= 70) {
     msg1.text("현재 좋은 자세입니다.");
     msg2.text("이렇게 계속 유지해주세요!");
     $(".camera-container").css("border", "6px solid rgb(81, 81, 224)");
@@ -246,6 +245,25 @@ function onPoseResults(results) {
     msg1.text("현재 나쁜 자세입니다.");
     msg2.text("자세를 바르게 해주세요.");
     $(".camera-container").css("border", "6px solid #FF0000");
+    var requestOptions3 = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   distance: distance,
+      // }),
+      redirect: "follow",
+    };
+
+    checkAndFetch("https://stand-up-back.store/pushlive/", requestOptions3)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("실시간 푸시알림:", result);
+        // set_dis = result.distance;
+      })
+      .catch((error) => console.log("error", error));
   } else if (rightShoulder.y - leftShoulder.y > 0.065) {
     // canvasCtx.fillText(`자세가 오른쪽으로 삐뚤어져 있습니다 !`, 10, 55);
     color = "#FFFF00";
@@ -253,6 +271,25 @@ function onPoseResults(results) {
     msg1.text("현재 나쁜 자세입니다.");
     msg2.text("자세를 바르게 해주세요.");
     $(".camera-container").css("border", "6px solid #FF0000");
+    var requestOptions3 = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   distance: distance,
+      // }),
+      redirect: "follow",
+    };
+
+    checkAndFetch("https://stand-up-back.store/pushlive/", requestOptions3)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("실시간 푸시알림:", result);
+        // set_dis = result.distance;
+      })
+      .catch((error) => console.log("error", error));
   } else {
     msg1.text("현재 좋은 자세입니다.");
     msg2.text("이렇게 계속 유지해주세요!");
