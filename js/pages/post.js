@@ -18,6 +18,7 @@ window.addEventListener("load", function () {
 
 let API_SERVER_DOMAIN = "https://stand-up-back.store";
 let isLiked = false;
+let currentPostId;
 
 function getCookie(name) {
   var nameEQ = name + "=";
@@ -38,21 +39,34 @@ function getToken() {
   return getCookie("accessToken") || null;
 }
 
-function checkAndFetch(url, options) {
+function checkAndFetch(url, options = {}) {
   const token = getToken();
   if (!token) {
     window.location.href = "../../html/pages/login.html";
     return Promise.reject("No token found");
   }
+
+  // 기본 headers 설정
   options.headers = {
     ...options.headers,
     Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   };
-  return fetch(url, options);
-}
 
-function fetchPostDetails(forumId, postId) {
-  return checkAndFetch(`${API_SERVER_DOMAIN}/post/${forumId}/`, {
+  return fetch(url, options).then((response) => {
+    if (!response.ok) {
+      // 401 오류 시 로그인 페이지로 리다이렉트
+      if (response.status === 401) {
+        window.location.href = "../../html/pages/login.html";
+      }
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response;
+  });
+}
+function fetchPostDetails(postId) {
+  currentPostId = postId;
+  return checkAndFetch(`${API_SERVER_DOMAIN}/post/get/${postId}/`, {
     method: "GET",
   })
     .then((response) => {
@@ -60,13 +74,6 @@ function fetchPostDetails(forumId, postId) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       return response.json();
-    })
-    .then((posts) => {
-      const post = posts.find((p) => p.id === parseInt(postId));
-      if (!post) {
-        throw new Error("게시글을 찾을 수 없습니다.");
-      }
-      return post;
     })
     .then((post) => {
       console.log("서버에서 받은 게시글 데이터:", post);
@@ -78,7 +85,7 @@ function fetchPostDetails(forumId, postId) {
     })
     .catch((error) => {
       console.error("게시글 상세 정보 가져오기 실패:", error);
-      alert("게시글을 찾을 수 없거나 오류가 발생했습니다. ID를 확인해주세요.");
+      alert("게시글을 찾을 수 없거나 오류가 발생했습니다.");
     });
 }
 
@@ -111,26 +118,38 @@ function displayPostDetails(post) {
     // 좋아요 버튼 설정
     const likeButton = document.querySelector("#row5 i");
     if (likeButton) {
-      isLiked = post.is_liked; // 서버에서 해당 사용자의 좋아요 여부를 반환한다고 가정
-      updateLikeButton();
-      likeButton.parentElement.onclick = () => toggleLike(post.id);
+      checkLikeStatus(post.id).then((liked) => {
+        isLiked = liked;
+        updateLikeButton();
+        likeButton.parentElement.onclick = () => toggleLike(post.id);
+      });
     }
 
     // 삭제 버튼 처리
     const deleteButton = document.querySelector("#delete_post");
-    if (deleteButton) {
+    const editButton = document.querySelector("#edit_post");
+    if (deleteButton && editButton) {
       getCurrentUserId()
         .then((currentUserId) => {
           if (post.user.id === currentUserId) {
             deleteButton.style.display = "inline-block";
-            deleteButton.onclick = () => deletePost(post.forum.id, post.id);
+            editButton.style.display = "inline-block";
+            deleteButton.onclick = () => deletePost(post.id);
           } else {
             deleteButton.style.display = "none";
+            editButton.style.display = "none";
           }
         })
         .catch((error) =>
           console.error("Error getting current user ID:", error)
         );
+    }
+
+    // 수정/삭제 버튼 컨테이너 스타일 조정
+    const deleteAndEditBtn = document.querySelector("#delete_and_edit_btn");
+    if (deleteAndEditBtn) {
+      deleteAndEditBtn.style.width = "100%";
+      deleteAndEditBtn.style.justifyContent = "flex-end";
     }
   } catch (error) {
     console.error("Error displaying post details:", error);
@@ -202,7 +221,6 @@ function createCommentElement(comment) {
   const commentDiv = document.createElement("div");
   commentDiv.className = "comment";
   commentDiv.innerHTML = `
-    <div class="commentPic"></div>
     <div class="commentContainer">
       <div class="commentWriter">${comment.user.username}</div>
       <div class="commentContent">${comment.content}</div>
@@ -216,15 +234,15 @@ function createCommentElement(comment) {
   return commentDiv;
 }
 
-function deletePost(forumId, postId) {
+function deletePost(postId) {
   if (confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
-    return checkAndFetch(`${API_SERVER_DOMAIN}/post/${forumId}/${postId}/`, {
+    return checkAndFetch(`${API_SERVER_DOMAIN}/post/${postId}/`, {
       method: "DELETE",
     })
       .then((response) => {
         if (response.ok) {
           alert("게시글이 성공적으로 삭제되었습니다.");
-          window.location.href = "게시글 목록 페이지 URL"; // 적절한 URL로 변경해주세요
+          window.location.href = "../../html/pages/community.html"; // 게시글 목록 페이지 URL로 변경
         } else {
           throw new Error("게시글 삭제에 실패했습니다.");
         }
@@ -239,19 +257,9 @@ function deletePost(forumId, postId) {
 function updateLikeButton() {
   const likeButton = document.querySelector("#row5 i");
   if (likeButton) {
-    if (isLiked) {
-      likeButton.className = "fa-solid fa-heart";
-    } else {
-      likeButton.className = "fa-regular fa-heart";
-    }
-  }
-}
-
-function toggleLike(postId) {
-  if (isLiked) {
-    unlikePost(postId);
-  } else {
-    likePost(postId);
+    likeButton.className = isLiked
+      ? "fa-solid fa-heart"
+      : "fa-regular fa-heart";
   }
 }
 
@@ -288,8 +296,11 @@ function unlikePost(postId) {
         isLiked = false;
         updateLikeButton();
         const likeCountElement = document.querySelector("#like_count");
-        likeCountElement.textContent =
-          parseInt(likeCountElement.textContent) - 1;
+        likeCountElement.textContent = Math.max(
+          0,
+          parseInt(likeCountElement.textContent) - 1
+        );
+        console.log("Successfully unliked post");
       } else {
         throw new Error("Failed to unlike post");
       }
@@ -300,18 +311,73 @@ function unlikePost(postId) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const postLookupForm = document.getElementById("postLookupForm");
-  if (postLookupForm) {
-    postLookupForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const forumId = document.getElementById("forumIdInput").value;
-      const postId = document.getElementById("postIdInput").value;
-      if (forumId && postId) {
-        fetchPostDetails(forumId, postId);
-      } else {
-        alert("게시판 ID와 게시글 ID를 모두 입력해주세요.");
-      }
+function checkLikeStatus(postId) {
+  return checkAndFetch(`${API_SERVER_DOMAIN}/postlike/get/`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((likes) => {
+      return likes.some((like) => like.post.id === parseInt(postId));
+    })
+    .catch((error) => {
+      console.error("Error checking like status:", error);
+      return false;
     });
+}
+
+function toggleLike(postId) {
+  const newLikeState = !isLiked;
+  if (newLikeState) {
+    likePost(postId);
+  } else {
+    unlikePost(postId);
+  }
+  isLiked = newLikeState;
+  updateLikeButton();
+}
+
+function getPostIdFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("id");
+}
+
+function submitComment(event) {
+  event.preventDefault(); // 폼 제출에 의한 페이지 새로고침 방지
+  const commentContent = document.querySelector("#commentContent").value;
+  if (!commentContent.trim()) {
+    alert("댓글 내용을 입력해주세요.");
+    return;
+  }
+
+  checkAndFetch(`${API_SERVER_DOMAIN}/comment/${currentPostId}/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ content: commentContent }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("댓글 작성 성공:", data);
+      document.querySelector("#commentContent").value = ""; // 입력 필드 초기화
+      fetchComments(currentPostId); // 댓글 목록 새로고침
+    })
+    .catch((error) => {
+      console.error("댓글 작성 실패:", error);
+      alert("댓글 작성 중 오류가 발생했습니다.");
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const postId = getPostIdFromUrl();
+  if (postId) {
+    currentPostId = postId;
+    fetchPostDetails(postId);
+
+    // 댓글 폼에 이벤트 리스너 추가
+    const commentForm = document.querySelector("#commentForm");
+    if (commentForm) {
+      commentForm.addEventListener("submit", submitComment);
+    }
   }
 });

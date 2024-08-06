@@ -1,4 +1,4 @@
-let API_BASE_URL = "https://stand-up.store";
+let API_BASE_URL = "https://stand-up-back.store";
 
 function getCookie(name) {
   var nameEQ = name + "=";
@@ -58,9 +58,22 @@ function fetchUserInfo() {
     redirect: "follow",
   };
 
+  console.log("Fetching user info from:", `${API_BASE_URL}/users/user/`);
+
   checkAndFetch(`${API_BASE_URL}/users/user/`, requestOptions)
-    .then((response) => response.json())
+    .then((response) => {
+      console.log("Response status:", response.status);
+      if (!response.ok) {
+        return response.text().then((text) => {
+          throw new Error(
+            `HTTP error! status: ${response.status}, body: ${text}`
+          );
+        });
+      }
+      return response.json();
+    })
     .then((result) => {
+      console.log("User info received:", result);
       const nicknameElements = document.querySelectorAll(".nickname");
       nicknameElements.forEach((element) => {
         element.textContent = result.fullname;
@@ -87,7 +100,12 @@ function fetchUserInfo() {
         emailElement.textContent = result.email;
       }
     })
-    .catch((error) => console.log("error", error));
+    .catch((error) => {
+      console.error("Error fetching user info:", error);
+      alert("사용자 정보를 가져오는데 실패했습니다. 다시 로그인해주세요.");
+      // 에러 처리 로직 (예: 로그인 페이지로 리다이렉트)
+      // window.location.href = "../../html/pages/login.html";
+    });
 }
 
 const changeIdModal = document.querySelector(".change-id-modal_container");
