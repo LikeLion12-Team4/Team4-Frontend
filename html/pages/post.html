@@ -23,7 +23,6 @@
         </div>
       </div>
       <div id="row3">
-        <div id="writer_pic"></div>
         <div id="writer_container">
           <div id="writer_nickname">아기사자</div>
           <div id="time_info">
@@ -74,29 +73,8 @@
           id="commentContent"
           placeholder="댓글을 입력하세요"
         ></textarea>
-        <button type="submit">댓글 작성</button>
+        <button type="submit">작성</button>
       </form>
-
-      <!--게시글 확인용, 추후 삭제 예정-->
-      <div class="post-lookup-form">
-        <h3>게시글 조회</h3>
-        <form id="postLookupForm">
-          <input
-            type="number"
-            id="forumIdInput"
-            placeholder="게시판 ID를 입력하세요"
-            required
-          />
-          <input
-            type="number"
-            id="postIdInput"
-            placeholder="게시글 ID를 입력하세요"
-            required
-          />
-          <button type="submit">조회</button>
-        </form>
-      </div>
-      <div id="postDetails" style="display: none"></div>
     </div>
 
     <script src="../../js/pages/post.js"></script>

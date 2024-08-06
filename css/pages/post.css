@@ -87,7 +87,7 @@ hr {
   padding: 25px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 10px 0 20px 0;
+  margin: 45px 0 20px 0;
 }
 
 /* 카테고리 선택 스타일 */
@@ -175,6 +175,7 @@ hr {
   flex-direction: column;
   height: 100%;
   justify-content: center;
+  margin-left: 8px;
 }
 
 #row3 {
@@ -248,10 +249,7 @@ hr {
 }
 
 #post_content {
-  margin-bottom: 20px;
-}
-
-.commentContent {
+  margin-bottom: 50px;
 }
 
 .comment {
@@ -286,4 +284,36 @@ hr {
 
 #delete_and_edit_btn #edit_post {
   cursor: pointer;
+}
+
+#commentForm {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#commentContent {
+  width: 92%;
+  height: 40px;
+  margin-right: 5px;
+  border-radius: 7px;
+  display: flex;
+  padding: 10px 0 0 10px;
+}
+
+#commentForm button {
+  height: 40px;
+  border-radius: 7px;
+  font-size: 14px;
+  border: none;
+  background-color: #6166f5;
+  color: white;
+  width: 50px;
+  cursor: pointer;
+}
+
+.commentContainer {
+  margin-left: 7px;
+  margin-bottom: 15px;
 }
