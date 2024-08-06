@@ -117,21 +117,22 @@ function displayPosts(posts) {
         const createdAt = new Date(post.created_at);
         const formattedDate = `${createdAt.getFullYear()}-${(createdAt.getMonth() + 1).toString().padStart(2, '0')}-${createdAt.getDate().toString().padStart(2, '0')} ${createdAt.getHours().toString().padStart(2, '0')}:${createdAt.getMinutes().toString().padStart(2, '0')}`;
         
-        let authorName = 'Unknown';
-        if (post.user && post.user.username) {
-            authorName = post.user.username;
-        } else if (post.user_name) {
-            authorName = post.user_name;
-        }
+        let authorName = post.user?.username || post.user_name || 'Unknown';
+
+        // postlikes_num을 사용하여 좋아요 수 표시
+        let likesCount = post.postlikes_num !== undefined ? post.postlikes_num : 0;
 
         row.innerHTML = `
             <td>${post.id}</td>
             <td><a href="post.html?id=${post.id}">${post.title}</a></td>
             <td>${authorName}</td>
             <td>${formattedDate}</td>
-            <td>${post.num || 0}</td>
+            <td>${likesCount}</td>
         `;
     });
+
+    // 디버깅을 위한 로그
+    console.log('First post data:', JSON.stringify(posts[0], null, 2));
 }
 
 
