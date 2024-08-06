@@ -4,6 +4,7 @@ const canvasCtx = canvasElement.getContext("2d");
 const cameraContainer = document.getElementsByClassName("camera");
 const msg1 = $("#alert-msg1");
 const msg2 = $("#alert-msg2");
+var i = 0;
 //쿠키 가져오기
 function getCookie(name) {
   var nameEQ = name + "=";
@@ -143,7 +144,32 @@ function onFaceMeshResults(results) {
   canvasCtx.fill();
   // canvasCtx.fillText(`Chin: (${chinLandmark.x.toFixed(2)}, ${chinLandmark.y.toFixed(2)})`, 10, 80);
   //canvasCtx.fillText(`Distance: (${distance})`, 10, 100);
+  if (i > 200) {
+    var requestOptions3 = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   distance: distance,
+      // }),
+      redirect: "follow",
+    };
 
+    checkAndFetch(
+      "https://stand-up-back.store/alarms/pushlive/",
+      requestOptions3
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("실시간 푸시알림:", result);
+        // set_dis = result.distance;
+      })
+      .catch((error) => console.log("error", error));
+
+    i = 0;
+  }
   // 자세 추출 전
   // setTimeout(function () {
   //   if (distance < 70) {
@@ -190,29 +216,7 @@ function onFaceMeshResults(results) {
     msg2.text("자세를 바르게 해주세요.");
     //1분당 약 1000씩 카운트 된다.
     turtle_num += 1;
-
-    var requestOptions3 = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-        "Content-Type": "application/json",
-      },
-      // body: JSON.stringify({
-      //   distance: distance,
-      // }),
-      redirect: "follow",
-    };
-
-    checkAndFetch(
-      "https://stand-up-back.store/alarms/pushlive/",
-      requestOptions3
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("실시간 푸시알림:", result);
-        // set_dis = result.distance;
-      })
-      .catch((error) => console.log("error", error));
+    i += 1;
   } else if (distance >= 70) {
     msg1.text("현재 좋은 자세입니다.");
     msg2.text("이렇게 계속 유지해주세요!");
@@ -248,28 +252,7 @@ function onPoseResults(results) {
     msg1.text("현재 나쁜 자세입니다.");
     msg2.text("자세를 바르게 해주세요.");
     $(".camera-container").css("border", "6px solid #FF0000");
-    var requestOptions3 = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-        "Content-Type": "application/json",
-      },
-      // body: JSON.stringify({
-      //   distance: distance,
-      // }),
-      redirect: "follow",
-    };
-
-    checkAndFetch(
-      "https://stand-up-back.store/alarms/pushlive/",
-      requestOptions3
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("실시간 푸시알림:", result);
-        // set_dis = result.distance;
-      })
-      .catch((error) => console.log("error", error));
+    i += 1;
   } else if (rightShoulder.y - leftShoulder.y > 0.065) {
     // canvasCtx.fillText(`자세가 오른쪽으로 삐뚤어져 있습니다 !`, 10, 55);
     color = "#FFFF00";
@@ -277,28 +260,7 @@ function onPoseResults(results) {
     msg1.text("현재 나쁜 자세입니다.");
     msg2.text("자세를 바르게 해주세요.");
     $(".camera-container").css("border", "6px solid #FF0000");
-    var requestOptions3 = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-        "Content-Type": "application/json",
-      },
-      // body: JSON.stringify({
-      //   distance: distance,
-      // }),
-      redirect: "follow",
-    };
-
-    checkAndFetch(
-      "https://stand-up-back.store/alarms/pushlive/",
-      requestOptions3
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        console.log("실시간 푸시알림:", result);
-        // set_dis = result.distance;
-      })
-      .catch((error) => console.log("error", error));
+    i += 1;
   } else {
     msg1.text("현재 좋은 자세입니다.");
     msg2.text("이렇게 계속 유지해주세요!");
