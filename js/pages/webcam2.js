@@ -145,6 +145,7 @@ function onFaceMeshResults(results) {
   // canvasCtx.fillText(`Chin: (${chinLandmark.x.toFixed(2)}, ${chinLandmark.y.toFixed(2)})`, 10, 80);
   //canvasCtx.fillText(`Distance: (${distance})`, 10, 100);
   if (i > 200) {
+    i = 0;
     var requestOptions3 = {
       method: "GET",
       headers: {
@@ -167,8 +168,6 @@ function onFaceMeshResults(results) {
         // set_dis = result.distance;
       })
       .catch((error) => console.log("error", error));
-
-    i = 0;
   }
   // 자세 추출 전
   // setTimeout(function () {
