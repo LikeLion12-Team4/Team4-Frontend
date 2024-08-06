@@ -1,72 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>요금제</title>
-    <link rel="stylesheet" href="../../css/pages/service-rates.css">
-</head>
-<body>
-    <header data-include-path="../../html/components/header.html"></header>
-    <main>
-        <h1><span class="highlight">자세차렷</span> 구독 서비스에 가입하고 다양한 혜택을 누려보세요!</h1>
-        <p>* 현재는 모든 기능을 무료(베이직)로 제공하고 있으며, 추후 일부 기능을 유료 기능(프리미엄)으로 전환할 예정입니다.</p>
-        <div class="price_table">
-            <div class="plan_headers">
-                <div class="plan_name">베이직</div>
-                <div class="plan_name">프리미엄</div>
-            </div>
-            <table>
-                <tr>
-                    <th class="month_rate">월요금</th>
-                    <td class="highlight">무료</td>
-                    <td class="highlight">9,900원</td>
-                </tr>
-                                                                
-                <tr>
-                    <th>주변 자세교정 시설</th>
-                    <td><i class="fa-solid fa-check"></i></td>
-                    <td><i class="fa-solid fa-check"></i></td>
-                </tr>
-                <tr>
-                    <th>현재 나의 자세</th>
-                    <td><i class="fa-solid fa-check"></i></td>
-                    <td><i class="fa-solid fa-check"></i></td>
-                </tr>
-                <tr>
-                    <th>AI 자세 코치</th>
-                    <td><i class="fa-solid fa-x"></i></td>
-                    <td><i class="fa-solid fa-check"></i></td>
-                </tr>
-                <tr>
-                    <th>푸시 알림</th>
-                    <td><i class="fa-solid fa-check"></i></td>
-                    <td><i class="fa-solid fa-check"></i></td>
-                </tr>
-            </table>
+    <link rel="stylesheet" href="../../css/pages/service-rates.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar_menu">
+          <li>
+            <a href="../pages/main.html">
+              <img
+                class="header_logo"
+                src="../../assets/icons/logo.svg"
+                alt="logo_img"
+              />
+              <span class="site_name">자세차렷</span>
+            </a>
+          </li>
+          <li><a href="../pages/introduction.html">서비스 소개</a></li>
+          <li><a href="../pages/maps.html">주변 자세 교정 시설 찾기</a></li>
+          <li><a href="../pages/webcam.html">현재 나의 자세 보기</a></li>
+          <li><a href="../../html/pages/AI-chat.html">AI 자세 코치</a></li>
+          <li><a href="#">커뮤니티</a></li>
+          <li><a href="../../html/pages/service-rates.html">요금제</a></li>
+          <li><a href="../pages/mypage.html">마이페이지</a></li>
+        </ul>
+        <div class="user_button">
+          <a href="../pages/login.html" class="login_btn">로그인</a>
+          <a href="../pages/sign-up.html" class="signup_btn">회원가입</a>
+          <p class="welcome_msg">
+            <span class="user_name"></span>님 안녕하세요!
+          </p>
+          <a href="../pages/login.html" class="logout_btn">로그아웃</a>
         </div>
+      </nav>
+    </header>
+    <main>
+      <h1>
+        <span class="highlight">자세차렷</span> 구독 서비스에 가입하고 다양한
+        혜택을 누려보세요!
+      </h1>
+      <p>
+        * 현재는 모든 기능을 무료(베이직)로 제공하고 있으며, 추후 일부 기능을
+        유료 기능(프리미엄)으로 전환할 예정입니다.
+      </p>
+      <div class="price_table">
+        <div class="plan_headers">
+          <div class="plan_name">베이직</div>
+          <div class="plan_name">프리미엄</div>
+        </div>
+        <table>
+          <tr>
+            <th class="month_rate">월요금</th>
+            <td class="highlight">무료</td>
+            <td class="highlight">9,900원</td>
+          </tr>
+
+          <tr>
+            <th>주변 자세교정 시설</th>
+            <td><i class="fa-solid fa-check"></i></td>
+            <td><i class="fa-solid fa-check"></i></td>
+          </tr>
+          <tr>
+            <th>현재 나의 자세</th>
+            <td><i class="fa-solid fa-check"></i></td>
+            <td><i class="fa-solid fa-check"></i></td>
+          </tr>
+          <tr>
+            <th>AI 자세 코치</th>
+            <td><i class="fa-solid fa-x"></i></td>
+            <td><i class="fa-solid fa-check"></i></td>
+          </tr>
+          <tr>
+            <th>푸시 알림</th>
+            <td><i class="fa-solid fa-check"></i></td>
+            <td><i class="fa-solid fa-check"></i></td>
+          </tr>
+        </table>
+      </div>
     </main>
-    
-</body>
-<script src="https://kit.fontawesome.com/817f949e69.js" 
-crossorigin="anonymous"></script>
-<script src="../../js/pages/header.js"></script>
-<script>
+  </body>
+  <script
+    src="https://kit.fontawesome.com/817f949e69.js"
+    crossorigin="anonymous"
+  ></script>
+  <script src="../../js/pages/header.js"></script>
+  <script>
     window.addEventListener("load", function () {
-  var allElements = document.getElementsByTagName("*");
-  Array.prototype.forEach.call(allElements, function (el) {
-    var includePath = el.dataset.includePath;
-    if (includePath) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          el.outerHTML = this.responseText;
+      var allElements = document.getElementsByTagName("*");
+      Array.prototype.forEach.call(allElements, function (el) {
+        var includePath = el.dataset.includePath;
+        if (includePath) {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+              el.outerHTML = this.responseText;
+            }
+          };
+          xhttp.open("GET", includePath, true);
+          xhttp.send();
         }
-      };
-      xhttp.open("GET", includePath, true);
-      xhttp.send();
-    }
-  });
-});
-</script>
+      });
+    });
+  </script>
 </html>

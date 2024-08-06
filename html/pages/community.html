@@ -1,67 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>커뮤니티</title>
-    <link rel="stylesheet" href="../../css/pages/community.css">
-</head>
-<body>
-    <header data-include-path="../../html/components/header.html"></header>
-    <main>
-        <div class="post_categories">
-            <div class="post_category">
-                <div class="post_category_header">
-                    <p>제품 추천 게시판</p>
-                    <button class="more_btn" data-category="제품 추천">더보기 +</button>
-                </div>
-                <div class="category_post_contents">
-                   
-                </div>
-            </div>
-            <div class="post_category">
-                <div class="post_category_header">
-                    <p>영상 후기 게시판</p>
-                    <button class="more_btn" data-category="영상 후기">더보기 +</button>
-                </div>
-                <div class="category_post_contents">
-                    
-                </div>
-            </div>
-            <div class="post_category">
-                <div class="post_category_header">
-                    <p>병원 후기 게시판</p>
-                    <button class="more_btn" data-category="병원 후기">더보기 +</button>
-                </div>
-                <div class="category_post_contents">
-                    
-                </div>
-            </div>
-            <div class="post_category">
-                <div class="post_category_header">
-                    <p>홍보 게시판</p>
-                    <button class="more_btn" data-category="홍보">더보기 +</button>
-                </div>
-                <div class="category_post_contents">
-                   
-                </div>
-            </div>
-            <div class="post_category">
-                <div class="post_category_header">
-                    <p>자유 게시판</p>
-                    <button class="more_btn" data-category="자유">더보기 +</button>
-                </div>
-                <div class="category_post_contents">
-                   
-                </div>
-            </div>
+    <link rel="stylesheet" href="../../css/pages/community.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar_menu">
+          <li>
+            <a href="../pages/main.html">
+              <img
+                class="header_logo"
+                src="../../assets/icons/logo.svg"
+                alt="logo_img"
+              />
+              <span class="site_name">자세차렷</span>
+            </a>
+          </li>
+          <li><a href="../pages/introduction.html">서비스 소개</a></li>
+          <li><a href="../pages/maps.html">주변 자세 교정 시설 찾기</a></li>
+          <li><a href="../pages/webcam.html">현재 나의 자세 보기</a></li>
+          <li><a href="../../html/pages/AI-chat.html">AI 자세 코치</a></li>
+          <li><a href="#">커뮤니티</a></li>
+          <li><a href="../../html/pages/service-rates.html">요금제</a></li>
+          <li><a href="../pages/mypage.html">마이페이지</a></li>
+        </ul>
+        <div class="user_button">
+          <a href="../pages/login.html" class="login_btn">로그인</a>
+          <a href="../pages/sign-up.html" class="signup_btn">회원가입</a>
+          <p class="welcome_msg">
+            <span class="user_name"></span>님 안녕하세요!
+          </p>
+          <a href="../pages/login.html" class="logout_btn">로그아웃</a>
         </div>
+      </nav>
+    </header>
+    <main>
+      <div class="post_categories">
+        <div class="post_category">
+          <div class="post_category_header">
+            <p>제품 추천 게시판</p>
+            <button class="more_btn" data-category="제품 추천">더보기 +</button>
+          </div>
+          <div class="category_post_contents"></div>
+        </div>
+        <div class="post_category">
+          <div class="post_category_header">
+            <p>영상 후기 게시판</p>
+            <button class="more_btn" data-category="영상 후기">더보기 +</button>
+          </div>
+          <div class="category_post_contents"></div>
+        </div>
+        <div class="post_category">
+          <div class="post_category_header">
+            <p>병원 후기 게시판</p>
+            <button class="more_btn" data-category="병원 후기">더보기 +</button>
+          </div>
+          <div class="category_post_contents"></div>
+        </div>
+        <div class="post_category">
+          <div class="post_category_header">
+            <p>홍보 게시판</p>
+            <button class="more_btn" data-category="홍보">더보기 +</button>
+          </div>
+          <div class="category_post_contents"></div>
+        </div>
+        <div class="post_category">
+          <div class="post_category_header">
+            <p>자유 게시판</p>
+            <button class="more_btn" data-category="자유">더보기 +</button>
+          </div>
+          <div class="category_post_contents"></div>
+        </div>
+      </div>
     </main>
-        
-
-    
-    
-</body>
-<script src="../../js/pages/header.js"></script>
-<script src="../../js/pages/community.js"></script>
+  </body>
+  <script src="../../js/pages/header.js"></script>
+  <script src="../../js/pages/community.js"></script>
 </html>

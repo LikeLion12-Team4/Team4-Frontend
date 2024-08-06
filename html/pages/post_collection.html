@@ -1,44 +1,76 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>병원후기</title>
-    <link rel="stylesheet" href="../../css/pages/post_collection.css">
-</head>
-<body>
-    <header data-include-path="../../html/components/header.html"></header>
-
-    <main>
-        <h2 id="category_title">병원후기</h2>
-        <hr>
-        <table class="post_table">
-            <thead>
-                <tr>
-                    <th>글번호</th>
-                    <th>글제목</th>
-                    <th>아이디</th>
-                    <th>작성시간</th>
-                    <th>좋아요 수</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 요기에 게시글이 동적으로 추가됨 -->
-            </tbody>
-        </table>
-        <div class="bottom_container">
-            <div class="pagination">
-                <button class="pre_btn">이전</button>
-                <div class="num_btn_contaniner">
-                    <button class="num_btn">1</button>
-                    <button class="num_btn">2</button>
-                </div>
-                <button class="next_btn">다음</button>
-                <!-- 여기에 페이지 넘기는 버튼 생성됨 -->
-            </div>
-            <button class="post_button" onclick="redirectToPostingPage()">글쓰기</button>
+    <link rel="stylesheet" href="../../css/pages/post_collection.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar_menu">
+          <li>
+            <a href="../pages/main.html">
+              <img
+                class="header_logo"
+                src="../../assets/icons/logo.svg"
+                alt="logo_img"
+              />
+              <span class="site_name">자세차렷</span>
+            </a>
+          </li>
+          <li><a href="../pages/introduction.html">서비스 소개</a></li>
+          <li><a href="../pages/maps.html">주변 자세 교정 시설 찾기</a></li>
+          <li><a href="../pages/webcam.html">현재 나의 자세 보기</a></li>
+          <li><a href="../../html/pages/AI-chat.html">AI 자세 코치</a></li>
+          <li><a href="#">커뮤니티</a></li>
+          <li><a href="../../html/pages/service-rates.html">요금제</a></li>
+          <li><a href="../pages/mypage.html">마이페이지</a></li>
+        </ul>
+        <div class="user_button">
+          <a href="../pages/login.html" class="login_btn">로그인</a>
+          <a href="../pages/sign-up.html" class="signup_btn">회원가입</a>
+          <p class="welcome_msg">
+            <span class="user_name"></span>님 안녕하세요!
+          </p>
+          <a href="../pages/login.html" class="logout_btn">로그아웃</a>
         </div>
+      </nav>
+    </header>
+    <main>
+      <h2 id="category_title">병원후기</h2>
+      <hr />
+      <table class="post_table">
+        <thead>
+          <tr>
+            <th>글번호</th>
+            <th>글제목</th>
+            <th>아이디</th>
+            <th>작성시간</th>
+            <th>좋아요 수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 요기에 게시글이 동적으로 추가됨 -->
+        </tbody>
+      </table>
+      <div class="bottom_container">
+        <div class="pagination">
+          <button class="pre_btn">이전</button>
+          <div class="num_btn_contaniner">
+            <button class="num_btn">1</button>
+            <button class="num_btn">2</button>
+          </div>
+          <button class="next_btn">다음</button>
+          <!-- 여기에 페이지 넘기는 버튼 생성됨 -->
+        </div>
+        <button class="post_button" onclick="redirectToPostingPage()">
+          글쓰기
+        </button>
+      </div>
     </main>
     <script src="../../js/pages/post_collection.js"></script>
-</body>
+    <script src="../../js/pages/header.js"></script>
+  </body>
 </html>
