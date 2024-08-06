@@ -13,7 +13,35 @@
     <link rel="stylesheet" href="../../css/pages/maps.css" />
     <link rel="stylesheet" href="../../css/components/header.css" />
   </head>
-  <header data-include-path="../../html/components/header.html"></header>
+  <header>
+    <nav class="navbar">
+      <ul class="navbar_menu">
+        <li>
+          <a href="../pages/main.html">
+            <img
+              class="header_logo"
+              src="../../assets/icons/logo.svg"
+              alt="logo_img"
+            />
+            <span class="site_name">자세차렷</span>
+          </a>
+        </li>
+        <li><a href="../pages/introduction.html">서비스 소개</a></li>
+        <li><a href="../pages/maps.html">주변 자세 교정 시설 찾기</a></li>
+        <li><a href="../pages/webcam.html">현재 나의 자세 보기</a></li>
+        <li><a href="../../html/pages/AI-chat.html">AI 자세 코치</a></li>
+        <li><a href="#">커뮤니티</a></li>
+        <li><a href="../../html/pages/service-rates.html">요금제</a></li>
+        <li><a href="../pages/mypage.html">마이페이지</a></li>
+      </ul>
+      <div class="user_button">
+        <a href="../pages/login.html" class="login_btn">로그인</a>
+        <a href="../pages/sign-up.html" class="signup_btn">회원가입</a>
+        <p class="welcome_msg"><span class="user_name"></span>님 안녕하세요!</p>
+        <a href="../pages/login.html" class="logout_btn">로그아웃</a>
+      </div>
+    </nav>
+  </header>
   <body>
     <div id="mapwrap">
       <!-- 지도가 표시될 div -->
@@ -33,6 +61,8 @@
     ></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../js/pages/header.js"></script>
+
     <script>
       // Kakao Maps API가 로드된 후 maps.js 실행
       kakao.maps.load(function () {
