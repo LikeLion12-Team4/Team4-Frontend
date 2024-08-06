@@ -122,7 +122,7 @@ function onFaceMeshResults(results) {
       redirect: "follow",
     };
 
-    checkAndFetch("https://stand-up.store/posedata/", requestOptions)
+    checkAndFetch("https://stand-up-back.store/posedata/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log("좋은 자세 추출 완료:", result);
@@ -191,6 +191,26 @@ function onFaceMeshResults(results) {
     msg2.text("자세를 바르게 해주세요.");
     //1분당 약 1000씩 카운트 된다.
     turtle_num += 1;
+
+    var requestOptions3 = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   distance: distance,
+      // }),
+      redirect: "follow",
+    };
+
+    checkAndFetch("https://stand-up-back.store/pushlive/", requestOptions3)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("실시간 푸시알림:", result);
+        // set_dis = result.distance;
+      })
+      .catch((error) => console.log("error", error));
   } else if (distance >= set_dis) {
     msg1.text("현재 좋은 자세입니다.");
     msg2.text("이렇게 계속 유지해주세요!");
@@ -329,7 +349,7 @@ $(document).ready(function () {
       redirect: "follow",
     };
 
-    checkAndFetch("https://stand-up.store/posedata/", requestOptions)
+    checkAndFetch("https://stand-up-back.store/posedata/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log("자세데이터 저장 완료:", result);
