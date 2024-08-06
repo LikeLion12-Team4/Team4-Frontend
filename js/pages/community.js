@@ -51,11 +51,7 @@ function loadCategoryPosts() {
   console.log("Loading category posts");
   CATEGORIES.forEach(category => {
     console.log(`Fetching posts for category: ${category.name}`);
-    fetch(`${API_BASE_URL}/forums/${category.id}/`, {
-      headers: {
-        'Authorization': `Bearer ${getToken()}`
-      }
-    })
+    fetch(`${API_BASE_URL}/forums/${category.id}/`)  // 헤더 부분 제거
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
