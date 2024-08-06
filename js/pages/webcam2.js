@@ -107,6 +107,7 @@ function onFaceMeshResults(results) {
     Math.pow((chinLandmark.x - shoulderMidpoint.x) * canvasElement.width, 2) +
       Math.pow((chinLandmark.y - shoulderMidpoint.y) * canvasElement.height, 2)
   );
+
   var set_dis = 0;
   setTimeout(function () {
     var requestOptions = {
@@ -121,7 +122,7 @@ function onFaceMeshResults(results) {
       redirect: "follow",
     };
 
-    checkAndFetch("http://3.37.90.114:8000/posedata/", requestOptions)
+    checkAndFetch("https://stand-up.store/posedata/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log("좋은 자세 추출 완료:", result);
@@ -143,23 +144,60 @@ function onFaceMeshResults(results) {
   canvasCtx.fill();
   // canvasCtx.fillText(`Chin: (${chinLandmark.x.toFixed(2)}, ${chinLandmark.y.toFixed(2)})`, 10, 80);
   //canvasCtx.fillText(`Distance: (${distance})`, 10, 100);
-  setTimeout(function () {
-    if (distance < 70) {
-      // canvasCtx.fillText(`거북목 자세입니다 !`, 10, 25);
-      color = "#FF0000";
-      $(".camera-container").css("border", "6px solid #FF0000");
-      msg1.text("현재 나쁜 자세입니다.");
-      msg2.text("자세를 바르게 해주세요.");
-      //1분당 약 1000씩 카운트 된다.
-      turtle_num += 1;
-    } else if (distance >= 70) {
-      msg1.text("현재 좋은 자세입니다.");
-      msg2.text("이렇게 계속 유지해주세요!");
-      $(".camera-container").css("border", "6px solid rgb(81, 81, 224)");
-    }
 
-    canvasCtx.restore();
-  }, 11000);
+  // 자세 추출 전
+  // setTimeout(function () {
+  //   if (distance < 70) {
+  //     // canvasCtx.fillText(`거북목 자세입니다 !`, 10, 25);
+  //     color = "#FF0000";
+  //     $(".camera-container").css("border", "6px solid #FF0000");
+  //     msg1.text("현재 나쁜 자세입니다.");
+  //     msg2.text("자세를 바르게 해주세요.");
+  //     //1분당 약 1000씩 카운트 된다.
+  //     turtle_num += 1;
+  //   } else if (distance >= 70) {
+  //     msg1.text("현재 좋은 자세입니다.");
+  //     msg2.text("이렇게 계속 유지해주세요!");
+  //     $(".camera-container").css("border", "6px solid rgb(81, 81, 224)");
+  //   }
+
+  //   canvasCtx.restore();
+  // }, 11000);
+
+  //시간지연 0 ver
+  // setTimeout(function () {
+  //   if (distance<(set_dis-15)) {
+  //     // canvasCtx.fillText(`거북목 자세입니다 !`, 10, 25);
+  //     color = "#FF0000";
+  //     $(".camera-container").css("border", "6px solid #FF0000");
+  //     msg1.text("현재 나쁜 자세입니다.");
+  //     msg2.text("자세를 바르게 해주세요.");
+  //     //1분당 약 1000씩 카운트 된다.
+  //     turtle_num += 1;
+  //   } else if (distance >= set_dis) {
+  //     msg1.text("현재 좋은 자세입니다.");
+  //     msg2.text("이렇게 계속 유지해주세요!");
+  //     $(".camera-container").css("border", "6px solid rgb(81, 81, 224)");
+  //   }
+
+  //   canvasCtx.restore();
+  // }, 11000);
+  //시간 지연 x
+  if (distance < set_dis - 15) {
+    // canvasCtx.fillText(`거북목 자세입니다 !`, 10, 25);
+    color = "#FF0000";
+    $(".camera-container").css("border", "6px solid #FF0000");
+    msg1.text("현재 나쁜 자세입니다.");
+    msg2.text("자세를 바르게 해주세요.");
+    //1분당 약 1000씩 카운트 된다.
+    turtle_num += 1;
+  } else if (distance >= set_dis) {
+    msg1.text("현재 좋은 자세입니다.");
+    msg2.text("이렇게 계속 유지해주세요!");
+    $(".camera-container").css("border", "6px solid rgb(81, 81, 224)");
+  }
+
+  canvasCtx.restore();
 }
 
 function onPoseResults(results) {
@@ -291,7 +329,7 @@ $(document).ready(function () {
       redirect: "follow",
     };
 
-    checkAndFetch("http://3.37.90.114:8000/posedata/", requestOptions)
+    checkAndFetch("https://stand-up.store/posedata/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log("자세데이터 저장 완료:", result);
