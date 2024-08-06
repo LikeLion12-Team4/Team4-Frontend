@@ -91,6 +91,7 @@ window.addEventListener("load", function () {
       .join("");
   
     implementBodypartChoice(lastCategory, videos);
+    addEventListeners();
   }
   
   function implementBodypartChoice(lastCategory, allVideos) {
