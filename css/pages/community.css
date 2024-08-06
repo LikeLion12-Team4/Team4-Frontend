@@ -55,18 +55,58 @@ main {
 .category_post_contents {
     border: 1px solid #e0e0e0;
     border-radius: 4px;
-    padding: 15px; /* 패딩 증가 */
+    padding: 15px;
     background-color: #f9f9f9;
-    min-height: 200px; /* 최소 높이 설정 */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    min-height: 200px;
 }
 
+/* 새로 추가된 스타일 */
+.post-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 
+.post-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.post-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-title {
+    flex-grow: 1;
+    font-weight: bold;
+    color: #333;
+}
+
+.post-author, .post-date {
+    font-size: 0.9em;
+    color: #666;
+    margin-left: 10px;
+}
 
 @media (max-width: 768px) {
     .post_categories {
         grid-template-columns: 1fr;
+    }
+
+    .post-link {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .post-author, .post-date {
+        margin-left: 0;
+        margin-top: 5px;
     }
 }

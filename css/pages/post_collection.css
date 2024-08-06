@@ -41,8 +41,18 @@ hr {
     text-overflow: ellipsis;  /* 추가: 넘치는 텍스트에 ... 표시 */
     white-space: nowrap;  /* 추가: 텍스트 줄바꿈 방지 */
     text-align: center;
+    color: black;
 }
 
+.post_table td a {
+    color: #333;  /* 어두운 회색 */
+    text-decoration: none;  /* 밑줄 제거 */
+}
+
+.post_table td a:hover {
+    color: #6166F5;  /* 마우스 오버 시 색상 변경 */
+    text-decoration: underline;  /* 마우스 오버 시 밑줄 추가 */
+}
 /* 각 열의 너비 지정 */
 .post_table th:nth-child(1),
 .post_table td:nth-child(1) {
